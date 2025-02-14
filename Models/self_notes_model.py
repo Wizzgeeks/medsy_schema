@@ -7,6 +7,8 @@ class Self_note(Document):
     title = StringField(required=True)
     notes_content = StringField(required=True)
     date = DateTimeField(required=True,default=datetime.now())
+    path=StringField()
+    
 
 
     
