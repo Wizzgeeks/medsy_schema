@@ -8,7 +8,7 @@ class Self_note(Document):
     notes_content = StringField(required=True)
     date = DateTimeField(required=True,default=datetime.now())
     path=StringField()
-    
+
 
 
     
@@ -18,7 +18,8 @@ class Self_note(Document):
             "user": str(self.user.id),
             "title":self.title,
             "notes_content":self.notes_content,
-            "date":self.date
+            "date":self.date,
+            "path":self.path
         }
 
     def with_key(self):
@@ -27,7 +28,8 @@ class Self_note(Document):
             "user": self.user.to_json() if self.user else None,
             "title":self.title,
             "notes_content":self.notes_content,
-            "date":self.date
+            "date":self.date,
+            "path":self.path
         }
     
     def update(self, **kwargs):
