@@ -8,14 +8,16 @@ class Saved_notes(Document):
     Lesson_note= ReferenceField(Lesson_note,required=True,reverse_delete_rule=2)
     type = StringField(choices=['Revise Later','Important','Reference'],required=True)
     path_name=StringField()
-    path_string=StringField()
+    path_url=StringField()
 
     def to_json(self):
         return {
             "id": str(self.id),
             "user": str(self.user.id),
             "lesson":str(self.lesson.id),
-            "type":self.type
+            "type":self.type,
+            "path_name":self.path_name,
+            "path_url":self.path_url,
         }
 
     def with_key(self):
