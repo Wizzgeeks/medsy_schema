@@ -9,6 +9,7 @@ class Saved_notes(Document):
     type = StringField(choices=['Revise Later','Important','Reference'],required=True)
     path_name=StringField()
     path_url=StringField()
+    path_string=StringField()
 
     def to_json(self):
         return {
