@@ -18,7 +18,7 @@ class Self_note(Document):
             "user": str(self.user.id),
             "title":self.title,
             "notes_content":self.notes_content,
-            "date":self.date,
+            "date":str(self.date),
             "path":self.path
         }
 
@@ -28,7 +28,7 @@ class Self_note(Document):
             "user": self.user.to_json() if self.user else None,
             "title":self.title,
             "notes_content":self.notes_content,
-            "date":self.date,
+            "date":str(self.date),
             "path":self.path
         }
     
