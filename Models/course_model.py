@@ -37,6 +37,19 @@ class Course(Document):
             "has_prompt":self.has_prompt,
             "key":self.key
         }
+    def admin_json(self):
+        return {
+            "name":self.name,
+            "duration":self.duration,
+            "country":self.country,
+            "coin_value":int(self.coin_value),
+            "meta_title":self.meta_title,
+            "meta_image_url":self.meta_image_url,
+            "meta_description":self.meta_description,
+            "meta_content":self.meta_content,
+            "has_prompt":self.has_prompt,
+            "key":self.key
+        }
     
     def update(self, **kwargs):
         self.clean()
