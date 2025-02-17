@@ -50,6 +50,19 @@ class Layer_1(Document):
             "has_prompt":self.has_prompt,
             "key":self.key
         }
+    def admin_json(self):
+        return {
+            "course":self.course.name if self.course else None,
+            "subject":self.subject.name if self.subject else None,
+            "year":self.year.year if self.year else None,
+            "name":self.name,
+            "meta_title":self.meta_title,
+            "meta_image_url":self.meta_image_url,
+            "meta_description":self.meta_description,
+            "meta_content":self.meta_content,
+            "has_prompt":self.has_prompt,
+            "key":self.key
+        }
     
     def update(self, **kwargs):
         self.clean()

@@ -51,7 +51,6 @@ class Subject(Document):
         }
     def admin_json(self):
         return {
-            "id": str(self.id),
             "course":self.course.name if self.course else None,
             "year":self.year.year if self.year else None,
             "name":self.name,
