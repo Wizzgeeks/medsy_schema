@@ -25,7 +25,9 @@ class Saved_notes(Document):
             "id": str(self.id),
             "user": self.user.to_json() if self.user else None,
             "Lesson_note":self.Lesson_note.to_json() if self.Lesson_note else None,
-            "type":self.type
+            "type":self.type,
+            "path_name":self.path_name,
+            "path_url":self.path_url,
         }
     
     def update(self, **kwargs):
