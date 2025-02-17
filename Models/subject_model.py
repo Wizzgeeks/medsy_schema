@@ -49,6 +49,21 @@ class Subject(Document):
             "has_3_layers":self.has_3_layers,
             "key":self.key
         }
+    def admin_json(self):
+        return {
+            "id": str(self.id),
+            "course":self.course.name if self.course else None,
+            "year":self.year.year if self.year else None,
+            "name":self.name,
+            "meta_title":self.meta_title,
+            "meta_image_url":self.meta_image_url,
+            "meta_description":self.meta_description,
+            "meta_content":self.meta_content,
+            "has_prompt":self.has_prompt,
+            "has_3_layers":self.has_3_layers,
+            "key":self.key
+        }
+
         
     def update(self, **kwargs):
         self.clean()
