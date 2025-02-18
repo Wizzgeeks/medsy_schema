@@ -10,7 +10,7 @@ class Subject(Document):
     meta_image_url = StringField()
     meta_description = StringField()
     meta_content = StringField()
-    has_prompt = BooleanField(required=True)
+    has_prompt = BooleanField(required=True,default=False)
     key = StringField(required=True,unique=True)
     has_3_layers = BooleanField()
 
