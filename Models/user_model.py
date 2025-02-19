@@ -5,10 +5,12 @@ import re
 
 class User(Document):
     course = ReferenceField(Course, required=True, reverse_delete_rule=2)
-    year = ReferenceField(Year, required=True, reverse_delete_rule=2)
+    year = ReferenceField(Year, reverse_delete_rule=2)
     username = StringField(required=True)
-    email = StringField(required=True, unique=True)
-    password = StringField(required=True)
+    email = StringField(unique=True)
+    phone= StringField(unique=True)
+    profile=StringField()
+    role=StringField()
     auth_token = StringField()
 
     def clean(self):
@@ -22,7 +24,11 @@ class User(Document):
             "course": str(self.course.id) if self.course else None,
             "year": str(self.year.id) if self.year else None,
             "username": self.username,
-            "email": self.email
+            "email": self.email if self.year else None,
+            "profile":self.profile if self.year else None,
+            "phone":self.phone if self.year else None,
+            "role":self.role if self.year else None
+
         }
 
     def with_key(self):
@@ -31,7 +37,10 @@ class User(Document):
             "course": self.course.to_json() if self.course else None,
             "year": self.year.to_json() if self.year else None,
             "username": self.username,
-            "email": self.email
+            "email": self.email if self.year else None,
+            "profile":self.profile if self.year else None,
+            "phone":self.phone if self.year else None,
+            "role":self.role if self.year else None
         }
     
     def update(self, **kwargs):
