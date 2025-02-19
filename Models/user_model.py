@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, StringField
+from mongoengine import Document, ReferenceField, StringField,EmailField
 from Models.course_model import Course
 from Models.year_model import Year
 import re
@@ -7,7 +7,7 @@ class User(Document):
     course = ReferenceField(Course, required=True, reverse_delete_rule=2)
     year = ReferenceField(Year, reverse_delete_rule=2)
     username = StringField(required=True)
-    email = StringField(unique=True)
+    email = EmailField(unique=True)
     phone= StringField(unique=True)
     profile=StringField()
     role=StringField()
