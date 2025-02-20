@@ -8,7 +8,7 @@ class User(Document):
     year = ReferenceField(Year, reverse_delete_rule=2)
     username = StringField(required=True)
     email = EmailField(unique=True)
-    phone= StringField(unique=True)
+    phone= StringField(unique=True,default=None)
     profile=StringField()
     role=StringField()
     auth_token = StringField()
