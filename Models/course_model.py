@@ -1,8 +1,8 @@
-from mongoengine import Document,StringField,BooleanField,ValidationError
+from mongoengine import Document,StringField,BooleanField,ValidationError,IntField
 
 class Course(Document):
     name = StringField(required=True,unique=True)
-    duration = StringField(required=True)
+    duration = IntField(required=True)
     country = StringField(required=True)
     coin_value = StringField(required=True)
     meta_title = StringField()
