@@ -12,6 +12,7 @@ class User(Document):
     profile=StringField()
     role=StringField()
     auth_token = StringField()
+    password=StringField()
 
     def clean(self):
         if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', self.email):
