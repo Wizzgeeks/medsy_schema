@@ -21,7 +21,8 @@ class Saved_notes(Document):
             "path_name":self.path_name,
             "path_url":self.path_url,
             "date": self.date.strftime("%d %b %Y"),
-            "content":self.content
+            "content":self.content,
+            "notes":""
         }
     
     def clean(self):
