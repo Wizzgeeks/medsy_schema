@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, StringField,DateTimeField,ValidationError,ListField
+from mongoengine import Document, ReferenceField, StringField,DateTimeField,ValidationError,ListField,DictField
 from datetime import datetime
 from Models.user_model import User
 from Models.lesson_note_model import Lesson_note
@@ -9,7 +9,7 @@ class Saved_notes(Document):
     type = StringField(choices=['Revise Later','Important','Reference','Snapshot'],required=True)
     path_name=StringField()
     path_url=StringField()
-    content=StringField()
+    content=ListField(DictField())
     date = DateTimeField(required=True, default=datetime.now)
 
     def to_json(self):
