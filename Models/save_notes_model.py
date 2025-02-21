@@ -9,7 +9,7 @@ class Saved_notes(Document):
     type = StringField(choices=['Revise Later','Important','Reference','Snapshot'],required=True)
     path_name=StringField()
     path_url=StringField()
-    content=ListField(StringField())
+    content=StringField()
     date = DateTimeField(required=True, default=datetime.now)
 
     def to_json(self):
