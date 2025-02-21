@@ -7,7 +7,7 @@ class User(Document):
     course = ReferenceField(Course, required=True, reverse_delete_rule=2)
     year = ReferenceField(Year, reverse_delete_rule=2)
     username = StringField(required=True)
-    email = EmailField(unique=True,required=False,sparse=True)
+    email = EmailField(unique=True,default=None)
     phone= StringField(unique=True,required=False,sparse=True)
     profile=StringField()
     role=StringField()
