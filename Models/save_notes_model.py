@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, StringField,DateTimeField
+from mongoengine import Document, ReferenceField, StringField,DateTimeField,ValidationError,ListField
 from datetime import datetime
 from Models.user_model import User
 from Models.lesson_note_model import Lesson_note
@@ -6,9 +6,11 @@ from Models.lesson_note_model import Lesson_note
 class Saved_notes(Document):
     user = ReferenceField(User,reverse_delete_rule=2)
     Lesson_note= ReferenceField(Lesson_note,required=True,reverse_delete_rule=2)
-    type = StringField(choices=['Revise Later','Important','Reference'],required=True)
+    type = StringField(choices=['Revise Later','Important','Reference','Snapshot'],required=True)
     path_name=StringField()
     path_url=StringField()
+    content=ListField(StringField)
+    date = DateTimeField(required=True, default=datetime.now)
 
     def to_json(self):
         return {
@@ -18,7 +20,14 @@ class Saved_notes(Document):
             "type":self.type,
             "path_name":self.path_name,
             "path_url":self.path_url,
+            "date": self.date.strftime("%d %b %Y"),
+            "content":self.content
         }
+    
+    def clean(self):
+        if self.type == 'Snapshot':
+            if not self.content:
+                raise ValidationError("Content is required for  Snapshot")
 
     def with_key(self):
         return {
@@ -28,6 +37,8 @@ class Saved_notes(Document):
             "type":self.type,
             "path_name":self.path_name,
             "path_url":self.path_url,
+            "date": self.date.strftime("%d %b %Y"),
+            "content":self.content
         }
     
     def update(self, **kwargs):
