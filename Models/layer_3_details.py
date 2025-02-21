@@ -8,7 +8,6 @@ class Layer_3_details(Document):
 
     def to_json(self):
         return {
-            'course': self.course.key,
-            'layer_1_name': self.layer_3_name
+            'layer_3_name': self.layer_3_name
         }
             
