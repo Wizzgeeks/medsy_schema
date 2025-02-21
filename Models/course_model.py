@@ -2,7 +2,7 @@ from mongoengine import Document,StringField,BooleanField,ValidationError,IntFie
 
 class Course(Document):
     name = StringField(required=True,unique=True)
-    duration = IntField(required=True)
+    duration = StringField(required=True)
     country = StringField(required=True)
     coin_value = StringField(required=True)
     meta_title = StringField()
