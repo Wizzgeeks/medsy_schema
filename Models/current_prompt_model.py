@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,DictField,StringField
+from mongoengine import Document,ReferenceField,DictField,StringField,BooleanField
 from Models.component_model import Component
 from Models.course_model import Course
 from Models.layer_1_model import Layer_1
@@ -20,6 +20,7 @@ class Current_prompt(Document):
     component = ReferenceField(Component,reverse_delete_rule=2)
     createdAt=StringField(required=True,default=datetime.now())
     prompt_framework = DictField(required=True)
+    isDeleted=BooleanField(required=True,default=False)
     
     def to_json(self):
         return {
@@ -33,6 +34,7 @@ class Current_prompt(Document):
             "layer3":str(self.layer3.id) if self.layer3 else None,
             "component":str(self.component.id) if self.component else None,
             "createdAt":str(self.createdAt),
-            "prompt_framework":self.prompt_framework
+            "prompt_framework":self.prompt_framework,
+            "isDeleted":self.isDeleted
         }
         
