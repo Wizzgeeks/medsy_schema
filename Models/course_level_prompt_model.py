@@ -9,7 +9,7 @@ from Models.subject_model import Subject
 from Models.year_model import Year
 from datetime import datetime 
 
-class Current_prompt(Document):
+class Course_level_prompt(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     model = ReferenceField(Model,required=True,reverse_delete_rule=2)
     year = ReferenceField(Year,reverse_delete_rule=2)
