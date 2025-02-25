@@ -20,7 +20,7 @@ class Course_level_prompt(Document):
     component = ReferenceField(Component,reverse_delete_rule=2)
     createdAt=DateTimeField(required=True,default=datetime.now())
     prompt_framework = DictField(required=True)
-    isDeleted=BooleanField(required=True,default=False)
+    isCurrent=BooleanField(required=True,default=True)
     
     def to_json(self):
         return {
@@ -35,6 +35,6 @@ class Course_level_prompt(Document):
             "component":str(self.component.id) if self.component else None,
             "createdAt":str(self.createdAt),
             "prompt_framework":self.prompt_framework,
-            "isDeleted":self.isDeleted
+            "isCurrent":self.isCurrent
         }
         
