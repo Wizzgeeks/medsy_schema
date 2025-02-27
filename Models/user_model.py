@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, StringField,EmailField
+from mongoengine import Document, ReferenceField, StringField,EmailField,BooleanField
 from Models.course_model import Course
 from Models.year_model import Year
 import re
@@ -17,6 +17,7 @@ class User(Document):
     location=StringField()
     examTarget=StringField()
     specialisation=StringField()
+    isDeleted=BooleanField(requierd=True,default=False)
     def update(self, **kwargs):
         self.clean()
         return super().update(**kwargs)
