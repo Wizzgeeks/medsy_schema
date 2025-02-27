@@ -4,8 +4,8 @@ from Models.year_model import Year
 import re
 
 class User(Document):
-    course = ReferenceField(Course,reverse_delete_rule=2)
-    year = ReferenceField(Year, reverse_delete_rule=2)
+    course =StringField()
+    year = StringField()
     username = StringField(required=True)
     email = EmailField(unique=True,required=False,sparse=True)
     phone= StringField(unique=True,required=False,sparse=True)
@@ -26,10 +26,6 @@ class User(Document):
         if self.role == 'user':
             if not self.course:
                 raise ValueError("Please select a course")
-            # if not self.year:
-            #     raise ValueError("Please select a course")
-
-
     def to_json(self):
         return {
             "id": str(self.id),
