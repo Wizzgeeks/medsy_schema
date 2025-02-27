@@ -7,7 +7,7 @@ class User(Document):
     course =StringField()
     year = StringField()
     username = StringField(required=True)
-    email = EmailField(unique=True,required=False)
+    email = EmailField(unique=True,required=False,default=None)
     phone= StringField(unique=True,required=False,sparse=True)
     profile=StringField()
     role=StringField(choices=['student','admin','superadmin'],required=True)
