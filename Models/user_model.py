@@ -17,7 +17,9 @@ class User(Document):
     location=StringField()
     examTarget=StringField()
     specialisation=StringField()
-
+    def update(self, **kwargs):
+        self.clean()
+        return super().update(**kwargs)
     def clean(self):
         if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', self.email):
             raise ValueError("Enter a Valid mail")
