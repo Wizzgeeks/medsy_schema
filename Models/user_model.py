@@ -10,7 +10,7 @@ class User(Document):
     email = EmailField(unique=True,required=False,sparse=True)
     phone= StringField(unique=True,required=False,sparse=True)
     profile=StringField()
-    role=StringField(required=True,choices=['student','admin','superadmin'])
+    role=StringField(choices=['student','admin','superadmin'],required=True)
     auth_token = StringField()
     password=StringField()
     institution=StringField()
