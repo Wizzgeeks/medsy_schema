@@ -17,7 +17,7 @@ class User(Document):
     location=StringField()
     examTarget=StringField()
     specialisation=StringField()
-    isDeleted=BooleanField(requierd=True,default=False)
+    # isDeleted=BooleanField(requierd=True,default=False)
     def update(self, **kwargs):
         self.clean()
         return super().update(**kwargs)
