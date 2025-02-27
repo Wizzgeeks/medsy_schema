@@ -4,32 +4,44 @@ from Models.year_model import Year
 import re
 
 class User(Document):
-    course = ReferenceField(Course, required=True, reverse_delete_rule=2)
+    course = ReferenceField(Course,reverse_delete_rule=2)
     year = ReferenceField(Year, reverse_delete_rule=2)
     username = StringField(required=True)
-    email = EmailField(unique=True,default=None)
+    email = EmailField(unique=True,required=False,sparse=True)
     phone= StringField(unique=True,required=False,sparse=True)
     profile=StringField()
-    role=StringField()
+    role=StringField(required=True,choices=['user','admin','superadmin'])
     auth_token = StringField()
     password=StringField()
+    institution=StringField()
+    location=StringField()
+    examTarget=StringField()
+    specialisation=StringField()
 
     def clean(self):
         if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', self.email):
             raise ValueError("Enter a Valid mail")
+        if self.role == 'user':
+            if not self.course:
+                raise ValueError("Please select a course")
+            # if not self.year:
+            #     raise ValueError("Please select a course")
 
 
     def to_json(self):
         return {
             "id": str(self.id),
             "course": str(self.course.id) if self.course else None,
-            "year": str(self.year.id) if self.year else None,
+            "year": str(self.year.year) if self.year else None,
             "username": self.username,
-            "email": self.email if self.year else None,
-            "profile":self.profile if self.year else None,
-            "phone":self.phone if self.year else None,
-            "role":self.role if self.year else None
-
+            "email": self.email if self.email else None,
+            "profile":self.profile if self.profile else None,
+            "phone":self.phone if self.phone else None,
+            "role":self.role if self.role else None,
+            "institution":self.institution if self.institution else None,
+            "location":self.location if self.location else None,
+            "examTarget":self.examTarget if self.examTarget else None,
+            "specialisation":self.specialisation if self.specialisation else None
         }
 
     def with_key(self):
@@ -41,7 +53,11 @@ class User(Document):
             "email": self.email if self.year else None,
             "profile":self.profile if self.year else None,
             "phone":self.phone if self.year else None,
-            "role":self.role if self.year else None
+            "role":self.role if self.year else None,
+            "institution":self.institution if self.institution else None,
+            "location":self.location if self.location else None,
+            "examTarget":self.examTarget if self.examTarget else None,
+            "specialisation":self.specialisation if self.specialisation else None
         }
     
     def update(self, **kwargs):
