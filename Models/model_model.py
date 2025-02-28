@@ -19,7 +19,6 @@ class Model(Document):
         return {
             "id": str(self.id),
             "name":self.name,
-            "api_key":self.api_key,
             "type":self.type,
             "provider":self.provider
         }
