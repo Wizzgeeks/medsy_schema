@@ -14,7 +14,7 @@ class Time_spent(Document):
     year = ReferenceField(Year,reverse_delete_rule=2)
     subject = ReferenceField(Subject,reverse_delete_rule=2)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2 = ReferenceField(Layer_2reverse_delete_rule=2)
+    layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
     layer3 = StringField(required=True)
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
