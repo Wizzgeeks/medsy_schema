@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,ValidationError,DateTimeField
+from mongoengine import Document,StringField,ReferenceField,ValidationError,DateTimeField,IntField
 from Models.course_model import Course
 
 class Coupon(Document):
@@ -9,6 +9,8 @@ class Coupon(Document):
     max_discount_in_price = StringField(required=True)
     expires = DateTimeField(required=True)
     count = StringField(required=True)
+    max_usage=IntField()
+    current_usage=IntField()
 
     
 

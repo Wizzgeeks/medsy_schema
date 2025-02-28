@@ -15,7 +15,6 @@ class User(Document):
     password=StringField()
     institution=StringField()
     location=StringField()
-    examTarget=StringField()
     specialisation=StringField()
     # isDeleted=BooleanField(requierd=True,default=False)
     def update(self, **kwargs):
