@@ -5,7 +5,7 @@ from Models.year_model import Year
 from Models.component_model import Component
 
 class Component_association(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,unique=True,reverse_delete_rule=2)
     # subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
     # year = ReferenceField(Year,required=True,reverse_delete_rule=2)
     layer1 = ListField(ReferenceField(Component,reverse_delete_rule=2))
