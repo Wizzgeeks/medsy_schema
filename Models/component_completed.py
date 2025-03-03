@@ -11,8 +11,9 @@ from Models.subject_model import Subject
 
 class Component_completed(Document):
     
-    course = ReferenceField(Course,required=True,unique=True,reverse_delete_rule=2)
-    subject=ReferenceField(Subject,required=True,unique=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
+    subject=ReferenceField(Subject,required=True,reverse_delete_rule=2)
+    component=ReferenceField(Component,required=True,reverse_delete_rule=2)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
@@ -23,7 +24,8 @@ class Component_completed(Document):
     def to_json(self):
         return {
             "course":str(self.course),
-            "subject":self.subject,
+            "subject":str(self.subject.id) if self.subject.id else None,
+            "component":str(self.component.id) if self.component.id else None,
             "layer1":str(self.layer1.id) if self.layer1 else None,
             "layer2":str(self.layer2.id) if self.layer2 else None,
             "layer3":str(self.layer3.id) if self.layer3 else None,
