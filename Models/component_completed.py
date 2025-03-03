@@ -23,12 +23,12 @@ class Component_completed(Document):
 
     def to_json(self):
         return {
-            "course":str(self.course),
-            "subject":str(self.subject.id) if self.subject.id else None,
-            "component":self.component.to_json if self.component else None,
-            "layer1":str(self.layer1.id) if self.layer1 else None,
-            "layer2":str(self.layer2.id) if self.layer2 else None,
-            "layer3":str(self.layer3.id) if self.layer3 else None,
-            "user":str(self.user.id) if self.user else None,
+            # "course":str(self.course),
+            # "subject":str(self.subject.id) if self.subject.id else None,
+            "component":self.component.to_json() if self.component else None,
+            # "layer1":str(self.layer1.id) if self.layer1 else None,
+            # "layer2":str(self.layer2.id) if self.layer2 else None,
+            # "layer3":str(self.layer3.id) if self.layer3 else None,
+            # "user":str(self.user.id) if self.user else None,
             "completed":self.completed
         }
