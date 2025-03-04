@@ -1,11 +1,12 @@
-from mongoengine import Document,ReferenceField,IntField,ListField
+from mongoengine import Document,ReferenceField,BooleanField,ListField
 from Models.user_model import User
 from Models.course_model import Course
 from Models.year_model import Year
 from Models.subject_model import Subject
 
 
-class Time_spent(Document):  
+class Completed(Document):
+    
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     year = ReferenceField(Year,required=True,reverse_delete_rule=2)
     subject=ReferenceField(Subject,required=True,reverse_delete_rule=2)
@@ -13,7 +14,7 @@ class Time_spent(Document):
     layer2 = ListField(required=True)
     layer3 = ListField(required=True)
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    total_time=IntField(required=True)
+    completed=BooleanField(default=False)
 
 
     def to_json(self):
@@ -25,5 +26,5 @@ class Time_spent(Document):
             "layer2":self.layer2 if self.layer2 else None,
             "layer3":self.layer3 if self.layer3 else None,
             "user":str(self.user.id) if self.user else None,
-            "total_time":self.total_time
+            "completed":self.completed
         }
