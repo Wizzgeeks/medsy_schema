@@ -10,9 +10,9 @@ class Completed(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     year = ReferenceField(Year,required=True,reverse_delete_rule=2)
     subject=ReferenceField(Subject,required=True,reverse_delete_rule=2)
-    layer1 = ListField(required=True)
-    layer2 = ListField(required=True)
-    layer3 = ListField(required=True)
+    layer1 = ListField()
+    layer2 = ListField()
+    layer3 = ListField()
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     completed=BooleanField(default=False)
 
