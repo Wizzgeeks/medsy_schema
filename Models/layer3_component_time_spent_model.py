@@ -4,7 +4,7 @@ from Models.layer_3_model import Layer_3
 from Models.component_model import Component
 
 
-class Layer1_completion_status(Document):
+class Layer3_component_time_spent(Document):
     layer3 = ReferenceField(Layer_3,required=True,reverse_delete_rule=2)
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     component = ReferenceField(Component,required=True,reverse_delete_rule=2)
