@@ -1,11 +1,11 @@
-from mongoengine import Document, StringField
+from mongoengine import Document, StringField,EmailField
 
 class User(Document):
     course =StringField()
     year = StringField()
     username = StringField(required=True)
-    # email = EmailField(unique=True,required=False,default=None)
-    # phone= StringField(unique=True,required=False,sparse=True)
+    email = EmailField(unique=True,required=False,default=None)
+    phone= StringField(unique=True,required=False,sparse=True)
     profile=StringField()
     role=StringField(choices=['student','admin','superadmin'],required=True)
     auth_token = StringField()
@@ -48,9 +48,9 @@ class User(Document):
             "course": self.course.to_json() if self.course else None,
             "year": self.year.to_json() if self.year else None,
             "username": self.username,
-            # "email": self.email if self.year else None,
+            "email": self.email if self.year else None,
             "profile":self.profile if self.year else None,
-            # "phone":self.phone if self.year else None,
+            "phone":self.phone if self.year else None,
             "role":self.role if self.year else None,
             "institution":self.institution if self.institution else None,
             "location":self.location if self.location else None,
