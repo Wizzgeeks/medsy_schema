@@ -5,8 +5,8 @@ from datetime import datetime
 class Active_study_time(Document):
     user = ReferenceField(User, required=True, reverse_delete_rule=2)
     date = StringField(unique=True,default=lambda: datetime.now().strftime('%d-%m-%Y'))
-    in_time = ListField(StringField(default=lambda: datetime.now().strftime('%I:%M %p')))
-    out_time = ListField(StringField(default=lambda: datetime.now().strftime('%I:%M %p')))
+    in_time = ListField(required=True)
+    out_time = ListField()
 
     def to_json(self):
         return {
