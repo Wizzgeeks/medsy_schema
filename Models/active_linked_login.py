@@ -3,7 +3,7 @@ from Models.user_model import User
 
 
 class Linked_logins(Document):
-    user=ReferenceField(User,required=True,reverse_delete_rule=2)
+    user=ReferenceField(User,required=True,unique=True,reverse_delete_rule=2)
     Linked_login=ListField(DictField())
 
     def to_json(self):
