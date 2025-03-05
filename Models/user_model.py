@@ -1,7 +1,5 @@
-from mongoengine import Document, ReferenceField, StringField,EmailField,BooleanField,ListField
-from Models.course_model import Course
-from Models.year_model import Year
-from Models.active_linked_login import Linked_logins
+from mongoengine import Document, StringField
+
 class User(Document):
     course =StringField()
     year = StringField()
@@ -17,7 +15,6 @@ class User(Document):
     specialisation=StringField()
     position=StringField()
     examTarget=StringField()
-    linked_login=ListField(ReferenceField(Linked_logins))
 
     def update(self, **kwargs):
         self.clean()
