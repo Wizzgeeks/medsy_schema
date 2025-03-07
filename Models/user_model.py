@@ -4,8 +4,6 @@ class User(Document):
     course =StringField()
     year = StringField()
     username = StringField(required=True)
-    email = EmailField(unique=True,required=False,default=None)
-    phone= StringField(unique=True,required=False,sparse=True)
     profile=StringField()
     role=StringField(choices=['student','admin','superadmin'],required=True)
     auth_token = StringField()
@@ -31,9 +29,7 @@ class User(Document):
             "course": str(self.course.id) if self.course else None,
             "year": str(self.year.year) if self.year else None,
             "username": self.username,
-            # "email": self.email if self.email else None,
             "profile":self.profile if self.profile else None,
-            # "phone":self.phone if self.phone else None,
             "role":self.role if self.role else None,
             "institution":self.institution if self.institution else None,
             "location":self.location if self.location else None,
@@ -48,9 +44,7 @@ class User(Document):
             "course": self.course.to_json() if self.course else None,
             "year": self.year.to_json() if self.year else None,
             "username": self.username,
-            "email": self.email if self.year else None,
             "profile":self.profile if self.year else None,
-            "phone":self.phone if self.year else None,
             "role":self.role if self.year else None,
             "institution":self.institution if self.institution else None,
             "location":self.location if self.location else None,
