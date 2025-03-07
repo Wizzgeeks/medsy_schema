@@ -26,12 +26,13 @@ class User(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "course": str(self.course.id) if self.course else None,
-            "year": str(self.year.year) if self.year else None,
+            "course": (self.course) if self.course else None,
+            "year": (self.year) if self.year else None,
             "username": self.username,
             "profile":self.profile if self.profile else None,
             "role":self.role if self.role else None,
             "institution":self.institution if self.institution else None,
+            "position":self.profile if self.profile else None,
             "location":self.location if self.location else None,
             "examTarget":self.examTarget if self.examTarget else None,
             "specialisation":self.specialisation if self.specialisation else None
@@ -41,8 +42,8 @@ class User(Document):
     def with_key(self):
         return {
             "id": str(self.id),
-            "course": self.course.to_json() if self.course else None,
-            "year": self.year.to_json() if self.year else None,
+            "course": self.course if self.course else None,
+            "year": self.year if self.year else None,
             "username": self.username,
             "profile":self.profile if self.year else None,
             "role":self.role if self.year else None,
