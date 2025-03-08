@@ -1,11 +1,9 @@
 from mongoengine import Document, StringField,EmailField
-
+import datetime
 class User(Document):
     course =StringField()
     year = StringField()
     username = StringField(required=True)
-    email = EmailField(unique=True,required=False,default=None)
-    phone= StringField(unique=True,required=False,sparse=True)
     profile=StringField()
     role=StringField(choices=['student','admin','superadmin'],required=True)
     auth_token = StringField()
@@ -28,14 +26,13 @@ class User(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "course": str(self.course.id) if self.course else None,
-            "year": str(self.year.year) if self.year else None,
+            "course": (self.course) if self.course else None,
+            "year": (self.year) if self.year else None,
             "username": self.username,
-            # "email": self.email if self.email else None,
             "profile":self.profile if self.profile else None,
-            # "phone":self.phone if self.phone else None,
             "role":self.role if self.role else None,
             "institution":self.institution if self.institution else None,
+            "position":self.profile if self.profile else None,
             "location":self.location if self.location else None,
             "examTarget":self.examTarget if self.examTarget else None,
             "specialisation":self.specialisation if self.specialisation else None
@@ -45,15 +42,17 @@ class User(Document):
     def with_key(self):
         return {
             "id": str(self.id),
-            "course": self.course.to_json() if self.course else None,
-            "year": self.year.to_json() if self.year else None,
+            "course": self.course if self.course else None,
+            "year": self.year if self.year else None,
             "username": self.username,
-            "email": self.email if self.year else None,
             "profile":self.profile if self.year else None,
-            "phone":self.phone if self.year else None,
             "role":self.role if self.year else None,
             "institution":self.institution if self.institution else None,
             "location":self.location if self.location else None,
             "examTarget":self.examTarget if self.examTarget else None,
             "specialisation":self.specialisation if self.specialisation else None
         }
+    def remove_expired_tokens(self):
+        current_time = datetime.datetime.utcnow()
+        valid_tokens = [token for token in self.authToken if 'exp' in token and token['exp'] > current_time]
+        self.update(set__authToken=valid_tokens if valid_tokens else "")
