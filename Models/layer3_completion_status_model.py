@@ -18,3 +18,11 @@ class Layer3_completion_status(Document):
             "user":str(self.user.id) if self.user else None,
             "completed":self.completed
         }
+    
+    def with_key(self):
+        return {
+            "layer3":str(self.layer3.id) if self.layer3 else None,
+            "component":str(self.component.to_json()) if self.component else None,
+            "user":str(self.user.id) if self.user else None,
+            "completed":self.completed
+        }
