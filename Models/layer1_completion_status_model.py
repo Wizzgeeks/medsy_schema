@@ -22,7 +22,7 @@ class Layer1_completion_status(Document):
     def with_key(self):
         return {
             "layer1":str(self.layer1.id) if self.layer1 else None,
-            "component":str(self.component.to_json()) if self.component else None,
+            "component":self.component.to_json() if self.component else None,
             "user":str(self.user.id) if self.user else None,
             "completed":self.completed
         }
