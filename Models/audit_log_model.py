@@ -1,8 +1,8 @@
 from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField
-from Models.user_model import User
+from Models.admin_model import Admin
 from datetime import datetime
 class Audit_log(Document):
-    user_id = ReferenceField(User,required=True,reverse_delete_rule=2)
+    user_id = ReferenceField(Admin,required=True,reverse_delete_rule=2)
     method=StringField()
     table_name=StringField()
     id_or_key=StringField()
