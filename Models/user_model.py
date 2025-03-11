@@ -13,6 +13,7 @@ class User(Document):
     specialisation=StringField()
     position=StringField()
     examTarget=StringField()
+    
 
     def update(self, **kwargs):
         self.clean()
