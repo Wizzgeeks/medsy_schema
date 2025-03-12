@@ -21,7 +21,7 @@ class Course_level_prompt(Document):
     createdAt=DateTimeField(required=True,default=datetime.now)
     prompt_framework = DictField(required=True)
     isCurrent=BooleanField(required=True,default=True)
-    
+    name=StringField()
     def to_json(self):
         return {
             "id": str(self.id),
@@ -35,6 +35,7 @@ class Course_level_prompt(Document):
             "component":str(self.component.id) if self.component else None,
             "createdAt":str(self.createdAt),
             "prompt_framework":self.prompt_framework,
-            "isCurrent":self.isCurrent
+            "isCurrent":self.isCurrent,
+            "name":self.name
         }
         
