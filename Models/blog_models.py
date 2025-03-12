@@ -10,8 +10,9 @@ class Blog(Document):
 
     def to_json(self):
         return {
+            "id":str(self.id),
             "blog_title":self.blog_title,
-            "created_at": self.created_at.strftime("%d %b %Y"),
+            "created_at": self.created_at.strftime("%d %B %Y"),
             "blog_description":self.blog_description,
             "blog_image_url":self.blog_image_url
         }
