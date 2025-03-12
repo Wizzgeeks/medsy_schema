@@ -33,7 +33,7 @@ class User(Document):
             "profile":self.profile if self.profile else None,
             "role":self.role if self.role else None,
             "institution":self.institution if self.institution else None,
-            "position":self.profile if self.profile else None,
+            "position":self.position if self.position else None,
             "location":self.location if self.location else None,
             "examTarget":self.examTarget if self.examTarget else None,
             "specialisation":self.specialisation if self.specialisation else None
@@ -51,7 +51,9 @@ class User(Document):
             "institution":self.institution if self.institution else None,
             "location":self.location if self.location else None,
             "examTarget":self.examTarget if self.examTarget else None,
-            "specialisation":self.specialisation if self.specialisation else None
+            "specialisation":self.specialisation if self.specialisation else None,
+            "position":self.position if self.position else None,
+
         }
     def remove_expired_tokens(self):
         current_time = datetime.datetime.utcnow()
