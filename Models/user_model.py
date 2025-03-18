@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,EmailField
+from mongoengine import Document, StringField,EmailField,BooleanField
 import datetime
 class User(Document):
     course =StringField()
@@ -13,6 +13,7 @@ class User(Document):
     specialisation=StringField()
     position=StringField()
     examTarget=StringField()
+    newuser=BooleanField(default=True,required=True)
     
 
     def update(self, **kwargs):
@@ -36,7 +37,9 @@ class User(Document):
             "position":self.position if self.position else None,
             "location":self.location if self.location else None,
             "examTarget":self.examTarget if self.examTarget else None,
-            "specialisation":self.specialisation if self.specialisation else None
+            "specialisation":self.specialisation if self.specialisation else None,
+            "newuser":self.newuser if self.newuser else None,
+            
 
         }
 
@@ -53,6 +56,7 @@ class User(Document):
             "examTarget":self.examTarget if self.examTarget else None,
             "specialisation":self.specialisation if self.specialisation else None,
             "position":self.position if self.position else None,
+            "newuser":self.newuser if self.newuser else None
 
         }
     def remove_expired_tokens(self):
