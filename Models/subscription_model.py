@@ -7,9 +7,9 @@ class Subscription(Document):
     year = StringField()
     term_in_months = StringField(required=True)
     price = FloatField(required=True)
-    subscription_tier=StringField(required=True,choices=["free","pro","Premium"])
+    subscription_tier=StringField(required=True,choices=["free","pro","premium"])
     coins_threshold = StringField(required=True)
-    component_association=ListField(DictField(),required=True)
+    component_associated=ListField(DictField(),required=True)
    
     def clean(self):
         if not self.term_in_months.strip():
@@ -28,7 +28,7 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "component_association":self.component_association,
+            "component_associated":self.component_associated,
             "subscription_tier":self.subscription_tier
         }
     
@@ -40,7 +40,7 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "component_association":self.component_association,
+            "component_associated":self.component_associated,
             "subscription_tier":self.subscription_tier
         }
     def admin_json(self):
@@ -51,7 +51,7 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "component_association":self.component_association,
+            "component_associated":self.component_associated,
             "subscription_tier":self.subscription_tier
         }   
     def update(self, **kwargs):
