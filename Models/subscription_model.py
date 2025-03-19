@@ -1,13 +1,15 @@
-from mongoengine import Document,StringField,ReferenceField,ValidationError
+from mongoengine import Document,StringField,ReferenceField,ValidationError,ListField,DecimalField
 from Models.course_model import Course
 from Models.year_model import Year
 
 class Subscription(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=2)
+    year = StringField()
     term_in_months = StringField(required=True)
-    price = StringField(required=True)
+    price = DecimalField(required=True)
+    subscription_tier=StringField(required=True,)
     coins_threshold = StringField(required=True)
+    component_association=ListField(required=True)
    
     def clean(self):
         if not self.term_in_months.strip():
@@ -22,20 +24,22 @@ class Subscription(Document):
         return {
             "id": str(self.id),
             "course":str(self.course.id) if self.course else None,
-            "year":str(self.year.id) if self.year else None,
+            "year":self.year if self.year else None,
             "term_in_months":self.term_in_months,
             "price":self.price,
-            "coins_threshold":self.coins_threshold
+            "coins_threshold":self.coins_threshold,
+            "component_association":self.component_association
         }
     
     def with_key(self):
         return {
             "id": str(self.id),
             "course":self.course.to_json() if self.course else None,
-            "year":self.year.to_json() if self.year else None,
+            "year":self.year if self.year else None,
             "term_in_months":self.term_in_months,
             "price":self.price,
-            "coins_threshold":self.coins_threshold
+            "coins_threshold":self.coins_threshold,
+            "component_association":self.component_association
         }
         
     def update(self, **kwargs):
