@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,ValidationError,ListField,DecimalField,DictField
+from mongoengine import Document,StringField,ReferenceField,ValidationError,ListField,FloatField,DictField
 from Models.course_model import Course
 from Models.year_model import Year
 
@@ -6,7 +6,7 @@ class Subscription(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     year = StringField()
     term_in_months = StringField(required=True)
-    price = DecimalField(required=True)
+    price = FloatField(required=True)
     subscription_tier=StringField(required=True,)
     coins_threshold = StringField(required=True)
     component_association=ListField(DictField(),required=True)
