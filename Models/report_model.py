@@ -2,7 +2,7 @@ from mongoengine import Document, ReferenceField, StringField
 from Models.user_model import User
 from datetime import datetime
 
-class Active_study_time(Document):
+class Report(Document):
     user = ReferenceField(User, required=True, reverse_delete_rule=2)
     created_at = StringField(default=lambda: datetime.now().strftime('%d-%m-%Y'))
     problem = StringField(required=True)
