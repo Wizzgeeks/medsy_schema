@@ -10,6 +10,9 @@ class Subscription(Document):
     subscription_tier=StringField(required=True,choices=["free","pro","premium"])
     coins_threshold = StringField(required=True)
     component_associated=ListField(DictField(),required=True)
+    package_name=StringField(required=True)
+    max_token=StringField(required=True)
+
    
     def clean(self):
         if not self.term_in_months.strip():
@@ -29,7 +32,9 @@ class Subscription(Document):
             "price":self.price,
             "coins_threshold":self.coins_threshold,
             "component_associated":self.component_associated,
-            "subscription_tier":self.subscription_tier
+            "subscription_tier":self.subscription_tier,
+            "package_name":self.package_name,
+            "max_token":self.max_token
         }
     
     def with_key(self):
@@ -41,7 +46,9 @@ class Subscription(Document):
             "price":self.price,
             "coins_threshold":self.coins_threshold,
             "component_associated":self.component_associated,
-            "subscription_tier":self.subscription_tier
+            "subscription_tier":self.subscription_tier,
+            "package_name":self.package_name,
+            "max_token":self.max_token
         }
     def admin_json(self):
         return {
@@ -52,7 +59,9 @@ class Subscription(Document):
             "price":self.price,
             "coins_threshold":self.coins_threshold,
             "component_associated":self.component_associated,
-            "subscription_tier":self.subscription_tier
+            "subscription_tier":self.subscription_tier,
+            "package_name":self.package_name,
+            "max_token":self.max_token
         }   
     def update(self, **kwargs):
         self.clean()
