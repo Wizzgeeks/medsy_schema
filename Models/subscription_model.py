@@ -7,15 +7,15 @@ class Subscription(Document):
     year = StringField()
     term_in_months = StringField(required=True)
     price = FloatField(required=True)
-    subscription_tier=StringField(required=True,)
+    subscription_tier=StringField(required=True,choices=["free","pro","Premium"])
     coins_threshold = StringField(required=True)
     component_association=ListField(DictField(),required=True)
    
     def clean(self):
         if not self.term_in_months.strip():
             raise ValidationError("Term in months cannot be empty")
-        if not self.price.strip():
-            raise ValidationError("Price  cannot be empty")
+        # if not self.price.strip():
+        #     raise ValidationError("Price  cannot be empty")
         if not self.coins_threshold.strip():
             raise ValidationError("Coins threshold cannot be empty")
         
@@ -28,7 +28,8 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "component_association":self.component_association
+            "component_association":self.component_association,
+            "subscription_tier":self.subscription_tier
         }
     
     def with_key(self):
@@ -39,7 +40,8 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "component_association":self.component_association
+            "component_association":self.component_association,
+            "subscription_tier":self.subscription_tier
         }
     def admin_json(self):
         return {
@@ -49,7 +51,8 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "component_association":self.component_association
+            "component_association":self.component_association,
+            "subscription_tier":self.subscription_tier
         }   
     def update(self, **kwargs):
         self.clean()
