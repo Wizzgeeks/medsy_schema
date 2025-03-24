@@ -9,6 +9,7 @@ class Blog(Document):
     description=StringField()
     blog_category=StringField(choices=['type1','type2','type3'],required=True)
     created_at = DateTimeField(default=datetime.utcnow)
+    file_name=StringField()
 
     def to_json(self):
         return {
@@ -18,5 +19,6 @@ class Blog(Document):
             "blog_description":self.blog_description,
             "blog_image_url":self.blog_image_url,
             "description":self.description,
-            "blog_category":self.blog_category
+            "blog_category":self.blog_category,
+            "file_name":self.file_name
         }
