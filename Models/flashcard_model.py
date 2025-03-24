@@ -25,7 +25,6 @@ class Flashcard(Document):
             "subject":str(self.subject.id) if self.subject else None,
             "year":str(self.year.id) if self.year else None,
             "layer1":str(self.layer1.id) if self.layer1 else None,
-            "type":self.type,
             "content":self.content,
         }
     
@@ -36,7 +35,6 @@ class Flashcard(Document):
             "subject":self.subject.to_json() if self.subject else None,
             "year":self.year.to_json() if self.year else None,
             "layer1":self.layer1.to_json() if self.layer1 else None,
-            "type":self.type,
             "content":self.content,
         }
     
