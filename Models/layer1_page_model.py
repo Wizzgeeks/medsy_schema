@@ -36,6 +36,6 @@ class Layer1_page(Document):
             'types': self.types,
             'sequence': self.sequence,
             'hierarcy_level': self.hierarcy_level,
-            "child_pages": [child.to_json() for child in self.child_pages] if self.child_pages else [],
+            "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
         }
 
