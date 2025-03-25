@@ -14,6 +14,6 @@ class Dependent_components(Document):
         return {
             "name":self.name,
             "prompt":str(self.prompt.id),
-            "type":self.type
+            "types":self.types
         }
     
