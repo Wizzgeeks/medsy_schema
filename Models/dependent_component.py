@@ -1,10 +1,10 @@
 from mongoengine import Document,ReferenceField,BooleanField,ListField,StringField
 from Models.prompt_model import Prompt
 
-class Dependent_components():
+class Dependent_components(Document):
     name=StringField()
     prompt=ReferenceField(Prompt,required=True,reverse_delete_rule=2)
-    type=StringField(choices=['fillups','image','video','mcq','analysis'],required=True)
+    types=StringField(choices=['fillups','image','video','mcq','analysis'],required=True)
 
     def update(self, **kwargs):
         self.clean()
