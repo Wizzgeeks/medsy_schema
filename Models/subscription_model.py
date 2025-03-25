@@ -53,7 +53,7 @@ class Subscription(Document):
     def admin_json(self):
         return {
             "id": str(self.id),
-            "course":(self.course.name) if self.course else None,
+            "course":(self.course.to_json()) if self.course else None,
             "year":self.year if self.year else None,
             "term_in_months":self.term_in_months,
             "price":self.price,
