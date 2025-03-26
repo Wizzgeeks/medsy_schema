@@ -1,7 +1,6 @@
 from mongoengine import Document,ReferenceField,IntField,DictField,ListField,StringField,BooleanField
 from Models.user_model import User
 from Models.layer_1_model import Layer_1
-from Models.component_model import Component
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer1_page_model import Layer1_page
@@ -12,7 +11,7 @@ class Layer1_time_spent(Document):
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     layer1_page = ReferenceField(Layer1_page,required=True,reverse_delete_rule=2)
     attempts =ListField(DictField())
-    types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis'],required=True)
+    types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content'],required=True)
     completed=BooleanField(default=False)
     
 
