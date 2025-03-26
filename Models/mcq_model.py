@@ -8,22 +8,16 @@ from Models.layer1_page_model import Layer1_page
 from Models.layer2_page_model import Layer2_page
 from Models.layer3_page_model import Layer3_page
 from Models.year_model import Year
-from Models.prompt_content_model import Prompt_content
+from Models.user_model import User
 
 
-class MCQ(Document):
-    course = ReferenceField(Course, reverse_delete_rule=2, required=True)
-    year = ReferenceField(Year, reverse_delete_rule=2, required=True)
-    subject = ReferenceField(Subject, reverse_delete_rule=2, required=True)
-    layer1 = ReferenceField(Layer_1, reverse_delete_rule=2, null=True)
-    layer2 = ReferenceField(Layer_2, reverse_delete_rule=2, null=True)
-    layer3 = ReferenceField(Layer_3, reverse_delete_rule=2, null=True)
+class Mcq_result(Document):
+    user=ReferenceField(User,reverse_delete_rule=2,required=True)
     layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2, null=True)
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
-    questions = ListField(DictField())
-    types = StringField(choices=['mcq','fillups','coversational','match'],required=True)
-    prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
+    attempt_data = ListField(DictField())
+    
 
     def to_json(self):
         return {
@@ -37,8 +31,7 @@ class MCQ(Document):
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
-            "content": self.questions,
-            "prompt": self.prompt.to_json() if self.prompt else None
+            "attempts": self.attempts,
         }
     
     def to_user(self):
@@ -53,5 +46,5 @@ class MCQ(Document):
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
-            "content": self.questions,
+            "content": self.v,
         }
