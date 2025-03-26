@@ -22,29 +22,19 @@ class Mcq_result(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            'course': str(self.course.id) if self.course else None,
-            'year': str(self.year.id) if self.year else None,
-            "subject": str(self.subject.id) if self.subject else None,
-            "layer1": str(self.layer1.id) if self.layer1 else None,
-            "layer2": str(self.layer2.id) if self.layer2 else None,
-            "layer3": str(self.layer3.id) if self.layer3 else None,
+            "user":str(self.user.id) if self.user else None,
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
-            "attempts": self.attempts,
+            "attempt_data": self.attempt_data,
         }
     
     def to_user(self):
         return {
             "id": str(self.id),
-            'course': str(self.course.id) if self.course else None,
-            'year': str(self.year.id) if self.year else None,
-            "subject": str(self.subject.id) if self.subject else None,
-            "layer1": str(self.layer1.id) if self.layer1 else None,
-            "layer2": str(self.layer2.id) if self.layer2 else None,
-            "layer3": str(self.layer3.id) if self.layer3 else None,
+            "user":str(self.user.id) if self.user else None,            
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
-            "content": self.v,
+            "attempt_data": self.attempt_data,
         }
