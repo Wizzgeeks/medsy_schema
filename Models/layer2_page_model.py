@@ -47,6 +47,6 @@ class Layer2_page(Document):
             'types': self.types,
             'sequence': self.sequence,
             'hierarcy_level': self.hierarcy_level,
-            "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
+            "child_pages": [child.to_admin() for child in self.child_pages] if self.child_pages else [],
             "prompts": [str(prompt.id) for prompt in self.prompts] if self.prompts else None
         }
