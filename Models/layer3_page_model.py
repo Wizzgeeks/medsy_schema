@@ -39,3 +39,15 @@ class Layer3_page(Document):
             'hierarcy_level':str(self.hierarcy_level),
             "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
         }
+    
+    def to_admin(self):
+        return {
+            "id": str(self.id),
+            'course': str(self.course.id),
+            'name': self.name,
+            'types': self.types,
+            'sequence': self.sequence,
+            'hierarcy_level': self.hierarcy_level,
+            "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
+            "prompts": [str(prompt.id) for prompt in self.prompts] if self.prompts else None
+        }
