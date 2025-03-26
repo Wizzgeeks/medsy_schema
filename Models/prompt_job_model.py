@@ -11,7 +11,7 @@ class Prompt_job(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     created_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
     created_at = DateTimeField(default=datetime.now)
-    target=StringField(choices=['Layer1_page_creation_job','Layer2_page_creation_job','Layer3_page_creation_job'],required=True)
+    target=StringField(choices=['Layer1_prompt_apply_job','Layer2_prompt_apply_job','Layer3_prompt_apply_job'],required=True)
     detail=StringField()
     completed_count=IntField()
     total_count=IntField()
