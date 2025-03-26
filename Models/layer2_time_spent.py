@@ -7,7 +7,7 @@ from Models.layer_2_model import Layer_2
 # from Models.layer_3_model import Layer_3
 from Models.layer2_page_model import Layer2_page
 
-class Layer1_time_spent(Document):
+class Layer2_time_spent(Document):
     coures = ReferenceField(Course,required=True,reverse_delete_rule=2)
     subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
