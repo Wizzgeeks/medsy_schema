@@ -19,7 +19,7 @@ class Prompt_job(Document):
     layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2)
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2)
-    component = StringField(choices=['image','video','conversation'])
+    component = StringField(choices=['image','video','conversation','content','mcq','test_series'])
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2,required=True)
 
     def to_json(self):
