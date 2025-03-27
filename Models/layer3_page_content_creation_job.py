@@ -16,6 +16,7 @@ class Layer3_page_creation_job(Document):
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2,required=True)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2,required=True)
     logs=ListField(DictField())
+    conversation = ListField(default=[])
     created_at=DateTimeField(default=datetime.now,required=True)
     status=StringField()
 
@@ -31,6 +32,7 @@ class Layer3_page_creation_job(Document):
             'layer3':str(self.layer3.id),
             'status':self.status,
             'logs':self.logs,
+            'conversation':self.conversation if self.conversation else [],
             'created_at':self.created_at
             }
     
@@ -46,5 +48,6 @@ class Layer3_page_creation_job(Document):
             'layer3':str(self.layer3.id),
             'status':self.status,
             'logs':self.logs,
+            'conversation':self.conversation if self.conversation else [],
             'created_at':self.created_at
             }
