@@ -18,6 +18,18 @@ class Layer1_prompt_apply_job(Document):
     def to_json(self):
         return {
             "id":str(self.id),
+            'job_id':self.job_id.to_json(),
+            'course':str(self.course.id),
+            'year':str(self.year.id),
+            'subject':str(self.subject.id),
+            'layer1':str(self.layer1.id),
+            'status':self.status,
+            'created_at':self.created_at
+            }
+    
+    def to_admin(self):
+        return {
+            "id":str(self.id),
             'job_id':str(self.job_id.id),
             'course':str(self.course.id),
             'year':str(self.year.id),

@@ -30,3 +30,17 @@ class Layer2_page_creation_job(Document):
             'logs':self.logs,
             'created_at':self.created_at
             }
+    
+    def to_admin(self):
+        return {
+            "id":str(self.id),
+            'job_id':str(self.job_id.id),
+            'course':str(self.course.id),
+            'year':str(self.year.id),
+            'subject':str(self.subject.id),
+            'layer1':str(self.layer1.id) if self.layer1 else None,
+            'layer2':str(self.layer2.id),
+            'status':self.status,
+            'logs':self.logs,
+            'created_at':self.created_at
+            }
