@@ -22,7 +22,7 @@ class Layer3_prompt_apply_job(Document):
     def to_json(self):
         return {
             "id":str(self.id),
-            'job_id':self.job_id.to_json(),
+            'job_id':str(self.job_id.id),
             'course':str(self.course.id),
             'year':str(self.year.id),
             'subject':str(self.subject.id),
