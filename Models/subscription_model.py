@@ -24,7 +24,7 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "categories":self.categories,
+            "categories":[categories.to_json() for categories in self.categories] if self.categories else None,
             "subscription_tier":self.subscription_tier,
             "package_name":self.package_name,
             "max_token":self.max_token
@@ -38,7 +38,7 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "categories":self.categories,
+            "categories":[categories.to_json() for categories in self.categories] if self.categories else None,
             "subscription_tier":self.subscription_tier,
             "package_name":self.package_name,
             "max_token":self.max_token
@@ -51,7 +51,7 @@ class Subscription(Document):
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
-            "categories":self.categories,
+            "categories":[categories.to_json() for categories in self.categories] if self.categories else None,
             "subscription_tier":self.subscription_tier,
             "package_name":self.package_name,
             "max_token":self.max_token
