@@ -9,6 +9,7 @@ class Admin(Document):
 
     def to_json(self):
         return{
+            'id':str(self.id),
             'email':self.email
         }
     def remove_expired_tokens(self):
