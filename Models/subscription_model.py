@@ -20,7 +20,7 @@ class Subscription(Document):
         return {
             "id": str(self.id),
             "course":(self.course.id) if self.course else None,
-            "year":str(self.year.id) if self.year else None,
+            "year":[years.to_json() for years in self.year] if self.year else None,
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
@@ -34,7 +34,7 @@ class Subscription(Document):
         return {
             "id": str(self.id),
             "course":self.course.to_json() if self.course else None,
-            "year":self.year.to_json() if self.year else None,
+            "year":[years.to_json() for years in self.year] if self.year else None,
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
@@ -47,7 +47,7 @@ class Subscription(Document):
         return {
             "id": str(self.id),
             "course":self.course.to_json() if self.course else None,
-            "year":self.year.to_json() if self.year else None,
+            "year":[years.to_json() for years in self.year] if self.year else None,
             "term_in_months":self.term_in_months,
             "price":self.price,
             "coins_threshold":self.coins_threshold,
