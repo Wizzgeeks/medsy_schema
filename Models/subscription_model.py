@@ -19,7 +19,7 @@ class Subscription(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "course":(self.course.id) if self.course else None,
+            "course":str(self.course.id) if self.course else None,
             "year":[years.to_json() for years in self.year] if self.year else None,
             "term_in_months":self.term_in_months,
             "price":self.price,
