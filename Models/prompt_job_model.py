@@ -25,7 +25,7 @@ class Prompt_job(Document):
     def to_json(self):
         return{
             "id":str(self.id),
-            "course":str(self.course.id) if self.course else None,
+            "course":self.course.to_json() if self.course else None,
             "created_by":self.created_by.to_json() if self.created_by else None,
             "created_at":str(self.created_at),
             "target":self.target,
