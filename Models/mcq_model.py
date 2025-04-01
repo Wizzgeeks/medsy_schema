@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField,ListField,DictField,StringField,BooleanField
+from mongoengine import Document, ReferenceField,ListField,DictField,StringField,BooleanField,IntField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -17,6 +17,10 @@ class Mcq_result(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     attempt_data = ListField(DictField())
+    score=IntField()
+    total_questions=IntField()
+    attempt_questions=IntField()
+    time_taken=IntField()
     completed=BooleanField(default=False)
     
 
@@ -28,7 +32,11 @@ class Mcq_result(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "attempt_data": self.attempt_data,
-            "completed":self.completed
+            "completed":self.completed,
+            "score":self.score,
+            "total_questions":self.total_questions,
+            "attempt_questions":self.attempt_questions,
+            "time_taken":self.time_taken
         }
     
     def to_user(self):
@@ -39,5 +47,9 @@ class Mcq_result(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "attempt_data": self.attempt_data,
-            "completed":self.completed
+            "completed":self.completed,
+            "score":self.score,
+            "total_questions":self.total_questions,
+            "attempt_questions":self.attempt_questions,
+            "time_taken":self.time_taken
         }
