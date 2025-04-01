@@ -2,10 +2,11 @@ from mongoengine import Document, ReferenceField, StringField,DateTimeField,Vali
 from datetime import datetime
 from Models.user_model import User
 from Models.lesson_note_model import Lesson_note
+from Models.page_content_model import PageContent
 
 class Saved_notes(Document):
     user = ReferenceField(User,reverse_delete_rule=2)
-    Lesson_note= ReferenceField(Lesson_note,required=True,reverse_delete_rule=2)
+    page= ReferenceField(PageContent,required=True,reverse_delete_rule=2)
     type = StringField(choices=['RevisedLater','Important','Reference','Snapshot'],required=True)
     path_name=StringField()
     path_url=StringField()
