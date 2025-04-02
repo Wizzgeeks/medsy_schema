@@ -17,7 +17,7 @@ class Saved_notes(Document):
         return {
             "id": str(self.id),
             "user": str(self.user.id),
-            "Lesson_note":str(self.Lesson_note.id),
+            "page":str(self.page.id),
             "type":self.type,
             "path_name":self.path_name,
             "path_url":self.path_url,
