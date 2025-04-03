@@ -1,11 +1,17 @@
 from Models.layer3_page_model import Layer3_page
 from Models.layer2_page_model import Layer2_page
 from Models.layer1_page_model import Layer1_page
+from Models.layer_1_model import Layer_1
+from Models.layer_2_model import Layer_2
+from Models.layer_3_model import Layer_3
 from Models.user_model import User
 from mongoengine import Document,ReferenceField,StringField,IntField,ListField,DictField
 
 class User_Chat(Document):
     user=ReferenceField(User,reverse_delete_rule=2,required=True)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
+    layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
+    layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
     layer1_page=ReferenceField(Layer1_page,reverse_delete_rule=2)
     layer2_page=ReferenceField(Layer2_page,reverse_delete_rule=2)
     layer3_page=ReferenceField(Layer3_page,reverse_delete_rule=2)
