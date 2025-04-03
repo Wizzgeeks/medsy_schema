@@ -15,7 +15,7 @@ class User_Chat(Document):
     layer1_page=ReferenceField(Layer1_page,reverse_delete_rule=2)
     layer2_page=ReferenceField(Layer2_page,reverse_delete_rule=2)
     layer3_page=ReferenceField(Layer3_page,reverse_delete_rule=2)
-    chat=ListField(DictField)
+    chat=ListField(DictField())
 
     def to_json(self):
         return{
