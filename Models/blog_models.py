@@ -7,7 +7,7 @@ class Blog(Document):
     blog_title=StringField()
     blog_description=StringField()
     description=StringField()
-    blog_category=StringField(choices=['type1','type2','type3'],required=True)
+    blog_category=StringField(choices=['blog','announcements','article'],required=True)
     created_at = DateTimeField(default=datetime.now)
     file_name=StringField()
 
