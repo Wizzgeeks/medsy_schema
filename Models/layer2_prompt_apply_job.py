@@ -25,7 +25,7 @@ class Layer2_prompt_apply_job(Document):
             'year':str(self.year.id),
             'subject':str(self.subject.id),
             'layer1':str(self.layer1.id) if self.layer1 else None,
-            'layer2':str(self.layer2.id),
+            'layer2':self.layer2.to_json(),
             'status':self.status,
             'created_at':self.created_at
             }
@@ -38,7 +38,7 @@ class Layer2_prompt_apply_job(Document):
             'year':str(self.year.id),
             'subject':str(self.subject.id),
             'layer1':str(self.layer1.id) if self.layer1 else None,
-            'layer2':str(self.layer2.id),
+            'layer2':self.layer2.to_json(),
             'status':self.status,
             'created_at':self.created_at
             }

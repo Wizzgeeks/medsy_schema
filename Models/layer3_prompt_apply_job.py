@@ -28,7 +28,7 @@ class Layer3_prompt_apply_job(Document):
             'subject':str(self.subject.id),
             'layer1':str(self.layer1.id) if self.layer1 else None,
             'layer2':str(self.layer2.id),
-            'layer3':str(self.layer3.id),
+            'layer3':self.layer3.to_json(),
             'status':self.status,
             'created_at':self.created_at
             }
@@ -42,7 +42,7 @@ class Layer3_prompt_apply_job(Document):
             'subject':str(self.subject.id),
             'layer1':str(self.layer1.id) if self.layer1 else None,
             'layer2':str(self.layer2.id),
-            'layer3':str(self.layer3.id),
+            'layer3':self.layer3.to_json(),
             'status':self.status,
             'created_at':self.created_at
             }

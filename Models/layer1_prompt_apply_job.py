@@ -22,7 +22,7 @@ class Layer1_prompt_apply_job(Document):
             'course':str(self.course.id),
             'year':str(self.year.id),
             'subject':str(self.subject.id),
-            'layer1':str(self.layer1.id),
+            'layer1':self.layer1.to_json(),
             'status':self.status,
             'created_at':self.created_at
             }
@@ -34,7 +34,7 @@ class Layer1_prompt_apply_job(Document):
             'course':str(self.course.id),
             'year':str(self.year.id),
             'subject':str(self.subject.id),
-            'layer1':str(self.layer1.id),
+            'layer1':self.layer1.to_json(),
             'status':self.status,
             'created_at':self.created_at
             }
