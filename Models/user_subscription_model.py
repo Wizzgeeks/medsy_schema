@@ -8,9 +8,9 @@ class User_subscription(Document):
     # payment = ReferenceField(Payment_detail,required=True,reverse_delete_rule=2)
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     subscription = ReferenceField(Subscription,required=True,reverse_delete_rule=2)
-    coupon = ReferenceField(Coupon,required=True,reverse_delete_rule=2)
-    coins_redeemed=StringField(required=True)
-    expiry = DateTimeField(required=True)
+    coupon = ReferenceField(Coupon,reverse_delete_rule=2)
+    coins_redeemed=StringField()
+    expiry = DateTimeField()
 
     def to_json(self):
         return {
