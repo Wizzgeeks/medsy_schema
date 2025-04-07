@@ -36,7 +36,7 @@ class Layer3_page_creation_job(Document):
             'created_at':self.created_at
             }
     
-    def to_json(self):
+    def to_admin(self):
         return {
             "id":str(self.id),
             'job_id':str(self.job_id.id),
