@@ -1,12 +1,12 @@
 from mongoengine import ReferenceField,Document,StringField,DateTimeField
 from Models.user_model import User
 from Models.user_subscription_model import User_subscription
-from datetime import datetime
+from datetime import datetime,timezone
 
 class Transaction_detail(Document):
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     user_subscription = ReferenceField(User_subscription,required=True,reverse_delete_rule=2)
-    transaction_time = DateTimeField(required=True,default=datetime.now())
+    transaction_time = DateTimeField(required=True,default=datetime.now(timezone.utc))
     order_id = StringField(required=True)
     payment_id = StringField(required=True)
     signature = StringField(required=True)
@@ -18,7 +18,7 @@ class Transaction_detail(Document):
         return {
         "id":str(self.id),
         "user":str(self.user.id) if self.user else None,
-        "user_subscription":str(self.user_subscription.id) if self.user_subscription else None,
+        "user_subscription":self.user_subscription.to_json() if self.user_subscription else None,
         "transaction_time":self.transaction_time,
         "order_id":self.order_id,
         "payment_id":self.payment_id,

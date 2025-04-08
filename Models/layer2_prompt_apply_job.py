@@ -5,7 +5,7 @@ from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.year_model import Year
-from datetime import datetime
+from datetime import datetime,timezone
 
 class Layer2_prompt_apply_job(Document):
     job_id=ReferenceField(Prompt_job,reverse_delete_rule=2,required=True)

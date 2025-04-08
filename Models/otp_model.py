@@ -1,5 +1,5 @@
 from mongoengine import  Document, StringField, IntField,DateTimeField
-from datetime import datetime
+from datetime import datetime,timezone
 
 
 class OTPModel(Document):

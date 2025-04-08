@@ -5,7 +5,7 @@ from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.year_model import Year
-from datetime import datetime
+from datetime import datetime,timezone
 class Layer2_page_creation_job(Document):
     job_id=ReferenceField(Job_detail,reverse_delete_rule=2,required=True)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
