@@ -14,7 +14,7 @@ class Layer1_page_creation_job(Document):
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2,required=True)
     logs=ListField(DictField())
     conversation = ListField(default=[])
-    created_at=DateTimeField(default=datetime.now,required=True)
+    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
     status=StringField()
 
     def to_json(self):
