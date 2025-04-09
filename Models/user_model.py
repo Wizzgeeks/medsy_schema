@@ -1,5 +1,5 @@
 from mongoengine import Document, StringField,EmailField,BooleanField
-import datetime,timezone
+from datetime import datetime,timezone
 class User(Document):
     course =StringField()
     year = StringField()
