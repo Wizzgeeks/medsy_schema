@@ -40,7 +40,7 @@ class Subject_page(Document):
     def to_admin(self):
         return {
             "id": str(self.id),
-            'course': str(self.course.id),
+            'course': str(self.course.id), 
             'name': self.name,
             'types': self.types,
             'sequence': self.sequence,
