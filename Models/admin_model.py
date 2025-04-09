@@ -1,5 +1,5 @@
 from mongoengine import Document, StringField,EmailField
-import datetime,timezone
+from datetime import datetime,timezone
 
 
 class Admin(Document):
