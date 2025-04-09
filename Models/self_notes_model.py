@@ -6,7 +6,7 @@ class Self_note(Document):
     user = ReferenceField(User, required=True, reverse_delete_rule=2)
     title = StringField(required=True)
     notes_content = StringField(required=True)
-    date = DateTimeField(required=True, default=datetime.now)
+    date = DateTimeField(required=True, default=datetime.now(timezone.utc))
     path=StringField()
 
 

@@ -8,7 +8,7 @@ class Audit_log(Document):
     id_or_key=StringField()
     updated_data=DictField(default={})
     existing_data=DictField(default={})
-    created_at = DateTimeField(default=datetime.now)
+    created_at = DateTimeField(default=datetime.now(timezone.utc))
 
     def to_json(self):
         return {

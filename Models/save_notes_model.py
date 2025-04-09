@@ -11,7 +11,7 @@ class Saved_notes(Document):
     path_name=StringField()
     path_url=StringField()
     content=IntField()
-    date = DateTimeField(required=True, default=datetime.now)
+    date = DateTimeField(required=True, default=datetime.now(timezone.utc))
 
     def to_json(self):
         return {

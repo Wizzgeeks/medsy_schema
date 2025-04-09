@@ -11,8 +11,8 @@ from Models.subject_page_model import Subject_page
 class Prompt_job(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     created_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
-    created_at = DateTimeField(default=datetime.now)
-    target=StringField(choices=['Subject_prompt_apply_job','Layer1_prompt_apply_job','Layer2_prompt_apply_job','Layer3_prompt_apply_job'],required=True)
+    created_at = DateTimeField(default=datetime.now(timezone.utc))
+    target=StringField(choices=['subject_prompt_apply_job','Layer1_prompt_apply_job','Layer2_prompt_apply_job','Layer3_prompt_apply_job'],required=True)
     detail=StringField()
     completed_count=IntField()
     total_count=IntField()
