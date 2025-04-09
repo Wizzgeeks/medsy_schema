@@ -9,7 +9,7 @@ class Subject_page(Document):
     types = StringField(choices=['content','mcq','test_series'],required=True)
     sequence = IntField(required=True)
     hierarcy_level = IntField(default=0)
-    child_pages = ListField(ReferenceField("Layer1_page", reverse_delete_rule=2, required=True))
+    child_pages = ListField(ReferenceField("Subject_page", reverse_delete_rule=2, required=True))
     prompts = ListField(ReferenceField(Prompt_content,reverse_delete_rule=2,required=True))    
 
    
