@@ -10,7 +10,7 @@ class Subject_prompt_apply_job(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
-    created_at=DateTimeField(default=datetime.now,required=True)
+    created_at=DateTimeField(default=datetime.datetime.now(timezone.utc),required=True)
     status=StringField()
 
     def to_json(self):
