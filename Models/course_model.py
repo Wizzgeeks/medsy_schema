@@ -15,6 +15,8 @@ class Course(Document):
     def clean(self):
         if not self.duration.strip():
             raise ValidationError("duration cannot be empty")
+        if not self.coin_value.strip():
+            raise ValidationError("coin_value cannot be empty")
         if not self.name.strip():
             raise ValidationError("course name cannot be empty")
         if not self.country.strip():

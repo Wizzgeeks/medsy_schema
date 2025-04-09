@@ -6,12 +6,13 @@ from Models.layer1_page_model import Layer1_page
 from Models.layer2_page_model import Layer2_page
 from Models.layer3_page_model import Layer3_page
 from Models.page_content_model import Prompt_content
+from Models.subject_page_model import Subject_page
 
 class Prompt_job(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     created_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
-    target=StringField(choices=['Layer1_prompt_apply_job','Layer2_prompt_apply_job','Layer3_prompt_apply_job'],required=True)
+    target=StringField(choices=['subject_prompt_apply_job','Layer1_prompt_apply_job','Layer2_prompt_apply_job','Layer3_prompt_apply_job'],required=True)
     detail=StringField()
     completed_count=IntField()
     total_count=IntField()
@@ -19,6 +20,7 @@ class Prompt_job(Document):
     layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2)
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2)
+    subject_page = ReferenceField(Subject_page, reverse_delete_rule=2)
     component = StringField(choices=['image','video','conversation','content','mcq','test_series'])
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2,required=True)
 
@@ -36,6 +38,7 @@ class Prompt_job(Document):
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
+            "subject_page": str(self.subject_page.id) if self.subject_page else None,
             "component": self.component,
             "prompt": str(self.prompt.id),
 
