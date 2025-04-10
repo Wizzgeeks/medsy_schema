@@ -4,7 +4,7 @@ from Models.prompt_model import Prompt
 class Dependent_components(Document):
     name=StringField()
     prompt=ReferenceField(Prompt,required=True,reverse_delete_rule=2)
-    types=StringField(choices=['fillups','image','video','mcq','analysis','expand','match','trueorfalse'],required=True)
+    types=StringField(choices=['fillups','image','video','mcq','analysis','expand','match','trueorfalse','ontimeMCQ'],required=True)
 
     def update(self, **kwargs):
         self.clean()
