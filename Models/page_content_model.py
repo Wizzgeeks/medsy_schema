@@ -38,6 +38,7 @@ class PageContent(Document):
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
+            "subject_page": str(self.subject_page.id) if self.subject_page else None,
             "content": self.content,
             "prompt": self.prompt.to_json() if self.prompt else None
         }
@@ -54,5 +55,6 @@ class PageContent(Document):
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
+            "subject_page": str(self.subject_page.id) if self.subject_page else None,
             "content": self.content,
         }
