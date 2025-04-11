@@ -52,6 +52,12 @@ class Course(Document):
             "has_prompt":self.has_prompt,
             "key":self.key
         }
+    def simple_data(self):
+        return {
+            "name":self.name,
+            "country":self.country,
+            "key":self.key
+        }
     
     def update(self, **kwargs):
         self.clean()
