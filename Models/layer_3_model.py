@@ -79,6 +79,11 @@ class Layer_3(Document):
             "competency_key":self.competency_key
 
         }
+    def accordian_json(self):
+        return {
+            "name":self.name,
+            "key":self.key
+        }
         
     def update(self, **kwargs):
         self.clean()

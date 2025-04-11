@@ -62,6 +62,13 @@ class Subject(Document):
             "has_3_layers":self.has_3_layers,
             "key":self.key
         }
+    
+    def accordian_json(self):
+        return {
+            "name":self.name,
+            "key":self.key
+        }
+    
 
         
     def update(self, **kwargs):

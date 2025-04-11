@@ -54,6 +54,11 @@ class Year(Document):
             "has_prompt":self.has_prompt,
             "key":self.key
         }
+    def accordian_json(self):
+        return {
+            "name":self.year,
+            "key":self.key
+        }
         
     def update(self, **kwargs):
         self.clean()
