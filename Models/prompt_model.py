@@ -17,7 +17,7 @@ class Prompt(Document):
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
     layer = StringField(choices=['subject','layer1','layer2','layer3'],required=True)
-    types=StringField(choices=['fillups','image','video','mcq','analysis','expand','match','trueorfalse','ontimeMCQ'],required=True)
+    types=StringField(choices=['fillups','image','video','mcq','analysis','expand','match','trueorfalse','ontimeMCQ','chat','others'],required=True)
     prompt_framework = DictField(required=True)
     name=StringField(default='CTC Prompt')
     default=BooleanField(default=False)
