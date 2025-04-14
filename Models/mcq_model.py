@@ -7,6 +7,7 @@ from Models.layer_3_model import Layer_3
 from Models.layer1_page_model import Layer1_page
 from Models.layer2_page_model import Layer2_page
 from Models.layer3_page_model import Layer3_page
+from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.user_model import User
 
@@ -16,6 +17,7 @@ class Mcq_result(Document):
     layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2, null=True)
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
+    subject_page=ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
     attempt_data = ListField(DictField())
     score=IntField()
     total_questions=IntField()
