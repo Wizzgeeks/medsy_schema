@@ -2,6 +2,7 @@ from mongoengine import Document,ReferenceField,IntField,DictField,ListField,Str
 from Models.user_model import User
 from Models.layer_1_model import Layer_1
 from Models.course_model import Course
+from Models.year_model import Year
 from Models.subject_model import Subject
 from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
@@ -10,6 +11,7 @@ from Models.layer3_page_model import Layer3_page
 class Layer3_time_spent(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
+    year = ReferenceField(Year,required=True,reverse_delete_rule=2)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
     layer2=ReferenceField(Layer_2,required=True,reverse_delete_rule=2)
     layer3=ReferenceField(Layer_3,required=True,reverse_delete_rule=2)
@@ -32,6 +34,7 @@ class Layer3_time_spent(Document):
             "layer1":self.layer1.to_json() if self.layer1 else None,
             "layer2":self.layer2.to_json() if self.layer2 else None,
             "layer3":self.layer3.to_json() if self.layer3 else None,
+            "year":self.year.to_json() if self.layer3.year else None,
             "layer3_page":self.layer3_page.to_json() if self.layer3_page else None,
             "attempts":self.attempts,
             "types":self.types,
