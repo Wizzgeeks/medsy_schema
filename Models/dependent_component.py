@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,BooleanField,ListField,StringField
+from mongoengine import Document,ReferenceField,StringField
 from Models.prompt_model import Prompt
 
 class Dependent_components(Document):

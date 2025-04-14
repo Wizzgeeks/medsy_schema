@@ -1,5 +1,4 @@
-from mongoengine import Document,ReferenceField,DictField,StringField
-from Models.component_model import Component
+from mongoengine import Document,ReferenceField,DictField,StringField,BooleanField
 from Models.course_model import Course
 from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
@@ -17,9 +16,12 @@ class Prompt(Document):
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
-    component = ReferenceField(Component,reverse_delete_rule=2)
+    types=StringField(choices=['fillups','image','video','mcq','analysis','expand','match','trueorfalse','ontimeMCQ'],required=True)
     prompt_framework = DictField(required=True)
-    name=StringField()
+    name=StringField(default='CTC Prompt')
+    default=BooleanField(default=False)
+
+
     def to_json(self):
         return {
             "id": str(self.id),
@@ -30,9 +32,10 @@ class Prompt(Document):
             "layer1":str(self.layer1.id) if self.layer1 else None,
             "layer2":str(self.layer2.id) if self.layer2 else None,
             "layer3":str(self.layer3.id) if self.layer3 else None,
-            "component":str(self.component.id) if self.component else None,
+            "types":self.types,
             "prompt_framework":self.prompt_framework,
-            "name":self.name
+            "name":self.name,
+            "default":self.default
         }
     
     def with_key(self):
@@ -45,8 +48,9 @@ class Prompt(Document):
             "layer1":self.layer1.to_json() if self.layer1 else None,
             "layer2":self.layer2.to_json() if self.layer2 else None,
             "layer3":self.layer3.to_json() if self.layer3 else None,
-            "component":self.component.to_json() if self.component else None,
+            "types":self.types,
             "prompt_framework":self.prompt_framework,
-            "name":self.name
+            "name":self.name,
+            "default":self.default
         }
         
