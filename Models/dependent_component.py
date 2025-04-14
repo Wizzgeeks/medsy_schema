@@ -11,6 +11,7 @@ class Dependent_components(Document):
     
     def to_json(self):
         return {
+            'id': str(self.id),
             "name":self.name,
             "types":self.types
         }
