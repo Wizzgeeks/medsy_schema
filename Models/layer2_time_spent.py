@@ -2,7 +2,7 @@ from mongoengine import Document,ReferenceField,IntField,DictField,ListField,Str
 from Models.user_model import User
 from Models.layer_1_model import Layer_1
 from Models.course_model import Course
-from models.year_model import Year
+from Models.year_model import Year
 from Models.subject_model import Subject
 from Models.layer_2_model import Layer_2
 # from Models.layer_3_model import Layer_3
