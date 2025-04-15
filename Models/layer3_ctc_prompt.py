@@ -7,7 +7,7 @@ from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
 from Models.year_model import Year
 
-class Layer3_prompt_ctc_apply_job(Document):
+class Layer3_ctc_prompt(Document):
     prompt=ReferenceField(Prompt,reverse_delete_rule=2,required=True)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
