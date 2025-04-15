@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,EmailField,BooleanField,ListField
+from mongoengine import Document, StringField,BooleanField,ListField,IntField
 from datetime import datetime,timezone
 class User(Document):
     course =StringField()
@@ -17,6 +17,7 @@ class User(Document):
     referral_code=StringField(required=True,unique=True)
     refered_by=StringField()
     refered_users=ListField(default=[])
+    coins = IntField()
 
     def update(self, **kwargs):
         self.clean()
@@ -44,6 +45,7 @@ class User(Document):
             "referral_code":self.referral_code if self.referral_code else None,
             "refered_by":self.refered_by if self.refered_by else None,
             "refered_users":self.refered_users if self.refered_users else None,
+            "coins":self.coins if self.coins else None,
         }
 
     def with_key(self):
@@ -63,6 +65,7 @@ class User(Document):
             "referral_code":self.referral_code if self.referral_code else None,
             "refered_by":self.refered_by if self.refered_by else None,
             "refered_users":self.refered_users if self.refered_users else None,
+            "coins":self.coins if self.coins else None,
 
         }
     def remove_expired_tokens(self):
