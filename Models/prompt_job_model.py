@@ -5,7 +5,7 @@ from datetime import datetime,timezone
 from Models.layer1_page_model import Layer1_page
 from Models.layer2_page_model import Layer2_page
 from Models.layer3_page_model import Layer3_page
-from Models.page_content_model import Prompt_content
+from Models.prompt_content_model import Prompt_content
 from Models.subject_page_model import Subject_page
 
 class Prompt_job(Document):

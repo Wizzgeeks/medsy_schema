@@ -1,5 +1,5 @@
 from mongoengine import Document,StringField,ReferenceField,DateTimeField
-from Models.prompt_job_model import Prompt_job
+from Models.prompt_ctc_job import Prompt_ctc_job
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -8,8 +8,8 @@ from Models.layer_3_model import Layer_3
 from Models.year_model import Year
 from datetime import datetime,timezone
 
-class Layer3_prompt_apply_job(Document):
-    job_id=ReferenceField(Prompt_job,reverse_delete_rule=2,required=True)
+class Layer3_prompt_ctc_apply_job(Document):
+    job_id=ReferenceField(Prompt_ctc_job,reverse_delete_rule=2,required=True)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)

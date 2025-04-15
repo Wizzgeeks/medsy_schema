@@ -8,7 +8,7 @@ class Subscription(Document):
     year = ListField(ReferenceField(Year,reverse_delete_rule=2,required=True))
     term_in_months = StringField(required=True)
     price = FloatField(required=True)
-    subscription_tier=StringField(required=True,choices=["free","pro","premium"])
+    subscription_tier=StringField(required=True)
     coins_threshold = StringField(required=True)
     categories=ListField(ReferenceField(ContentCategory,reverse_delete_rule=2,required=True))
     package_name=StringField(required=True)
