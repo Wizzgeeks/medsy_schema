@@ -1,5 +1,6 @@
 from mongoengine import Document,StringField,ReferenceField,ValidationError,DateTimeField,IntField
 from Models.course_model import Course
+from datetime import datetime,timezone
 
 class Coupon(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
@@ -7,9 +8,10 @@ class Coupon(Document):
     discount_in_percentage = StringField()
     discount_in_flat = StringField()
     max_discount_in_price = StringField(required=True)
+    created_at = DateTimeField(default=datetime.now(timezone.utc))
     expires = DateTimeField(required=True)
-    count = StringField(required=True)
-    max_usage=IntField()
+    code = StringField(required=True)
+    max_usage=IntField(required=True)
     current_usage=IntField()
 
     
@@ -28,7 +30,8 @@ class Coupon(Document):
             "discount_in_flat":self.discount_in_flat,
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
-            "count":self.count
+            "count":self.code,
+            "created_at": self.created_at.strftime("%d %B %Y"),
         }
     
     def with_key(self):
@@ -40,7 +43,8 @@ class Coupon(Document):
             "discount_in_flat":self.discount_in_flat,
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
-            "count":self.count
+            "count":self.code,
+            "created_at": self.created_at.strftime("%d %B %Y")
         }
         
     def update(self, **kwargs):
