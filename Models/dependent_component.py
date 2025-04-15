@@ -3,8 +3,7 @@ from Models.prompt_model import Prompt
 
 class Dependent_components(Document):
     name=StringField()
-    prompt=ReferenceField(Prompt,required=True,reverse_delete_rule=2)
-    types=StringField(choices=['fillups','image','video','mcq','analysis','expand','match','trueorfalse','ontimeMCQ'],required=True)
+    types=StringField(required=True,unique=True)
 
     def update(self, **kwargs):
         self.clean()
@@ -12,8 +11,8 @@ class Dependent_components(Document):
     
     def to_json(self):
         return {
+            'id': str(self.id),
             "name":self.name,
-            "prompt":str(self.prompt.id),
             "types":self.types
         }
     
