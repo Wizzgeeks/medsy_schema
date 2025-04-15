@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,EmailField,BooleanField
+from mongoengine import Document, StringField,EmailField,BooleanField,ListField
 from datetime import datetime,timezone
 class User(Document):
     course =StringField()
@@ -14,7 +14,9 @@ class User(Document):
     position=StringField()
     examTarget=StringField()
     newuser=BooleanField(default=True,required=True)
-    
+    referral_code=StringField(unique=True)
+    refered_by=StringField()
+    refered_users=ListField()
 
     def update(self, **kwargs):
         self.clean()
@@ -39,8 +41,9 @@ class User(Document):
             "examTarget":self.examTarget if self.examTarget else None,
             "specialisation":self.specialisation if self.specialisation else None,
             "newuser":self.newuser if self.newuser else None,
-            
-
+            "referral_code":self.referral_code if self.referral_code else None,
+            "refered_by":self.refered_by if self.refered_by else None,
+            "refered_users":self.refered_users if self.refered_users else None,
         }
 
     def with_key(self):
@@ -56,7 +59,10 @@ class User(Document):
             "examTarget":self.examTarget if self.examTarget else None,
             "specialisation":self.specialisation if self.specialisation else None,
             "position":self.position if self.position else None,
-            "newuser":self.newuser if self.newuser else None
+            "newuser":self.newuser if self.newuser else None,
+            "referral_code":self.referral_code if self.referral_code else None,
+            "refered_by":self.refered_by if self.refered_by else None,
+            "refered_users":self.refered_users if self.refered_users else None,
 
         }
     def remove_expired_tokens(self):
