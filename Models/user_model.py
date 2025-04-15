@@ -14,9 +14,9 @@ class User(Document):
     position=StringField()
     examTarget=StringField()
     newuser=BooleanField(default=True,required=True)
-    referral_code=StringField(unique=True)
+    referral_code=StringField(required=True,unique=True)
     refered_by=StringField()
-    refered_users=ListField()
+    refered_users=ListField(default=[])
 
     def update(self, **kwargs):
         self.clean()
