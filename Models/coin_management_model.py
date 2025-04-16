@@ -3,7 +3,7 @@ from Models.course_model import Course
 from Models.user_model import User
 from datetime import datetime,timezone
 
-class Coin(Document):
+class Coin_management(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     coins = IntField(required=True)
