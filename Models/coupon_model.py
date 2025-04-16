@@ -30,7 +30,7 @@ class Coupon(Document):
             "discount_in_flat":self.discount_in_flat,
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
-            "count":self.code,
+            "code":self.code,
             "created_at": self.created_at.strftime('%d/%m/%Y'),
         }
     
@@ -43,7 +43,7 @@ class Coupon(Document):
             "discount_in_flat":self.discount_in_flat,
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
-            "count":self.code,
+            "code":self.code,
             "created_at": self.created_at.strftime('%d/%m/%Y')
         }
         
