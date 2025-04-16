@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField
 from Models.coupon_model import Coupon
 from Models.subscription_model import Subscription
 from Models.user_model import User
@@ -8,7 +8,7 @@ class User_subscription(Document):
     subscription = ReferenceField(Subscription,required=True,reverse_delete_rule=2)
     coupon = ReferenceField(Coupon,reverse_delete_rule=2)
     coins_redeemed=StringField()
-    expiry = StringField(required=True)
+    expiry = DateTimeField(required=True)
 
     def to_json(self):
         return {
@@ -17,7 +17,7 @@ class User_subscription(Document):
             "subscription":self.subscription.to_json() if self.subscription else None,
             "coupon":str(self.coupon.id) if self.coupon else None,
             "coins_redeemed":self.coins_redeemed if self.coins_redeemed else None,
-            "expiry":self.expiry
+            "expiry":self.expiry.strftime("%d %B %Y")
         }
     
     def with_key(self):
@@ -27,5 +27,5 @@ class User_subscription(Document):
             "subscription":self.subscription.to_json() if self.subscription else None,
             "coupon":self.coupon.to_json() if self.coupon else None,
             "coins_redeemed":self.coins_redeemed if self.coins_redeemed else None,
-            "expiry":self.expiry
+            "expiry":self.expiry.strftime("%d %B %Y")
         }
