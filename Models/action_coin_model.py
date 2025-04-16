@@ -17,6 +17,6 @@ class Action_coins(Document):
             "name":self.name,
             "coins":self.coins if self.coins else None,
             "action":self.action.to_json() if self.action else None,
-            "created_at": self.created_at.strftime("%d %B %Y"),
+            "created_at": self.created_at.strftime('%d/%m/%Y'),
         }
     

@@ -17,7 +17,7 @@ class User_subscription(Document):
             "subscription":self.subscription.to_json() if self.subscription else None,
             "coupon":str(self.coupon.id) if self.coupon else None,
             "coins_redeemed":self.coins_redeemed if self.coins_redeemed else None,
-            "expiry":self.expiry.strftime("%d %B %Y")
+            "expiry":self.expiry.strftime('%d/%m/%Y')
         }
     
     def with_key(self):
@@ -27,5 +27,5 @@ class User_subscription(Document):
             "subscription":self.subscription.to_json() if self.subscription else None,
             "coupon":self.coupon.to_json() if self.coupon else None,
             "coins_redeemed":self.coins_redeemed if self.coins_redeemed else None,
-            "expiry":self.expiry.strftime("%d %B %Y")
+            "expiry":self.expiry.strftime('%d/%m/%Y')
         }

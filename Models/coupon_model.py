@@ -31,7 +31,7 @@ class Coupon(Document):
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
             "count":self.code,
-            "created_at": self.created_at.strftime("%d %B %Y"),
+            "created_at": self.created_at.strftime('%d/%m/%Y'),
         }
     
     def with_key(self):
@@ -44,7 +44,7 @@ class Coupon(Document):
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
             "count":self.code,
-            "created_at": self.created_at.strftime("%d %B %Y")
+            "created_at": self.created_at.strftime('%d/%m/%Y')
         }
         
     def update(self, **kwargs):
