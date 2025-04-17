@@ -24,13 +24,15 @@ class Coupon(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "course":str(self.course.id) if self.course else None,
+            "course":self.course.key if self.course else None,
             "name":self.name,
             "discount_in_percentage":self.discount_in_percentage,
             "discount_in_flat":self.discount_in_flat,
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
             "code":self.code,
+            "max_usage":self.max_usage if self.max_usage else None,
+            "current_usage":self.current_usage if self.current_usage else None,
             "created_at": self.created_at.strftime('%d/%m/%Y'),
         }
     
@@ -44,6 +46,8 @@ class Coupon(Document):
             "max_discount_in_price":self.max_discount_in_price,
             "expires":self.expires,
             "code":self.code,
+            "max_usage":self.max_usage if self.max_usage else None,
+            "current_usage":self.current_usage if self.current_usage else None,
             "created_at": self.created_at.strftime('%d/%m/%Y')
         }
         
