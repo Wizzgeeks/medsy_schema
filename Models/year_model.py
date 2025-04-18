@@ -6,6 +6,7 @@ class Year(Document):
     year = StringField(required=True)
     meta_title = StringField()
     meta_image_url = StringField()
+    meta_image_name = StringField()
     meta_description = StringField()
     meta_content = StringField()
     has_prompt = BooleanField(required=True,default=False)
@@ -24,6 +25,7 @@ class Year(Document):
             "course":str(self.course.id) if self.course else None,
             "name":self.year,
             "meta_title":self.meta_title,
+            "meta_image_name":self.meta_image_name,
             "meta_image_url":self.meta_image_url,
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
@@ -38,6 +40,7 @@ class Year(Document):
             "name":self.year,
             "meta_title":self.meta_title,
             "meta_image_url":self.meta_image_url,
+            "meta_image_name":self.meta_image_name,
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
@@ -49,6 +52,7 @@ class Year(Document):
             "name":self.year,
             "meta_title":self.meta_title,
             "meta_image_url":self.meta_image_url,
+            "meta_image_name":self.meta_image_name,
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
