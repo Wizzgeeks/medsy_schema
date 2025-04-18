@@ -13,6 +13,7 @@ class Layer1_prompt_apply_job(Document):
     subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2,required=True)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    updated_at=DateTimeField()
     status=StringField()
 
     def to_json(self):
@@ -24,7 +25,9 @@ class Layer1_prompt_apply_job(Document):
             'subject':str(self.subject.id),
             'layer1':self.layer1.to_json(),
             'status':self.status,
-            'created_at':self.created_at
+            'created_at':self.created_at,
+            'updated_at':self.updated_at if self.updated_at else None,
+
             }
     
     def to_admin(self):
@@ -36,5 +39,6 @@ class Layer1_prompt_apply_job(Document):
             'subject':str(self.subject.id),
             'layer1':self.layer1.to_json(),
             'status':self.status,
-            'created_at':self.created_at
+            'created_at':self.created_at,
+            'updated_at':self.updated_at if self.updated_at else None,
             }

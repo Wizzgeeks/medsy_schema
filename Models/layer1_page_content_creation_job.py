@@ -3,7 +3,7 @@ from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
 from Models.year_model import Year
-from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,ListField,DictField
 from datetime import datetime,timezone
 
 class Layer1_page_creation_job(Document):
@@ -15,6 +15,7 @@ class Layer1_page_creation_job(Document):
     logs=ListField(DictField())
     conversation = ListField(default=[])
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    updated_at=DateTimeField()
     status=StringField()
 
     def to_json(self):
@@ -28,7 +29,8 @@ class Layer1_page_creation_job(Document):
             'status':self.status,
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
-            'created_at':self.created_at
+            'created_at':self.created_at,
+            'updated_at':self.updated_at if self.updated_at else None,
             }
     
     def to_admin(self):
@@ -42,5 +44,7 @@ class Layer1_page_creation_job(Document):
             'status':self.status,
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
-            'created_at':self.created_at
+            'created_at':self.created_at,
+            'updated_at':self.updated_at if self.updated_at else None,
+
             }

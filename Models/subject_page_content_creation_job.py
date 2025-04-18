@@ -13,6 +13,7 @@ class Subject_page_creation_job(Document):
     logs=ListField(DictField())
     conversation = ListField(default=[])
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    updated_at = DateTimeField()
     status=StringField()
 
     def to_json(self):
@@ -25,6 +26,7 @@ class Subject_page_creation_job(Document):
             'status':self.status,
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
+            'updated_at':self.updated_at if self.updated_at else None,
             'created_at':self.created_at
             }
     
@@ -38,5 +40,6 @@ class Subject_page_creation_job(Document):
             'status':self.status,
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
+            'updated_at':self.updated_at if self.updated_at else None,
             'created_at':self.created_at
             }
