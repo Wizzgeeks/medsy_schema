@@ -23,12 +23,14 @@ class Prompt_job(Document):
     subject_page = ReferenceField(Subject_page, reverse_delete_rule=2)
     component = StringField(choices=['image','video','conversation','content','mcq','test_series'])
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2,required=True)
+    updated_at = DateTimeField(null=True)
 
     def to_json(self):
         return{
             "id":str(self.id),
             "course":self.course.to_json() if self.course else None,
             "created_by":self.created_by.to_json() if self.created_by else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
             "created_at":str(self.created_at),
             "target":self.target,
             "detail":self.detail,

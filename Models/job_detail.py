@@ -21,6 +21,8 @@ class Job_detail(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2)
     subject_page= ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
+    updated_at = DateTimeField(null=True)
+    
 
 
     def to_json(self):
@@ -28,6 +30,7 @@ class Job_detail(Document):
             'id':str(self.id),
             "course":self.course.to_json() if self.course else None,
             "created_by":self.created_by.to_json() if self.created_by else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
             "created_at":str(self.created_at),
             "target":self.target,
             "detail":self.detail,

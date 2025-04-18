@@ -17,7 +17,7 @@ class Layer3_prompt_ctc_apply_job(Document):
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2,required=True)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2,required=True)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
-    updated_at = DateTimeField()
+    updated_at = DateTimeField(null=True)
     status=StringField()
 
     def to_json(self):
@@ -31,7 +31,7 @@ class Layer3_prompt_ctc_apply_job(Document):
             'layer2':str(self.layer2.id),
             'layer3':self.layer3.to_json(),
             'status':self.status,
-            'updated_at':self.updated_at if self.updated_at else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':self.created_at
             }
     
@@ -46,6 +46,6 @@ class Layer3_prompt_ctc_apply_job(Document):
             'layer2':str(self.layer2.id),
             'layer3':self.layer3.to_json(),
             'status':self.status,
-            'updated_at':self.updated_at if self.updated_at else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':self.created_at
             }

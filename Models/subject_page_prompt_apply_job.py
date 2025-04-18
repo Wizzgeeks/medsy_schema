@@ -11,7 +11,7 @@ class Subject_prompt_apply_job(Document):
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
-    updated_at = DateTimeField()
+    updated_at = DateTimeField(null=True)
     status=StringField()
 
     def to_json(self):
@@ -22,7 +22,7 @@ class Subject_prompt_apply_job(Document):
             'year':str(self.year.id),
             'subject':str(self.subject.id),
             'status':self.status,
-            'updated_at':self.updated_at if self.updated_at else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':self.created_at
             }
     
@@ -34,6 +34,6 @@ class Subject_prompt_apply_job(Document):
             'year':str(self.year.id),
             'subject':str(self.subject.id),
             'status':self.status,
-            'updated_at':self.updated_at if self.updated_at else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':self.created_at
             }
