@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,DateTimeField,IntField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,IntField,BooleanField
 from Models.course_model import Course
 from Models.actions import Action
 from datetime import datetime,timezone
@@ -8,6 +8,7 @@ class Action_coins(Document):
     name = StringField()
     coins = IntField(default=0)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
+    active = BooleanField(default=True)
     action = ReferenceField(Action,required=True,reverse_delete_rule=2)
 
     def to_json(self):
@@ -16,6 +17,7 @@ class Action_coins(Document):
             "course":str(self.course.id) if self.course else None,
             "name":self.name,
             "coins":self.coins if self.coins else None,
+            "active":self.active if self.active else False,
             "action":self.action.to_json() if self.action else None,
             "created_at": self.created_at.strftime('%d/%m/%Y'),
         }
