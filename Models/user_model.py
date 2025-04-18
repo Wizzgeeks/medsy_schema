@@ -6,7 +6,7 @@ class User(Document):
     username = StringField(required=True)
     profile=StringField()
     role=StringField(choices=['student','admin','superadmin'],required=True)
-    auth_token = StringField()
+    auth_token = ListField(StringField())
     password=StringField()
     institution=StringField()
     location=StringField()
