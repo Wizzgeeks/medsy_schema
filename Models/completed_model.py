@@ -9,7 +9,7 @@ class Completed(Document):
     
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     year = ReferenceField(Year,required=True,reverse_delete_rule=2)
-    subject=ReferenceField(Subject,required=True,reverse_delete_rule=2)
+    subject=ListField()
     layer1 = ListField()
     layer2 = ListField()
     layer3 = ListField()
@@ -21,7 +21,7 @@ class Completed(Document):
         return {
             "course":str(self.course.id),
             "year":str(self.year.id),
-            "subject":str(self.subject.id) if self.subject else None,
+            "subject":self.subject if self.subject else None,
             "layer1":self.layer1 if self.layer1 else None,
             "layer2":self.layer2 if self.layer2 else None,
             "layer3":self.layer3 if self.layer3 else None,
