@@ -21,7 +21,6 @@ class Completed(Document):
         return {
             "course":str(self.course.id),
             "year":str(self.year.id),
-            "subject":self.subject if self.subject else None,
             "layer1":self.layer1 if self.layer1 else None,
             "layer2":self.layer2 if self.layer2 else None,
             "layer3":self.layer3 if self.layer3 else None,
