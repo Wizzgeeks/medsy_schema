@@ -1,4 +1,4 @@
-from mongoengine import ReferenceField,Document,StringField,DateTimeField
+from mongoengine import ReferenceField,Document,StringField,DateTimeField,IntField
 from Models.user_model import User
 from Models.user_subscription_model import User_subscription
 from datetime import datetime,timezone
@@ -11,7 +11,7 @@ class Transaction_detail(Document):
     payment_id = StringField(required=True)
     signature = StringField(required=True)
     mode = StringField(required=True)
-    amount_paid = StringField(required=True)
+    amount_paid = IntField(required=True)
     status = StringField(required=True)
 
     def to_json(self):
