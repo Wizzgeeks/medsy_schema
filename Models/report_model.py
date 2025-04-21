@@ -4,7 +4,7 @@ from datetime import datetime,timezone
 
 class Report(Document):
     user = ReferenceField(User, required=True, reverse_delete_rule=2)
-    created_at = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y'))
+    created_at = StringField(default=lambda: datetime.now().strftime('%d-%m-%Y'))
     problem = StringField(required=True)
     category = StringField(required=True)
     location = StringField()

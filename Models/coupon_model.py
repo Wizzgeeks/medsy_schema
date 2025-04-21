@@ -8,7 +8,7 @@ class Coupon(Document):
     discount_in_percentage = StringField()
     discount_in_flat = IntField()
     max_discount_in_price = IntField(required=True)
-    created_at = DateTimeField(default=datetime.now(timezone.utc))
+    created_at = DateTimeField(default=datetime.now())
     expires = DateTimeField(required=True)
     code = StringField(required=True)
     max_usage=IntField(required=True)

@@ -10,7 +10,7 @@ from Models.subject_page_model import Subject_page
 class Job_detail(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     created_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
-    created_at = DateTimeField(default=datetime.now(timezone.utc))
+    created_at = DateTimeField(default=datetime.now())
     target=StringField(choices=['Subject_page_creation_job','Layer1_page_creation_job','Layer2_page_creation_job','Layer3_page_creation_job'],required=True)
     detail=StringField()
     completed_count=IntField()

@@ -12,7 +12,7 @@ class Subject_page_creation_job(Document):
     subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
     logs=ListField(DictField())
     conversation = ListField(default=[])
-    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    created_at=DateTimeField(default=datetime.now(),required=True)
     updated_at = DateTimeField(null=True)
     status=StringField()
 

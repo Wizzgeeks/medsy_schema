@@ -7,7 +7,7 @@ class Action_coins(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     name = StringField()
     coins = IntField(default=0)
-    created_at = DateTimeField(default=datetime.now(timezone.utc))
+    created_at = DateTimeField(default=datetime.now())
     active = BooleanField(default=True)
     action = ReferenceField(Action,required=True,reverse_delete_rule=2)
 

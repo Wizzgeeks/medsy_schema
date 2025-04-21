@@ -10,7 +10,7 @@ class Subject_prompt_ctc_apply_job(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
-    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    created_at=DateTimeField(default=datetime.now(),required=True)
     updated_at = DateTimeField(null=True)
     status=StringField()
 

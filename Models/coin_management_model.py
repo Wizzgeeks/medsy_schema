@@ -8,7 +8,7 @@ class Coin_management(Document):
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     coins = IntField(required=True)
     action = StringField(required=True)
-    date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y')) 
+    date = StringField(default=lambda: datetime.now().strftime('%d-%m-%Y')) 
 
 
     def to_json(self):

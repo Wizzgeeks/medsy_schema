@@ -15,7 +15,7 @@ class Layer2_page_creation_job(Document):
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2,required=True)
     logs=ListField(DictField())
     conversation = ListField(default=[])
-    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    created_at=DateTimeField(default=datetime.now(),required=True)
     updated_at =DateTimeField(null=True)
     status=StringField()
 

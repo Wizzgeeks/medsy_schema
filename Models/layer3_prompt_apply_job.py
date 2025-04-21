@@ -16,7 +16,7 @@ class Layer3_prompt_apply_job(Document):
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2,required=True)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2,required=True)
-    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    created_at=DateTimeField(default=datetime.now(),required=True)
     updated_at = DateTimeField(null=True)
     status=StringField()
 
