@@ -23,7 +23,7 @@ class Subject_prompt_ctc_apply_job(Document):
             'subject':str(self.subject.id),
             'status':self.status,
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':self.created_at
+            'created_at':str(self.created_at)
             }
     
     def to_admin(self):
@@ -35,5 +35,5 @@ class Subject_prompt_ctc_apply_job(Document):
             'subject':str(self.subject.id),
             'status':self.status,
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':self.created_at
+            'created_at':str(self.created_at)
             }

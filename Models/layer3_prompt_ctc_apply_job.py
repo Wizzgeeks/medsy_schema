@@ -32,7 +32,7 @@ class Layer3_prompt_ctc_apply_job(Document):
             'layer3':self.layer3.to_json(),
             'status':self.status,
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':self.created_at
+            'created_at':str(self.created_at)
             }
     
     def to_admin(self):
@@ -47,5 +47,5 @@ class Layer3_prompt_ctc_apply_job(Document):
             'layer3':self.layer3.to_json(),
             'status':self.status,
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':self.created_at
+            'created_at':str(self.created_at)
             }

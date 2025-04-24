@@ -25,7 +25,7 @@ class Layer1_prompt_apply_job(Document):
             'subject':str(self.subject.id),
             'layer1':self.layer1.to_json(),
             'status':self.status,
-            'created_at':self.created_at,
+            'created_at':str(self.created_at),
             'updated_at':str(self.updated_at) if self.updated_at else None,
 
             }
@@ -39,6 +39,6 @@ class Layer1_prompt_apply_job(Document):
             'subject':str(self.subject.id),
             'layer1':self.layer1.to_json(),
             'status':self.status,
-            'created_at':self.created_at,
+            'created_at':str(self.created_at),
             'updated_at':str(self.updated_at) if self.updated_at else None,
             }

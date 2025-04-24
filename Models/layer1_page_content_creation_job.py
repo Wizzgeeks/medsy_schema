@@ -30,7 +30,7 @@ class Layer1_page_creation_job(Document):
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':self.created_at,
+            'created_at':str(self.created_at),
             }
     
     def to_admin(self):
@@ -45,6 +45,6 @@ class Layer1_page_creation_job(Document):
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':self.created_at,
+            'created_at':str(self.created_at),
 
             }
