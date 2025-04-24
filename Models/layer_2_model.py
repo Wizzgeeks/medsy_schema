@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,ValidationError,BooleanField
+from mongoengine import Document,StringField,ReferenceField,ValidationError,BooleanField,IntField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -16,6 +16,7 @@ class Layer_2(Document):
     meta_content = StringField()
     has_prompt = BooleanField(required=True,default=False)
     key = StringField(required=True,unique=True)
+    sequence=IntField()
 
 
     def clean(self):
@@ -37,7 +38,8 @@ class Layer_2(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
+            "key":self.key,
+            "sequence":self.sequence
         }
     
     def with_key(self):
@@ -53,7 +55,9 @@ class Layer_2(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
+            "key":self.key,
+            "sequence":self.sequence
+
         }
     def admin_json(self):
         return {
@@ -67,12 +71,14 @@ class Layer_2(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
+            "key":self.key,
+            "sequence":self.sequence
         }
     def accordian_json(self):
         return {
             "name":self.name,
-            "key":self.key
+            "key":self.key,
+            "sequence":self.sequence,
         }
     
     def update(self, **kwargs):
