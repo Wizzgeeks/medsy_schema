@@ -35,7 +35,7 @@ class Layer_1(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     
     def with_key(self):
@@ -51,7 +51,7 @@ class Layer_1(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     def admin_json(self):
         return {
@@ -65,13 +65,13 @@ class Layer_1(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     def accordian_json(self):
         return {
             "name":self.name,
             "key":self.key,
-            "sequence":self.sequence,
+            "sequence":self.sequence if self.sequence else 0,
         }
     
     def update(self, **kwargs):

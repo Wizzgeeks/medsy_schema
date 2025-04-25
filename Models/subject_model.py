@@ -34,7 +34,7 @@ class Subject(Document):
             "has_prompt":self.has_prompt,
             "has_3_layers":self.has_3_layers,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     
     def with_key(self):
@@ -50,7 +50,7 @@ class Subject(Document):
             "has_prompt":self.has_prompt,
             "has_3_layers":self.has_3_layers,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     def admin_json(self):
         return {
@@ -64,14 +64,14 @@ class Subject(Document):
             "has_prompt":self.has_prompt,
             "has_3_layers":self.has_3_layers,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     
     def accordian_json(self):
         return {
             "name":self.name,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     
 

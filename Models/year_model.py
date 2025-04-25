@@ -32,7 +32,7 @@ class Year(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     
     def with_key(self):
@@ -47,7 +47,7 @@ class Year(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     def admin_json(self):
         return {
@@ -60,7 +60,7 @@ class Year(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence
+            "sequence":self.sequence if self.sequence else 0
         }
     def accordian_json(self):
         return {
