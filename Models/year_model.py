@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,BooleanField,ValidationError,ReferenceField
+from mongoengine import Document,StringField,BooleanField,ValidationError,ReferenceField,IntField
 from Models.course_model import Course
 
 class Year(Document):
@@ -11,6 +11,7 @@ class Year(Document):
     meta_content = StringField()
     has_prompt = BooleanField(required=True,default=False)
     key = StringField(required=True,unique=True)
+    sequence=IntField()
 
     def clean(self):
         if not self.year.strip():
@@ -30,7 +31,8 @@ class Year(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
+            "key":self.key,
+            "sequence":self.sequence if self.sequence else 0
         }
     
     def with_key(self):
@@ -44,7 +46,8 @@ class Year(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
+            "key":self.key,
+            "sequence":self.sequence if self.sequence else 0
         }
     def admin_json(self):
         return {
@@ -56,12 +59,14 @@ class Year(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
+            "key":self.key,
+            "sequence":self.sequence if self.sequence else 0
         }
     def accordian_json(self):
         return {
             "name":self.year,
-            "key":self.key
+            "key":self.key,
+            "squence":self.sequence
         }
         
     def update(self, **kwargs):
