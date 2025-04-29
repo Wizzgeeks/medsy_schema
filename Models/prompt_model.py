@@ -5,7 +5,7 @@ from Models.year_model import Year
 
 
 class Prompt(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,reverse_delete_rule=2)
     model = ReferenceField(Model,required=True,reverse_delete_rule=2)
     year = ReferenceField(Year,reverse_delete_rule=2)
     types=StringField(required=True)
