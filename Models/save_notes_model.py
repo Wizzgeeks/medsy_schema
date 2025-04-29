@@ -11,6 +11,7 @@ class Saved_notes(Document):
     path_name=StringField()
     path_url=StringField()
     content=IntField()
+    index = IntField(default=0)
     date = DateTimeField(required=True, default=datetime.now())
 
     def to_json(self):
@@ -23,7 +24,9 @@ class Saved_notes(Document):
             "path_url":self.path_url,
             "date": self.date.strftime("%d %b %Y"),
             "content":self.content,
-            "notes":""
+            "notes":"",
+            "index":self.index if self.index else 0
+
         }
     
     def clean(self):
@@ -40,7 +43,9 @@ class Saved_notes(Document):
             "path_name":self.path_name,
             "path_url":self.path_url,
             "date": self.date.strftime("%d %b %Y"),
-            "content":self.content
+            "content":self.content,
+            "index":self.index if self.index else 0
+
         }
     
     def update(self, **kwargs):
