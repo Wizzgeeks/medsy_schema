@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, StringField,ListField
+from mongoengine import Document, ReferenceField,BooleanField,ListField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -25,6 +25,8 @@ class PageContent(Document):
     subject_page= ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
     content = ListField()
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
+    deep_dive=BooleanField(default=False)
+    summarize=BooleanField(default=False)
 
     def to_json(self):
         return {
@@ -40,7 +42,9 @@ class PageContent(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page": str(self.subject_page.id) if self.subject_page else None,
             "content": self.content,
-            "prompt": self.prompt.to_json() if self.prompt else None
+            "prompt": self.prompt.to_json() if self.prompt else None,
+            "deep_dive":self.deep_dive if self.deep_dive else False,
+            "summarize":self.summarize if self.summarize else False,
         }
     
     def to_user(self):
@@ -57,4 +61,6 @@ class PageContent(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page": str(self.subject_page.id) if self.subject_page else None,
             "content": self.content,
+            "deep_dive":self.deep_dive if self.deep_dive else False,
+            "summarize":self.summarize if self.summarize else False,
         }

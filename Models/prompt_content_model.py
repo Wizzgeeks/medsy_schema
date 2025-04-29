@@ -8,6 +8,8 @@ class Prompt_content(Document):
     system_content = StringField(required=True)
     framework = ListField(DictField())
     model = ReferenceField(Model,reverse_delete_rule=2,required=True)
+    deep_dive = StringField()
+    summarize = StringField()
 
   
     def to_json(self):
@@ -17,5 +19,7 @@ class Prompt_content(Document):
             'course':str(self.course.id),
             'system_content':self.system_content,
             'framework':self.framework,
-            'model':str(self.model.id)
+            'model':str(self.model.id),
+            'deep_dive':self.deep_dive if self.deep_dive else None,
+            'summarize':self.summarize if self.summarize else None,
         }
