@@ -1,28 +1,53 @@
-from mongoengine import Document,ReferenceField,BooleanField
+from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField
 from Models.user_model import User
 from Models.layer_3_model import Layer_3
-from Models.component_model import Component
+from Models.layer_2_model import Layer_2
+from Models.layer_1_model import Layer_1
+from Models.subject_model import Subject
+from Models.year_model import Year
+from Models.course_model import Course
 
 
 class Layer3_completion_status(Document):
+    course=ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    subject=ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    layer1=ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2=ReferenceField(Layer_2,required=True,reverse_delete_rule=CASCADE)
     layer3 = ReferenceField(Layer_3,required=True,reverse_delete_rule=2)
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    component = ReferenceField(Component,required=True,reverse_delete_rule=2)
     completed=BooleanField(default=False)
+    total_page=IntField()
+    completed_page=IntField()
+    time_taken_page=IntField()
 
 
     def to_json(self):
         return {
+            "id":str(self.id),
+            "course":str(self.course.id) if self.course else None,
+            "year":str(self.year.id) if self.year else None,
+            "subject":str(self.subject.id) if self.subject else None,
+            "layer1":str(self.layer1.id) if self.layer1 else None,
+            "layer2":str(self.layer2.id) if self.layer2 else None,
             "layer3":str(self.layer3.id) if self.layer3 else None,
-            "component":str(self.component.id) if self.component else None,
             "user":str(self.user.id) if self.user else None,
-            "completed":self.completed
+            "completed":self.completed,
+            "total_page":self.total_page,
+            "completed_page":self.completed_page,
         }
     
     def with_key(self):
         return {
-            "layer3":str(self.layer3.id) if self.layer3 else None,
-            "component":self.component.to_json() if self.component else None,
+            "id":str(self.id),
+            "course":self.course.to_json() if self.course else None,
+            "year":self.year.to_json() if self.year else None,
+            "subject":self.subject.to_json() if self.subject else None,
+            "layer1":self.layer1.to_json() if self.layer1 else None,
+            "layer2":self.layer2.to_json() if self.layer2 else None,
+            "layer3":self.layer3.to_json() if self.layer3 else None,
             "user":str(self.user.id) if self.user else None,
-            "completed":self.completed
+            "completed":self.completed,
+            "total_page":self.total_page,
+            "completed_page":self.completed_page,
         }
