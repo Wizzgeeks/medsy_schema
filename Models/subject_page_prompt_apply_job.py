@@ -20,7 +20,7 @@ class Subject_prompt_apply_job(Document):
             'job_id':self.job_id.to_json(),
             'course':str(self.course.id),
             'year':str(self.year.id),
-            'subject':str(self.subject.id),
+            'subject':self.subject.to_json(),
             'status':self.status,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
@@ -32,7 +32,7 @@ class Subject_prompt_apply_job(Document):
             'job_id':str(self.job_id.id),
             'course':str(self.course.id),
             'year':str(self.year.id),
-            'subject':str(self.subject.id),
+            'subject':self.subject.to_json(),
             'status':self.status,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
