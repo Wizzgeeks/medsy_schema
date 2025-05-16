@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,DateTimeField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,BooleanField
 from Models.admin_model import Admin
 from datetime import datetime,timezone
 class Blog(Document):
@@ -10,6 +10,7 @@ class Blog(Document):
     blog_category=StringField(choices=['blog','announcements','article'],required=True)
     created_at = DateTimeField(default=datetime.now())
     file_name=StringField()
+    publish=BooleanField(default=False)
 
     def to_json(self):
         return {
@@ -20,5 +21,6 @@ class Blog(Document):
             "blog_image_url":self.blog_image_url,
             "description":self.description,
             "blog_category":self.blog_category,
-            "file_name":self.file_name
+            "file_name":self.file_name,
+            "publish":self.publish if self.publish else False,
         }
