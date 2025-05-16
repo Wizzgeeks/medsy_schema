@@ -17,7 +17,7 @@ class User(Document):
     referral_code=StringField(required=True,unique=True)
     refered_by=StringField()
     refered_users=ListField(default=[])
-    coins = IntField()
+    coins = IntField(default=0)
 
     def update(self, **kwargs):
         self.clean()
@@ -45,7 +45,7 @@ class User(Document):
             "referral_code":self.referral_code if self.referral_code else None,
             "refered_by":self.refered_by if self.refered_by else None,
             "refered_users":self.refered_users if self.refered_users else None,
-            "coins":self.coins if self.coins else None,
+            "coins":self.coins if self.coins else 0,
         }
 
     def with_key(self):
@@ -65,7 +65,7 @@ class User(Document):
             "referral_code":self.referral_code if self.referral_code else None,
             "refered_by":self.refered_by if self.refered_by else None,
             "refered_users":self.refered_users if self.refered_users else None,
-            "coins":self.coins if self.coins else None,
+            "coins":self.coins if self.coins else 0,
 
         }
     def remove_expired_tokens(self):

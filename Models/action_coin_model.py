@@ -16,7 +16,7 @@ class Action_coins(Document):
             "id": str(self.id),
             "course":str(self.course.id) if self.course else None,
             "name":self.name,
-            "coins":self.coins if self.coins else None,
+            "coins":self.coins if self.coins else 0,
             "active":self.active if self.active else False,
             "action":self.action.to_json() if self.action else None,
             "created_at": self.created_at.strftime('%d/%m/%Y'),

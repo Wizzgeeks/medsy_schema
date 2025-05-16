@@ -13,7 +13,7 @@ class Coins_spending(Document):
             "id": str(self.id),
             "user":str(self.user.id) if self.user else None,
             "used_for":self.used_for,
-            "coins":self.coins if self.coins else None,
+            "coins":self.coins if self.coins else 0,
             "date": self.date.strftime('%d/%m/%Y'),
         }
     
