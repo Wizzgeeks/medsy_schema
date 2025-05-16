@@ -4,17 +4,21 @@ from Models.layer1_page_model import Layer1_page
 from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
+from Models.subject_page_model import Subject_page
 from Models.user_model import User
+from Models.subject_model import Subject
 from mongoengine import Document,ReferenceField,StringField,IntField,ListField,DictField
 
 class User_Chat(Document):
     user=ReferenceField(User,reverse_delete_rule=2,required=True)
+    subject=ReferenceField(Subject,reverse_delete_rule=2)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
     layer1_page=ReferenceField(Layer1_page,reverse_delete_rule=2)
     layer2_page=ReferenceField(Layer2_page,reverse_delete_rule=2)
     layer3_page=ReferenceField(Layer3_page,reverse_delete_rule=2)
+    subject_page=ReferenceField(Subject_page,reverse_delete_rule=2)
     chat=ListField(DictField())
 
     def to_json(self):
