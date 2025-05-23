@@ -3,7 +3,7 @@ from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.year_model import Year
 
-class Layer_3(Document):
+class Channels(Document):
     course = ReferenceField(Course,required=True,reverse_delete_rule=2)
     subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
     year = ReferenceField(Year,reverse_delete_rule=2)
