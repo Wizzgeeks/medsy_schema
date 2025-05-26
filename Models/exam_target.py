@@ -11,7 +11,7 @@ class Exam_target(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     layer = StringField(choices=['subject','layer1','layer2','layer3'],required=True)
-    target =ListField(ReferenceField(choices=[Subject,Layer_1,Layer_2,Layer_3],reverse_delete_rule=2),required=True)
+    target =ListField(ReferenceField(choices=[Subject,Layer_1,Layer_2,Layer_3],reverse_delete_rule=2,required=True),required=True)
     created_at=DateTimeField(default=datetime.now(),required=True)
     updated_at=DateTimeField(null=True)
 
