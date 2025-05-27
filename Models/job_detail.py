@@ -16,7 +16,7 @@ class Job_detail(Document):
     completed_count=IntField()
     total_count=IntField()
     status=StringField()
-    jobtype = StringField(choices=['mcq','test_series','content'],null=True)
+    jobtype = StringField(choices=['mcq','test_series','content','exam'],null=True)
     layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2)
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2)
