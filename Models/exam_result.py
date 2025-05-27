@@ -1,10 +1,11 @@
-from mongoengine  import Document,ReferenceField,ListField,DictField,GenericReferenceField
+from mongoengine  import Document,ReferenceField,ListField,DictField,GenericReferenceField,StringField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
 from Models.year_model import Year
+
 
 class Exam_results(Document):
     course=ReferenceField(Course,reverse_delete_rule=2,required=True)
@@ -15,6 +16,7 @@ class Exam_results(Document):
     layer3=ReferenceField(Layer_3,reverse_delete_rule=2)
     page = GenericReferenceField(required=True)
     result=ListField(DictField())
+    status = StringField()
 
 
     def to_json(self):
@@ -28,6 +30,7 @@ class Exam_results(Document):
             'layer3':str(self.layer3.id) if self.layer3 else None,
             'result':self.result,
             "page": str(self.page.id) if self.page else None,
+            'status':self.status if self.status else None
         }
     
     def to_user(self):
@@ -41,4 +44,5 @@ class Exam_results(Document):
             "layer3": str(self.layer3.id) if self.layer3 else None,
             "page": str(self.page.id) if self.page else None,
             'result':self.result,
+            'status':self.status if self.status else None
         }
