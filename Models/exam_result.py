@@ -1,4 +1,4 @@
-from mongoengine  import Document,ReferenceField,ListField,DictField,GenericReferenceField,StringField
+from mongoengine  import Document,ReferenceField,ListField,DictField,GenericReferenceField,StringField,IntField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -19,7 +19,7 @@ class Exam_results(Document):
     page = GenericReferenceField(required=True)
     result=ListField(DictField())
     status = StringField()
-    total_mark = StringField()
+    total_mark = IntField()
 
     def to_json(self):
         return {
