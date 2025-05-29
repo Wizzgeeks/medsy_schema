@@ -19,7 +19,7 @@ class Exam_results(Document):
     page = GenericReferenceField(required=True)
     result=ListField(DictField())
     status = StringField()
-
+    total_mark = StringField()
 
     def to_json(self):
         return {
@@ -33,7 +33,8 @@ class Exam_results(Document):
             'layer3':str(self.layer3.id) if self.layer3 else None,
             'result':self.result,
             "page": str(self.page.id) if self.page else None,
-            'status':self.status if self.status else None
+            'status':self.status if self.status else None,
+            "total_mark":self.total_mark if self.total_mark else 0
         }
     
     def to_user(self):
@@ -48,5 +49,7 @@ class Exam_results(Document):
             "layer3": str(self.layer3.id) if self.layer3 else None,
             "page": str(self.page.id) if self.page else None,
             'result':self.result,
-            'status':self.status if self.status else None
+            'status':self.status if self.status else None,
+            "total_mark":self.total_mark if self.total_mark else 0
+
         }
