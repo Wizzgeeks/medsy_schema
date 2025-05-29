@@ -5,10 +5,12 @@ from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
 from Models.year_model import Year
+from Models.user_model import User
 
 
 class Exam_results(Document):
     course=ReferenceField(Course,reverse_delete_rule=2,required=True)
+    user=ReferenceField(User,reverse_delete_rule=2,required=True)
     year=ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject=ReferenceField(Subject,reverse_delete_rule=2)
     layer1=ReferenceField(Layer_1,reverse_delete_rule=2)
@@ -23,6 +25,7 @@ class Exam_results(Document):
         return {
             "id":str(self.id),
             'course':str(self.course.id),
+            'user':str(self.user.id),
             'year': str(self.year.id) if self.year else None,
             'subject':str(self.subject.id),
             'layer1':str(self.layer1.id) if self.layer1 else None,
@@ -36,6 +39,7 @@ class Exam_results(Document):
     def to_user(self):
         return {
             "id": str(self.id),
+            'user':str(self.user.id),
             'course': str(self.course.id) if self.course else None,
             'year': str(self.year.id) if self.year else None,
             "subject": str(self.subject.id) if self.subject else None,
