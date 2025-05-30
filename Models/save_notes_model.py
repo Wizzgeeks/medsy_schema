@@ -29,10 +29,10 @@ class Saved_notes(Document):
 
         }
     
-    def clean(self):
-        if self.type == 'Snapshot':
-            if not self.content:
-                raise ValidationError("Content is required for  Snapshot")
+    # def clean(self):
+    #     if self.type == 'Snapshot':
+    #         if not self.content:
+    #             raise ValidationError("Content is required for  Snapshot")
 
     def with_key(self):
         return {
