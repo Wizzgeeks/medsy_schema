@@ -14,7 +14,7 @@ class Layer2_prompt_ctc_apply_job(Document):
     subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=2,required=True)
-    created_at=DateTimeField(default=datetime.now(),required=True)
+    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
     updated_at = DateTimeField(null=True)
     status=StringField()
 

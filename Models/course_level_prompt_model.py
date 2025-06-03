@@ -18,7 +18,7 @@ class Course_level_prompt(Document):
     # layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
     # layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
     component = ReferenceField(Component,reverse_delete_rule=2)
-    createdAt=DateTimeField(required=True,default=datetime.now())
+    createdAt=DateTimeField(required=True,default=datetime.now(timezone.utc))
     prompt_framework = DictField(required=True)
     isCurrent=BooleanField(required=True,default=True)
     name=StringField()

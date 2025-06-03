@@ -6,7 +6,7 @@ from datetime import datetime,timezone
 class Transaction_detail(Document):
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     user_subscription = ReferenceField(User_subscription,required=True,reverse_delete_rule=2)
-    transaction_time = DateTimeField(required=True,default=datetime.now())
+    transaction_time = DateTimeField(required=True,default=datetime.now(timezone.utc))
     order_id = StringField(required=True)
     payment_id = StringField(required=True)
     signature = StringField(required=True)

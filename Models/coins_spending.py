@@ -6,7 +6,7 @@ class Coins_spending(Document):
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     used_for = StringField()
     coins = IntField()
-    date = DateTimeField(default=datetime.now())
+    date = DateTimeField(default=datetime.now(timezone.utc))
 
     def to_json(self):
         return {

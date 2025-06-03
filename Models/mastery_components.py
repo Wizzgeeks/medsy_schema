@@ -16,7 +16,7 @@ class Mastery_components(Document):
     layer2 = ReferenceField(Layer_2, reverse_delete_rule=2)
     layer3 = ReferenceField(Layer_3, reverse_delete_rule=2)
     subject = ReferenceField(Subject, reverse_delete_rule=2, null=True)
-    created_at = DateTimeField(default=datetime.now())
+    created_at = DateTimeField(default=datetime.now(timezone.utc))
     ctc_count=DictField(default={"image":0,"video":0,"conversation":0,
                                  "fillups":0,"justify":0,"mcq":0,"trueorfalse":0,
                                  "assertion_reasoning":0,"match":0,

@@ -18,7 +18,7 @@ class Mastery_evaluation(Document):
     layer2 = ReferenceField(Layer_2, reverse_delete_rule=2)
     layer3 = ReferenceField(Layer_3, reverse_delete_rule=2)
     subject = ReferenceField(Subject, reverse_delete_rule=2, null=True)
-    created_at = DateTimeField(default=datetime.now())
+    created_at = DateTimeField(default=datetime.now(timezone.utc))
     ctc_answer=DictField(default={})
     updated_at = DateTimeField(null=True)
     

@@ -6,7 +6,7 @@ from Models.subject_model import Subject
 class Active_subject_study_time(Document):
     user = ReferenceField(User, required=True, reverse_delete_rule=2)
     subject=ReferenceField(Subject, required=True, reverse_delete_rule=2)
-    date = StringField(default=lambda: datetime.now().strftime('%d-%m-%Y'))
+    date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y'))
     study_time = ListField(required=True)
 
     def to_json(self):
