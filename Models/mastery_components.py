@@ -1,6 +1,6 @@
 from mongoengine import Document,ReferenceField,DateTimeField,DictField
 from Models.course_model import Course
-from datetime import datetime
+from datetime import datetime,timezone
 from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
