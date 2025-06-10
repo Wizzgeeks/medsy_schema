@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,DictField,ListField,StringField
+from mongoengine import Document,ReferenceField,DictField,ListField,StringField,BooleanField
 from Models.course_model import Course
 from Models.model_model import Model
 
@@ -11,6 +11,7 @@ class Prompt_content(Document):
     deep_dive = StringField()
     summarize = StringField()
     json_schema=DictField()
+    json_mode = BooleanField(default=False)
 
   
     def to_json(self):
@@ -23,5 +24,6 @@ class Prompt_content(Document):
             'model':str(self.model.id),
             'deep_dive':self.deep_dive if self.deep_dive else None,
             'summarize':self.summarize if self.summarize else None,
-            'json_schema':self.json_schema
+            'json_schema':self.json_schema,
+            'json_mode':self.json_mode,
         }
