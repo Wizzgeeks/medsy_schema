@@ -10,7 +10,7 @@ class Prompt_content(Document):
     model = ReferenceField(Model,reverse_delete_rule=2,required=True)
     deep_dive = StringField()
     summarize = StringField()
-    json_schema=DictField()
+    json_schema=StringField()
     json_mode = BooleanField(default=False)
 
   
