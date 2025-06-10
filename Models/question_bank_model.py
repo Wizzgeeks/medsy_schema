@@ -1,4 +1,4 @@
-from mongoengine  import Document,ReferenceField,ListField,DictField
+from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -11,6 +11,27 @@ from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.prompt_content_model import Prompt_content
 
+class MCQ(EmbeddedDocument):
+    question = StringField(required=True)
+    options = DictField(required=True)
+    question_type = StringField(choices=["mcq", "textbasedevaluation"])
+    category = StringField()
+    answer = StringField(required=True)
+    explanation = StringField(required=True)
+    meta_tags = DictField()
+
+    def to_dict(self):
+        return {
+            "question": self.question,
+            "options": self.options,
+            "question_type": self.question_type,
+            "category": self.category,
+            "answer": self.answer,
+            "explanation": self.explanation,
+            "meta_tags": self.meta_tags
+        }
+
+
 class Question_bank(Document):
     course=ReferenceField(Course,reverse_delete_rule=2,required=True)
     year=ReferenceField(Year,reverse_delete_rule=2,required=True)
@@ -22,7 +43,7 @@ class Question_bank(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
-    questions=ListField(DictField())
+    questions=ListField(EmbeddedDocumentField(MCQ))
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 
@@ -35,7 +56,7 @@ class Question_bank(Document):
             'layer1':str(self.layer1.id) if self.layer1 else None,
             'layer2':str(self.layer2.id) if self.layer2 else None,
             'layer3':str(self.layer3.id) if self.layer3 else None,
-            'questions':self.questions,
+            "mcq": [q.to_dict() for q in self.mcq],
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
@@ -56,5 +77,5 @@ class Question_bank(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            'questions':self.questions,
+            "mcq": [q.to_dict() for q in self.mcq],
         }

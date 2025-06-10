@@ -1,4 +1,4 @@
-from mongoengine  import Document,ReferenceField,ListField,DictField
+from mongoengine  import Document,ReferenceField,ListField,DictField,EmbeddedDocument,EmbeddedDocumentField,StringField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -11,6 +11,26 @@ from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.prompt_content_model import Prompt_content
 
+class Exam(EmbeddedDocument):
+    question=StringField(required=True)
+    options = DictField()
+    question_type = StringField(choices=["mcq","textbasedevaluation"])
+    category = StringField()
+    answer = StringField()
+    explanation = StringField()
+    meta_tags = DictField()
+    
+    def to_dict(self):
+        return {
+            "question": self.question,
+            "options": self.options,
+            "question_type": self.question_type,
+            "category": self.category,
+            "answer": self.answer,
+            "explanation": self.explanation,
+            "meta_tags": self.meta_tags
+        }
+
 class Exam_page(Document):
     course=ReferenceField(Course,reverse_delete_rule=2,required=True)
     year=ReferenceField(Year,reverse_delete_rule=2,required=True)
@@ -22,7 +42,7 @@ class Exam_page(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
-    exam=ListField(DictField())
+    exam=ListField(EmbeddedDocumentField(Exam))
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 

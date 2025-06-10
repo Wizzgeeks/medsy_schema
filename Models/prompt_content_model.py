@@ -10,6 +10,7 @@ class Prompt_content(Document):
     model = ReferenceField(Model,reverse_delete_rule=2,required=True)
     deep_dive = StringField()
     summarize = StringField()
+    json_schema=DictField()
 
   
     def to_json(self):
@@ -22,4 +23,5 @@ class Prompt_content(Document):
             'model':str(self.model.id),
             'deep_dive':self.deep_dive if self.deep_dive else None,
             'summarize':self.summarize if self.summarize else None,
+            'json_schema':self.json_schema
         }
