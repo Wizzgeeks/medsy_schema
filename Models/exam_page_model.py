@@ -55,7 +55,7 @@ class Exam_page(Document):
             'layer1':str(self.layer1.id) if self.layer1 else None,
             'layer2':str(self.layer2.id) if self.layer2 else None,
             'layer3':str(self.layer3.id) if self.layer3 else None,
-            'exam':self.exam,
+            'exam':[s.to_dict() for s in self.exam],
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
@@ -76,5 +76,5 @@ class Exam_page(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            'exam':self.exam,
+            'exam':[s.to_dict() for s in self.exam],
         }
