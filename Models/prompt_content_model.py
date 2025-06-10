@@ -25,5 +25,5 @@ class Prompt_content(Document):
             'deep_dive':self.deep_dive if self.deep_dive else None,
             'summarize':self.summarize if self.summarize else None,
             'json_schema':self.json_schema,
-            'json_mode':self.json_mode,
+            'json_mode':self.json_mode if self.json_mode else False,
         }
