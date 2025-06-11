@@ -26,7 +26,7 @@ class Subject_time_spent(Document):
             "course":self.course.to_json() if self.course else None,
             "subject":self.subject.to_json() if self.subject else None,
             "year":self.year.to_json() if self.year else None,
-            "subject_page":self.subject_page.to_json() if self.layer1_page else None,
+            "subject_page":self.subject_page.to_json() if self.subject_page else None,
             "attempts":self.attempts,
             "types":self.types,
             "completed":self.completed
