@@ -13,7 +13,7 @@ from Models.year_model import Year
 from Models.prompt_content_model import Prompt_content
 
 
-class Adaptive_learning_mcq(Document):
+class Adaptive_learning_content(Document):
     course = ReferenceField(Course, reverse_delete_rule=2, required=True)
     year = ReferenceField(Year, reverse_delete_rule=2, required=True)
     user = ReferenceField(User, reverse_delete_rule=2, required=True)
@@ -25,7 +25,7 @@ class Adaptive_learning_mcq(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page= ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
-    mcq = ListField()
+    contents = ListField()
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
     deep_dive=BooleanField(default=False)
     summarize=BooleanField(default=False)
@@ -44,7 +44,7 @@ class Adaptive_learning_mcq(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page": str(self.subject_page.id) if self.subject_page else None,
-            "mcq": self.mcq,
+            "contents": self.contents,
             "prompt": self.prompt.to_json() if self.prompt else None,
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
@@ -64,7 +64,7 @@ class Adaptive_learning_mcq(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page": str(self.subject_page.id) if self.subject_page else None,
-            "mcq": self.mcq,
+            "contents": self.contents,
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
         }
