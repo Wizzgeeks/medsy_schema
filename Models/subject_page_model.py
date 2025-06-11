@@ -6,7 +6,7 @@ from Models.prompt_content_model import Prompt_content
 class Subject_page(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     name = StringField(required=True)
-    types = StringField(choices=['content','mcq','test_series','exam'],required=True)
+    types = StringField(choices=['content','mcq','test_series','exam','adaptive_learning'],required=True)
     sequence = IntField(required=True)
     hierarcy_level = IntField(default=0)
     child_pages = ListField(ReferenceField("Subject_page", reverse_delete_rule=2, required=True))
