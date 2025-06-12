@@ -32,9 +32,9 @@ class Layer2_completion_status(Document):
             "completed":self.completed,
             "total_time_taken_pages":self.total_time_taken_pages,
             "total_time_taken_layer3":self.total_time_taken_layer3,
-            "total_page_count":self.total_page_count,
-            "completed_page_count":self.completed_page_count,
-            "total_layer3_count":self.total_layer3_count,
+            "total_page_count":self.total_page_count if self.total_page_count else 0,
+            "completed_page_count":self.completed_page_count if self.completed_page_count else 0,
+            "total_layer3_count":self.total_layer3_count if self.total_layer3_count else 0,
         }
     
     def with_key(self):
