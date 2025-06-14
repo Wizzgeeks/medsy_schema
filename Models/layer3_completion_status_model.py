@@ -32,9 +32,9 @@ class Layer3_completion_status(Document):
             "layer2":str(self.layer2.id) if self.layer2 else None,
             "layer3":str(self.layer3.id) if self.layer3 else None,
             "user":str(self.user.id) if self.user else None,
-            "completed":self.completed,
-            "total_page":self.total_page,
-            "completed_page":self.completed_page,
+            "completed":self.completed if self.completed else 0,
+            "total_page":self.total_page if self.total_page else 0 ,
+            "completed_page":self.completed_page if self.completed_page else 0,
         }
     
     def with_key(self):
@@ -47,7 +47,7 @@ class Layer3_completion_status(Document):
             "layer2":self.layer2.to_json() if self.layer2 else None,
             "layer3":self.layer3.to_json() if self.layer3 else None,
             "user":str(self.user.id) if self.user else None,
-            "completed":self.completed,
-            "total_page":self.total_page,
-            "completed_page":self.completed_page,
+            "completed":self.completed if self.completed else 0,
+            "total_page":self.total_page if self.total_page else 0 ,
+            "completed_page":self.completed_page if self.completed_page else 0,
         }

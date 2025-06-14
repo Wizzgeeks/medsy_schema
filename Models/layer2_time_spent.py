@@ -17,7 +17,7 @@ class Layer2_time_spent(Document):
     user = ReferenceField(User,required=True,reverse_delete_rule=2)
     layer2_page = ReferenceField(Layer2_page,required=True,reverse_delete_rule=2)
     attempts =ListField(DictField())
-    types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content'],required=True)
+    types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content',"exam"],required=True)
     completed=BooleanField(default=False)
     
 
