@@ -11,25 +11,25 @@ from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.prompt_content_model import Prompt_content
 
-# class MCQ(EmbeddedDocument):
-#     question = StringField(required=True)
-#     options = DictField(required=True)
-#     question_type = StringField(choices=["mcq", "textbasedevaluation"])
-#     category = StringField()
-#     answer = StringField(required=True)
-#     explanation = StringField(required=True)
-#     meta_tags = DictField()
+class MCQ(EmbeddedDocument):
+    question = StringField(required=True)
+    options = DictField(required=True)
+    question_type = StringField(choices=["mcq", "textbasedevaluation"])
+    category = StringField()
+    answer = StringField(required=True)
+    explanation = StringField(required=True)
+    meta_tags = DictField()
 
-#     def to_dict(self):
-#         return {
-#             "question": self.question,
-#             "options": self.options,
-#             "question_type": self.question_type,
-#             "category": self.category,
-#             "answer": self.answer,
-#             "explanation": self.explanation,
-#             "meta_tags": self.meta_tags
-#         }
+    def to_dict(self):
+        return {
+            "question": self.question,
+            "options": self.options,
+            "question_type": self.question_type,
+            "category": self.category,
+            "answer": self.answer,
+            "explanation": self.explanation,
+            "meta_tags": self.meta_tags
+        }
 
 
 class Question_bank(Document):

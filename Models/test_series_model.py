@@ -42,7 +42,8 @@ class TestSeries(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
-    series=ListField(EmbeddedDocumentField(Series))
+    # series=ListField(EmbeddedDocumentField(Series))
+    series=ListField()
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 
@@ -55,7 +56,8 @@ class TestSeries(Document):
             'layer1':str(self.layer1.id) if self.layer1 else None,
             'layer2':str(self.layer2.id) if self.layer2 else None,
             'layer3':str(self.layer3.id) if self.layer3 else None,
-            'series': [s.to_dict() for s in self.series],
+            # 'series': [s.to_dict() for s in self.series],
+            'series': self.series,
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
@@ -76,5 +78,7 @@ class TestSeries(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            'series': [s.to_dict() for s in self.series],
+            # 'series': [s.to_dict() for s in self.series],
+            'series': self.series,
+            
         }
