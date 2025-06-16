@@ -14,7 +14,7 @@ from Models.prompt_content_model import Prompt_content
 class MCQ(EmbeddedDocument):
     question = StringField(required=True)
     options = DictField(required=True)
-    question_type = StringField(choices=["mcq", "textbasedevaluation"])
+    question_type = StringField()
     category = StringField()
     answer = StringField(required=True)
     explanation = StringField(required=True)
@@ -43,8 +43,8 @@ class Question_bank(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
-    # questions=ListField(EmbeddedDocumentField(MCQ))
-    questions=ListField()
+    questions=ListField(EmbeddedDocumentField(MCQ))
+    # questions=ListField()
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 
@@ -57,8 +57,8 @@ class Question_bank(Document):
             'layer1':str(self.layer1.id) if self.layer1 else None,
             'layer2':str(self.layer2.id) if self.layer2 else None,
             'layer3':str(self.layer3.id) if self.layer3 else None,
-            "questions": self.questions,
-            # "questions": [q.to_dict() for q in self.questions],
+            # "questions": self.questions,
+            "questions": [q.to_dict() for q in self.questions],
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
@@ -79,7 +79,7 @@ class Question_bank(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            # "questions": [q.to_dict() for q in self.questions],
-            "questions": self.questions,
+            "questions": [q.to_dict() for q in self.questions],
+            # "questions": self.questions,
             
         }
