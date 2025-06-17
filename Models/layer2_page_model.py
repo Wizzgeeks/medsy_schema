@@ -9,7 +9,7 @@ from Models.prompt_content_model import Prompt_content
 class Layer2_page(Document):
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     name = StringField(required=True)
-    types = StringField(choices=['content','mcq','test_series','exam','adaptive_learning','adaptive_learning_mcq','adaptive_learning_content'],required=True)
+    types = StringField(choices=['content','mcq','test_series','exam','adaptive_learning','adaptive_learning_mcq','adaptive_learning_content',"related_videos"],required=True)
     sequence = IntField(required=True)
     hierarcy_level = IntField(default=0)
     child_pages = ListField(ReferenceField("Layer2_page", reverse_delete_rule=2, required=True))
