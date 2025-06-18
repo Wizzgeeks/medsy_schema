@@ -22,6 +22,7 @@ class Mastery_components(Document):
                                  "assertion_reasoning":0,"match":0,
                                  "relatedQuestions":0,"predictandprevent":0,
                                  "amazing_fact":0})
+    ctc_index = DictField(null=True)
     updated_at = DateTimeField(null=True)
     
 
@@ -38,4 +39,5 @@ class Mastery_components(Document):
             'created_at': str(self.created_at),
             'updated_at': str(self.updated_at) if self.updated_at else None,
             'ctc_count': self.ctc_count,
+            'ctc_index': self.ctc_index if self.ctc_index else None,
         }
