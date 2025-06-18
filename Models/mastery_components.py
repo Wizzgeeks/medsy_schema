@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,DateTimeField,DictField
+from mongoengine import Document,ReferenceField,DateTimeField,DictField,ListField
 from Models.course_model import Course
 from datetime import datetime,timezone
 from Models.layer_1_model import Layer_1
@@ -22,7 +22,7 @@ class Mastery_components(Document):
                                  "assertion_reasoning":0,"match":0,
                                  "relatedQuestions":0,"predictandprevent":0,
                                  "amazing_fact":0})
-    ctc_index = DictField(null=True)
+    ctc_index = ListField(DictField())
     updated_at = DateTimeField(null=True)
     
 
