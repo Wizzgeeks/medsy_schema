@@ -13,6 +13,7 @@ class Subject_time_spent(Document):
     attempts =ListField(DictField())
     types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content','exam'],required=True)
     completed=BooleanField(default=False)
+    child=BooleanField(default=False) 
     
 
 
@@ -29,5 +30,6 @@ class Subject_time_spent(Document):
             "subject_page":self.subject_page.to_json() if self.subject_page else None,
             "attempts":self.attempts,
             "types":self.types,
-            "completed":self.completed
+            "completed":self.completed,
+            "child": self.child
             }

@@ -19,6 +19,7 @@ class Layer2_time_spent(Document):
     attempts =ListField(DictField())
     types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content',"exam"],required=True)
     completed=BooleanField(default=False)
+    child=BooleanField(default=False) 
     
 
     def to_json(self):
@@ -36,5 +37,8 @@ class Layer2_time_spent(Document):
             "layer2_page":self.layer2_page.to_json() if self.layer2_page else None,
             "attempts":self.attempts,
             "types":self.types,
-            "completed":self.completed
+            "completed":self.completed,
+            "child": self.child,
+        
+
             }
