@@ -24,6 +24,7 @@ class Ctc_completed(Document):
     completed_ctc_count=IntField(default=0)
     ctc_index = ListField(DictField())
     completed=BooleanField(default=False)
+    ctc_completed_data=ListField(DictField())
     def to_json(self):
         return {
             'id': str(self.id),
@@ -39,4 +40,5 @@ class Ctc_completed(Document):
             'completed_ctc_count': self.completed_ctc_count,
             'ctc_index': self.ctc_index if self.ctc_index else None,
             'completed': self.completed,
+            'ctc_completed_data': self.ctc_completed_data if self.ctc_completed_data else None,
         }
