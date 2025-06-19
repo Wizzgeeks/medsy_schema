@@ -11,7 +11,7 @@ from Models.user_model import User
 
 
 
-class CTC_completed(Document):
+class Ctc_completed(Document):
     user= ReferenceField(User, reverse_delete_rule=2, required=True)
     course = ReferenceField(Course, reverse_delete_rule=2, required=True)
     year = ReferenceField(Year, reverse_delete_rule=2, required=True)
