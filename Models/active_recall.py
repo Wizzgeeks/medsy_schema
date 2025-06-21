@@ -34,7 +34,7 @@ class MCQ(EmbeddedDocument):
         }
 
 
-class Adaptive_learning_mcq(Document):
+class Active_recall(Document):
     course=ReferenceField(Course,reverse_delete_rule=2,required=True)
     year=ReferenceField(Year,reverse_delete_rule=2,required=True)
     user = ReferenceField(User, reverse_delete_rule=2, required=True)
@@ -46,7 +46,7 @@ class Adaptive_learning_mcq(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
-    mcq=ListField(EmbeddedDocumentField(MCQ))
+    recall=ListField(EmbeddedDocumentField(MCQ))
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 
@@ -60,7 +60,7 @@ class Adaptive_learning_mcq(Document):
             'layer1':str(self.layer1.id) if self.layer1 else None,
             'layer2':str(self.layer2.id) if self.layer2 else None,
             'layer3':str(self.layer3.id) if self.layer3 else None,
-            "mcq": [q.to_dict() for q in self.mcq],
+            "recall": [q.to_dict() for q in self.recall],
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
@@ -82,5 +82,5 @@ class Adaptive_learning_mcq(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            "mcq": [q.to_dict() for q in self.mcq],
+            "recall": [q.to_dict() for q in self.recall],
         }
