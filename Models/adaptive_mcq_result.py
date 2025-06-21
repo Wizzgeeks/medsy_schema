@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, ListField, DictField, StringField,IntField
+from mongoengine import Document, ReferenceField, ListField, DictField, StringField,IntField,DateTimeField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -27,6 +27,8 @@ class Adaptive_learning_result(Document):
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     mcq_result=ListField()
     marks = IntField()
+    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    updated_at=DateTimeField(null=True)
 
 
     def to_json(self):
@@ -44,7 +46,9 @@ class Adaptive_learning_result(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            "marks": self.marks if self.marks else None
+            "marks": self.marks if self.marks else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
+            'created_at':str(self.created_at)
         }
     
     def to_user(self):
@@ -62,5 +66,7 @@ class Adaptive_learning_result(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "mcq_result":self.mcq_result,
-            "marks": self.marks if self.marks else None
+            "marks": self.marks if self.marks else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
+            'created_at':str(self.created_at)
         }

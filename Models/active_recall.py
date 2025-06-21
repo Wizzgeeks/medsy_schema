@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField
+from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField,DateTimeField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -47,6 +47,8 @@ class Active_recall(Document):
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     recall=ListField(EmbeddedDocumentField(MCQ))
+    created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
+    updated_at=DateTimeField(null=True)
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 
@@ -65,7 +67,9 @@ class Active_recall(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            "prompt": self.prompt.to_json() if self.prompt else None
+            "prompt": self.prompt.to_json() if self.prompt else None,
+            'updated_at':str(self.updated_at) if self.updated_at else None,
+            'created_at':str(self.created_at)
         }
     
     def to_user(self):
@@ -83,4 +87,6 @@ class Active_recall(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "recall": [q.to_dict() for q in self.recall],
+            'updated_at':str(self.updated_at) if self.updated_at else None,
+            'created_at':str(self.created_at)
         }
