@@ -35,7 +35,7 @@ class Layer3_time_spent(Document):
             "layer2":self.layer2.to_json() if self.layer2 else None,
             "layer3":self.layer3.to_json() if self.layer3 else None,
             "year":self.year.to_json() if self.layer3.year else None,
-            "layer3_page":self.layer3_page.to_json() if self.layer3_page else None,
+            "layer3_page":str(self.layer3_page.id) if self.layer3_page else None,
             "attempts":self.attempts,
             "types":self.types,
             "completed":self.completed,
