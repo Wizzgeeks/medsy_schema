@@ -91,3 +91,23 @@ class Active_recall_mcq(Document):
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
         }
+        
+    
+    def to_active(self):
+        return {
+            "id": str(self.id),
+            'course': str(self.course.name) if self.course else None,
+            'user': str(self.user.username) if self.user else None,
+            'year': str(self.year.year) if self.year else None,
+            "subject": str(self.subject.name) if self.subject else None,
+            "layer1": str(self.layer1.name) if self.layer1 else None,
+            "layer2": str(self.layer2.name) if self.layer2 else None,
+            "layer3": str(self.layer3.name) if self.layer3 else None,
+            "layer1_page": str(self.layer1_page.name) if self.layer1_page else None,
+            "layer2_page": str(self.layer2_page.name) if self.layer2_page else None,
+            "layer3_page": str(self.layer3_page.name) if self.layer3_page else None,
+            "subject_page":str(self.subject_page.name) if self.subject_page else None,
+            # "mcq": [q.to_dict() for q in self.mcq],
+            'updated_at':str(self.updated_at) if self.updated_at else None,
+            'created_at':str(self.created_at)
+        }
