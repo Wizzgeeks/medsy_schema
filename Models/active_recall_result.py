@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, ListField, DictField, StringField,IntField,DateTimeField
+from mongoengine import Document, ReferenceField, ListField,IntField,DateTimeField,BooleanField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -11,10 +11,10 @@ from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.user_model import User
 from datetime import datetime,timezone
+from Models.active_recall_mcq import Active_recall_mcq
 
 
-
-class Active_recall_result(Document):
+class Active_mcq_recall_result(Document):
     course=ReferenceField(Course,reverse_delete_rule=2,required=True)
     year=ReferenceField(Year,reverse_delete_rule=2,required=True)
     user = ReferenceField(User, reverse_delete_rule=2, required=True)
@@ -27,7 +27,9 @@ class Active_recall_result(Document):
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     recall_result=ListField()
+    completed = BooleanField()
     marks = IntField()
+    recall_page = ReferenceField(Active_recall_mcq, reverse_delete_rule=2, null=True)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
     updated_at=DateTimeField(null=True)
 
@@ -47,6 +49,7 @@ class Active_recall_result(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
+            "recall_page":str(self.recall_page.id) if self.recall_page else None,
             "marks": self.marks if self.marks else None,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
@@ -66,6 +69,7 @@ class Active_recall_result(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
+            "recall_page":str(self.recall_page.id) if self.recall_page else None,
             "recall_result":self.recall_result,
             "marks": self.marks if self.marks else None,
             'updated_at':str(self.updated_at) if self.updated_at else None,
