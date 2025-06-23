@@ -108,6 +108,6 @@ class Active_recall_mcq(Document):
             "layer3_page": str(self.layer3_page.name) if self.layer3_page else None,
             "subject_page":str(self.subject_page.name) if self.subject_page else None,
             # "mcq": [q.to_dict() for q in self.mcq],
-            'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':str(self.created_at)
+            'updated_at':self.updated_at.strftime("%d %b %Y") if self.updated_at else None,
+            'created_at':self.created_at.strftime("%d %b %Y")
         }
