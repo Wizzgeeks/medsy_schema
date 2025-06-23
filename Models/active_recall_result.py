@@ -27,7 +27,7 @@ class Active_mcq_recall_result(Document):
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     recall_result=ListField()
-    completed = BooleanField()
+    completed = BooleanField(default=False)
     marks = IntField()
     recall_page = ReferenceField(Active_recall_mcq, reverse_delete_rule=2, null=True)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
