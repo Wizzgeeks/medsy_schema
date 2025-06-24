@@ -26,7 +26,7 @@ class Layer3_page(Document):
             'types':str(self.types),
             'sequence':str(self.sequence),
             'hierarcy_level':str(self.hierarcy_level),
-            'enable_days': self.enable_days,
+            'enable_days': self.enable_days if self.enable_days else 0,
             "child_pages": [child.to_json() for child in self.child_pages] if self.child_pages else [],
             "prompts": [prompt.to_json() for prompt in self.prompts] if self.prompts else None
         }
@@ -38,7 +38,7 @@ class Layer3_page(Document):
             'name':str(self.name),
             'types':str(self.types),
             'sequence':str(self.sequence),
-            'enable_days': self.enable_days,
+            'enable_days': self.enable_days if self.enable_days else 0,
             'hierarcy_level':str(self.hierarcy_level),
             "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
         }
@@ -51,7 +51,7 @@ class Layer3_page(Document):
             'types': self.types,
             'sequence': self.sequence,
             'hierarcy_level': self.hierarcy_level,
-            'enable_days': self.enable_days,
+            'enable_days': self.enable_days if self.enable_days else 0,
             "child_pages": [child.to_admin() for child in self.child_pages] if self.child_pages else [],
             "prompts": [str(prompt.id) for prompt in self.prompts] if self.prompts else None
         }
