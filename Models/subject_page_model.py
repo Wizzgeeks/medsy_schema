@@ -9,7 +9,6 @@ class Subject_page(Document):
     types = StringField(choices=['content','mcq','test_series','exam','adaptive_learning','adaptive_learning_mcq','adaptive_learning_content',"related_videos","active_recall","active_recall_mcq","active_recall_content"],required=True)
     sequence = IntField(required=True)
     hierarcy_level = IntField(default=0)
-    enable_days = IntField(default=0)
     child_pages = ListField(ReferenceField("Subject_page", reverse_delete_rule=2, required=True))
     prompts = ListField(ReferenceField(Prompt_content,reverse_delete_rule=2,required=True))    
 
@@ -23,7 +22,6 @@ class Subject_page(Document):
             'types': self.types,
             'sequence': self.sequence,
             'hierarcy_level': self.hierarcy_level,
-            'enable_days': self.enable_days if self.enable_days else 0,
             "child_pages": [child.to_json() for child in self.child_pages] if self.child_pages else [],
             "prompts": [prompt.to_json() for prompt in self.prompts] if self.prompts else None
         }
@@ -36,7 +34,6 @@ class Subject_page(Document):
             'types': self.types,
             'sequence': self.sequence,
             'hierarcy_level': self.hierarcy_level,
-            'enable_days': self.enable_days if self.enable_days else 0,
             "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
         }
     
@@ -48,7 +45,6 @@ class Subject_page(Document):
             'types': self.types,
             'sequence': self.sequence,
             'hierarcy_level': self.hierarcy_level,
-            'enable_days': self.enable_days if self.enable_days else 0,
             "child_pages": [child.to_admin() for child in self.child_pages] if self.child_pages else [],
             "prompts": [str(prompt.id) for prompt in self.prompts] if self.prompts else None
         }
