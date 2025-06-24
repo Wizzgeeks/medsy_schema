@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, ListField, DictField, StringField,IntField,DateTimeField
+from mongoengine import Document, ReferenceField, ListField, DictField, StringField,IntField,DateTimeField,BooleanField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -28,6 +28,7 @@ class Adaptive_learning_result(Document):
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     mcq_result=ListField()
     marks = IntField()
+    completed= BooleanField(default=False)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
     updated_at=DateTimeField(null=True)
 
@@ -48,6 +49,7 @@ class Adaptive_learning_result(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "marks": self.marks if self.marks else None,
+            "completed": self.completed if self.completed else None,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
         }
@@ -68,6 +70,7 @@ class Adaptive_learning_result(Document):
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "mcq_result":self.mcq_result,
             "marks": self.marks if self.marks else None,
+            "completed": self.completed if self.completed else None,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
         }
