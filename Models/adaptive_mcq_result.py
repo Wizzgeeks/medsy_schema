@@ -11,6 +11,7 @@ from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.user_model import User
 from datetime import datetime,timezone
+from Models.adaptive_page_mcq import Adaptive_learning_mcq
 
 
 
@@ -29,6 +30,7 @@ class Adaptive_learning_result(Document):
     mcq_result=ListField()
     marks = IntField()
     completed= BooleanField(default=False)
+    recall_page = ReferenceField(Adaptive_learning_mcq, reverse_delete_rule=2, null=True)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
     updated_at=DateTimeField(null=True)
 
@@ -50,6 +52,7 @@ class Adaptive_learning_result(Document):
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "marks": self.marks if self.marks else None,
             "completed": self.completed if self.completed else None,
+            "recall_page":str(self.recall_page.id) if self.recall_page else None,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
         }
@@ -70,6 +73,7 @@ class Adaptive_learning_result(Document):
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "mcq_result":self.mcq_result,
             "marks": self.marks if self.marks else None,
+            "recall_page":str(self.recall_page.id) if self.recall_page else None,
             "completed": self.completed if self.completed else None,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
