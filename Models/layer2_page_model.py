@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,StringField,IntField,ListField
+from mongoengine import Document,ReferenceField,StringField,IntField,ListField,BooleanField
 from Models.course_model import Course
 
 from Models.prompt_content_model import Prompt_content
@@ -14,7 +14,10 @@ class Layer2_page(Document):
     hierarcy_level = IntField(default=0)
     enable_days = IntField(default=0)
     child_pages = ListField(ReferenceField("Layer2_page", reverse_delete_rule=2, required=True))
-    prompts = ListField(ReferenceField(Prompt_content,reverse_delete_rule=2,required=True))    
+    prompts = ListField(ReferenceField(Prompt_content,reverse_delete_rule=2,required=True))  
+    optional = BooleanField(default=False)
+    ignore = BooleanField(default=False)
+    min_page = IntField(default=0)    
     
   
     def to_json(self):
@@ -27,7 +30,10 @@ class Layer2_page(Document):
             'hierarcy_level':str(self.hierarcy_level),
             'enable_days': self.enable_days if self.enable_days else 0,
             "child_pages": [child.to_json() for child in self.child_pages] if self.child_pages else [],
-            "prompts": [prompt.to_json() for prompt in self.prompts] if self.prompts else None
+            "prompts": [prompt.to_json() for prompt in self.prompts] if self.prompts else None,
+            "optional": self.optional,
+            "ignore": self.ignore,
+            "min_page": self.min_page if self.min_page else 0
         }
     
     def to_user(self):
@@ -40,6 +46,9 @@ class Layer2_page(Document):
             'enable_days': self.enable_days if self.enable_days else 0,
             'hierarcy_level':str(self.hierarcy_level),
             "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
+            "optional": self.optional,
+            "ignore": self.ignore,
+            "min_page": self.min_page if self.min_page else 0
         }
     
     def to_admin(self):
@@ -52,5 +61,8 @@ class Layer2_page(Document):
             'enable_days': self.enable_days if self.enable_days else 0,
             'hierarcy_level': self.hierarcy_level,
             "child_pages": [child.to_admin() for child in self.child_pages] if self.child_pages else [],
-            "prompts": [str(prompt.id) for prompt in self.prompts] if self.prompts else None
+            "prompts": [str(prompt.id) for prompt in self.prompts] if self.prompts else None,
+            "optional": self.optional,
+            "ignore": self.ignore,
+            "min_page": self.min_page if self.min_page else 0
         }
