@@ -8,11 +8,12 @@ from Models.year_model import Year
 from datetime import datetime,timezone
 from Models.active_recall_mcq import Active_recall_mcq
 from Models.active_recall import Active_recall
-
+from Models.user_model import User
 
 class Active_recall_mcq_logs(Document):
     active = ReferenceField(Active_recall,reverse_delete_rule=2)
     active_mcq = ReferenceField(Active_recall_mcq,reverse_delete_rule=2)
+    user = ReferenceField(User, reverse_delete_rule=2, required=True)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2)
@@ -31,6 +32,7 @@ class Active_recall_mcq_logs(Document):
             "id":str(self.id),
             'active':str(self.active.id) if self.active else None,
             'active_mcq':str(self.active_mcq.id) if self.active_mcq else None,
+            'user': str(self.user.id) if self.user else None,
             'course':str(self.course.id),
             'year':str(self.year.id),
             'subject':str(self.subject.id) if self.subject else None,

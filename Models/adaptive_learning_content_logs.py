@@ -8,11 +8,14 @@ from Models.year_model import Year
 from datetime import datetime,timezone
 from Models.adaptive_page_content import Adaptive_learning_content
 from Models.adaptive_learning_page import Adaptive_learning
+from Models.user_model import User
+
 
 
 class Adaptive_learning_content_logs(Document):
     adaptive=ReferenceField(Adaptive_learning,reverse_delete_rule=2)
     adaptive_content=ReferenceField(Adaptive_learning_content,reverse_delete_rule=2)
+    user = ReferenceField(User, reverse_delete_rule=2, required=True)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2)
@@ -31,6 +34,7 @@ class Adaptive_learning_content_logs(Document):
             "id":str(self.id),
             'adaptive':str(self.adaptive.id )if self.adaptive else None,
             'adaptive_content':str(self.adaptive_content.id )if self.adaptive_content else None,
+            'user': str(self.user.id) if self.user else None,
             'course':str(self.course.id),
             'year':str(self.year.id),
             'subject':str(self.subject.id) if self.subject else None,

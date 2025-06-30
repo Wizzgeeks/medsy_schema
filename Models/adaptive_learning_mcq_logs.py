@@ -5,6 +5,7 @@ from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
 from Models.year_model import Year
+from Models.user_model import User
 from datetime import datetime,timezone
 from Models.adaptive_page_mcq import Adaptive_learning_mcq
 from Models.adaptive_learning_page import Adaptive_learning
@@ -13,6 +14,7 @@ from Models.adaptive_learning_page import Adaptive_learning
 class Adaptive_learning_mcq_logs(Document):
     adaptive=ReferenceField(Adaptive_learning,reverse_delete_rule=2)
     adaptive_mcq=ReferenceField(Adaptive_learning_mcq,reverse_delete_rule=2)
+    user = ReferenceField(User, reverse_delete_rule=2, required=True)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2)
@@ -30,6 +32,7 @@ class Adaptive_learning_mcq_logs(Document):
         return {
             "id":str(self.id),
             'adaptive':str(self.adaptive.id )if self.adaptive else None,
+            'user': str(self.user.id) if self.user else None,
             'adaptive_mcq':str(self.adaptive_mcq.id )if self.adaptive_mcq else None,
             'course':str(self.course.id),
             'year':str(self.year.id),

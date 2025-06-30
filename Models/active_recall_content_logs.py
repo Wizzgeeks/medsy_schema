@@ -6,6 +6,7 @@ from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
 from Models.year_model import Year
 from datetime import datetime,timezone
+from Models.user_model import User
 from Models.active_recall_content import Active_recall_content
 from Models.active_recall import Active_recall
 
@@ -13,6 +14,7 @@ from Models.active_recall import Active_recall
 class Active_recall_content_logs(Document):
     active = ReferenceField(Active_recall,reverse_delete_rule=2)
     active_content = ReferenceField(Active_recall_content,reverse_delete_rule=2)
+    user = ReferenceField(User, reverse_delete_rule=2, required=True)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2)
@@ -31,6 +33,7 @@ class Active_recall_content_logs(Document):
             "id":str(self.id),
             'active':str(self.active.id) if self.active else None,
             'active_content':str(self.active_content.id) if self.active_content else None,
+            'user': str(self.user.id) if self.user else None,
             'course':str(self.course.id),
             'year':str(self.year.id),
             'subject':str(self.subject.id) if self.subject else None,
