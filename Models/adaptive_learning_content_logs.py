@@ -11,14 +11,12 @@ from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from datetime import datetime,timezone
 from Models.adaptive_page_content import Adaptive_learning_content
-from Models.adaptive_page_mcq import Adaptive_learning_mcq
 from Models.adaptive_learning_page import Adaptive_learning
 
 
-class Adaptive_learning_logs(Document):
+class Adaptive_learning_content_logs(Document):
     adaptive=ReferenceField(Adaptive_learning,reverse_delete_rule=2)
     adaptive_content=ReferenceField(Adaptive_learning_content,reverse_delete_rule=2)
-    adaptive_mcq=ReferenceField(Adaptive_learning_mcq,reverse_delete_rule=2)
     course = ReferenceField(Course,reverse_delete_rule=2,required=True)
     year = ReferenceField(Year,reverse_delete_rule=2,required=True)
     subject = ReferenceField(Subject,reverse_delete_rule=2)
@@ -29,10 +27,8 @@ class Adaptive_learning_logs(Document):
     layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
-    logs_content=ListField(DictField())
-    logs_mcq=ListField(DictField())
-    conversation_content = ListField(default=[])
-    conversation_mcq = ListField(default=[])
+    logs=ListField(DictField())
+    conversation = ListField(default=[])
     created_at=DateTimeField(default=datetime.now(timezone.utc))
     updated_at = DateTimeField(null=True)
     status=StringField()
@@ -42,7 +38,6 @@ class Adaptive_learning_logs(Document):
             "id":str(self.id),
             'adaptive':str(self.adaptive.id )if self.adaptive else None,
             'adaptive_content':str(self.adaptive_content.id )if self.adaptive_content else None,
-            'adaptive_mcq':str(self.adaptive_mcq.id )if self.adaptive_mcq else None,
             'course':str(self.course.id),
             'year':str(self.year.id),
             'subject':str(self.subject.id) if self.subject else None,
@@ -54,10 +49,9 @@ class Adaptive_learning_logs(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             'status':self.status,
-            'logs_content':self.logs_content,
-            'logs_mcq':self.logs_mcq,
-            'conversation_content':self.conversation_content if self.conversation_content else [],
-            'conversation_mcq':self.conversation_mcq if self.conversation_mcq else [],
+            'logs_content':self.logs,
+            'logs_mcq':self.logs,
+            'conversation_mcq':self.conversation if self.conversation else [],
             'updated_at':str(self.updated_at) if self.updated_at else None,
             'created_at':str(self.created_at)
             }
