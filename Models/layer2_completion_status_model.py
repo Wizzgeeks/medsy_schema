@@ -57,13 +57,22 @@ class Layer2_completion_status(Document):
         }
 def get_l3_summary_mastery(layer):
     return {
-        f"direct_total_{layer}": 0,
-        f"direct_completed_{layer}": 0,
-        f"critical_total_{layer}": 0,
-        f"critical_completed_{layer}": 0,
-        f"reasoning_total_{layer}": 0,
-        f"reasoning_completed_{layer}": 0,
-        f"clinical_total_{layer}": 0,
-        f"clinical_completed_{layer}": 0,
+        "direct": {
+            f"total_{layer}": 0,
+            f"scored_{layer}": 0
+        },
+        "critical": {
+            f"total_{layer}": 0,
+            f"scored_{layer}": 0
+        },
+        "reasoning": {
+            f"total_{layer}": 0,
+            f"scored_{layer}": 0
+        },
+        "clinical": {
+            f"total_{layer}": 0,
+            f"scored_{layer}": 0
+        }
     }
+
     

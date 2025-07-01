@@ -9,16 +9,25 @@ from Models.course_model import Course
 
 
 def get_default_mastery():
-        return {
-            "direct_total": 0,
-            "direct_completed": 0,
-            "critical_total": 0,
-            "critical_completed": 0,
-            "reasoning_total": 0,
-            "reasoning_completed": 0,
-            "clinical_total": 0,
-            "clinical_completed": 0,
+    return {
+        "direct": {
+            "total": 0,
+            "scored": 0
+        },
+        "critical": {
+            "total": 0,
+            "scored": 0
+        },
+        "reasoning": {
+            "total": 0,
+            "scored": 0
+        },
+        "clinical": {
+            "total": 0,
+            "scored": 0
         }
+    }
+
 class Layer3_completion_status(Document):
     course=ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
     year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
