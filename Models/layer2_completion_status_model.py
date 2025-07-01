@@ -5,7 +5,7 @@ from Models.layer_1_model import Layer_1
 from Models.year_model import Year
 from Models.subject_model import Subject
 from Models.course_model import Course
-from Models.layer2_completion_status_model import get_default_mastery
+from Models.layer3_completion_status_model import get_default_mastery
 class Layer2_completion_status(Document):
     course=ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
     year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
