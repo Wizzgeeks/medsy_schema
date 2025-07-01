@@ -20,7 +20,7 @@ class Subject_completion_status(Document):
     completed_layer_count=IntField()
     mastery_subject = DictField(default=lambda: get_default_mastery())
     l1_summary=DictField(default=lambda: get_l3_summary_mastery("l1"))
-    l2_summary=DictField(default=lambda:[ get_l3_summary_mastery("l2")])
+    l2_summary=DictField(default=lambda:get_l3_summary_mastery("l2"))
     l3_summary=DictField(default=lambda:get_l3_summary_mastery("l3"))
 
 
