@@ -69,7 +69,7 @@ def get_l3_summary_mastery(layer):
             f"total_{layer}": 0,
             f"scored_{layer}": 0
         },
-        "clinical_application": {
+        "application": {
             f"total_{layer}": 0,
             f"scored_{layer}": 0
         }

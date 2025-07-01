@@ -22,7 +22,7 @@ def get_default_mastery():
             "total": 0,
             "scored": 0
         },
-        "clinical_application": {
+        "application": {
             "total": 0,
             "scored": 0
         }
