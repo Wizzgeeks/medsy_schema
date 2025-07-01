@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField
+from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField,ListField,DictField
 from Models.user_model import User
 from Models.layer_3_model import Layer_3
 from Models.layer_2_model import Layer_2
@@ -8,6 +8,17 @@ from Models.year_model import Year
 from Models.course_model import Course
 
 
+def get_default_mastery():
+        return {
+            "direct_total": 0,
+            "direct_completed": 0,
+            "critical_total": 0,
+            "critical_completed": 0,
+            "reasoning_total": 0,
+            "reasoning_completed": 0,
+            "clinical_total": 0,
+            "clinical_completed": 0,
+        }
 class Layer3_completion_status(Document):
     course=ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
     year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
@@ -20,6 +31,7 @@ class Layer3_completion_status(Document):
     total_page=IntField()
     completed_page=IntField()
     time_taken_page=IntField()
+    mastery_l3 = ListField(DictField(), default=[get_default_mastery])
 
 
     def to_json(self):
@@ -51,3 +63,4 @@ class Layer3_completion_status(Document):
             "total_page":self.total_page if self.total_page else 0 ,
             "completed_page":self.completed_page if self.completed_page else 0,
         }
+    

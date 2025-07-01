@@ -1,10 +1,11 @@
-from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField
+from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField,ListField,DictField
 from Models.user_model import User
 from Models.layer_2_model import Layer_2
 from Models.layer_1_model import Layer_1
 from Models.year_model import Year
 from Models.subject_model import Subject
 from Models.course_model import Course
+from Models.layer2_completion_status_model import get_default_mastery
 class Layer2_completion_status(Document):
     course=ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
     year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
@@ -19,6 +20,8 @@ class Layer2_completion_status(Document):
     completed_page_count=IntField()
     total_layer3_count=IntField()
     completed_layer3_count=IntField()
+    mastery_l2 = ListField(DictField(), default=[get_default_mastery])
+    l3_summary=ListField(DictField(),default=[lambda: get_l3_summary_mastery("l3")])
 
 
     def to_json(self):
@@ -52,3 +55,15 @@ class Layer2_completion_status(Document):
             "total_layer3_count":self.total_layer3_count,
             
         }
+def get_l3_summary_mastery(layer):
+    return {
+        f"direct_total_{layer}": 0,
+        f"direct_completed_{layer}": 0,
+        f"critical_total_{layer}": 0,
+        f"critical_completed_{layer}": 0,
+        f"reasoning_total_{layer}": 0,
+        f"reasoning_completed_{layer}": 0,
+        f"clinical_total_{layer}": 0,
+        f"clinical_completed_{layer}": 0,
+    }
+    

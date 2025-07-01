@@ -1,9 +1,11 @@
-from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField
+from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField,ListField,DictField
 from Models.user_model import User
 from Models.layer_1_model import Layer_1
 from Models.course_model import Course
 from Models.year_model import Year
 from Models.subject_model import Subject
+from Models.layer3_completion_status_model import get_default_mastery
+from Models.layer2_completion_status_model import get_l3_summary_mastery
 
 
 class Layer1_completion_status(Document):
@@ -19,6 +21,10 @@ class Layer1_completion_status(Document):
     completed_page_count=IntField()
     total_layer2_count=IntField()
     completed_layer2_count=IntField()
+    mastery_l1 = ListField(DictField(), default=[get_default_mastery])
+    l2_summary=ListField(DictField(),default=[lambda: get_l3_summary_mastery("l2")])
+    l3_summary=ListField(DictField(),default=[lambda: get_l3_summary_mastery("l3")])
+
 
 
     def to_json(self):
