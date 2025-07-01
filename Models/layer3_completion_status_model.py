@@ -14,7 +14,7 @@ def get_default_mastery():
             "total": 0,
             "scored": 0
         },
-        "critical": {
+        "critical_thinking": {
             "total": 0,
             "scored": 0
         },
@@ -22,7 +22,7 @@ def get_default_mastery():
             "total": 0,
             "scored": 0
         },
-        "clinical": {
+        "clinical_application": {
             "total": 0,
             "scored": 0
         }
