@@ -38,6 +38,25 @@ class User_evaluation_result(Document):
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     user=ReferenceField(User,reverse_delete_rule=2,required=True)
     attempts_data=ListField(EmbeddedDocumentField(User_result))
+    page_type=StringField(choices=['mcq','test_series','exam'],required=True)
     meta = {
         'timestamps': True
     }
+
+    def to_json(self):
+        return {
+            "id":str(self.id),
+            'course':str(self.course.id),
+            'year': str(self.year.id) if self.year else None,
+            'subject':str(self.subject.id),
+            'layer1':str(self.layer1.id) if self.layer1 else None,
+            'layer2':str(self.layer2.id) if self.layer2 else None,
+            'layer3':str(self.layer3.id) if self.layer3 else None,
+            'user':str(self.user.id) if self.user.id else None,
+            'attempts_data':[q.to_dict() for q in self.attempts_data],
+            'page_type':self.page_type,
+            "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
+            "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
+            "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
+            "subject_page": str(self.subject_page.id) if self.subject_page else None,
+        }
