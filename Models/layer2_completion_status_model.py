@@ -61,7 +61,7 @@ def get_l3_summary_mastery(layer):
             f"total_{layer}": 0,
             f"scored_{layer}": 0
         },
-        "critical": {
+        "critical_thinking": {
             f"total_{layer}": 0,
             f"scored_{layer}": 0
         },
@@ -69,7 +69,7 @@ def get_l3_summary_mastery(layer):
             f"total_{layer}": 0,
             f"scored_{layer}": 0
         },
-        "clinical": {
+        "clinical_application": {
             f"total_{layer}": 0,
             f"scored_{layer}": 0
         }
