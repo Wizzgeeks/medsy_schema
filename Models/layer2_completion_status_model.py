@@ -20,8 +20,8 @@ class Layer2_completion_status(Document):
     completed_page_count=IntField()
     total_layer3_count=IntField()
     completed_layer3_count=IntField()
-    mastery_l2 = ListField(DictField(), default=lambda: [get_default_mastery()])
-    l3_summary = ListField(DictField(), default=lambda: [get_l3_summary_mastery("l3")])
+    mastery_l2 = DictField(), default=lambda: [get_default_mastery()]
+    l3_summary = DictField(), default=lambda: [get_l3_summary_mastery("l3")]
 
 
     def to_json(self):
