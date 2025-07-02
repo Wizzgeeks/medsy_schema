@@ -22,7 +22,7 @@ def get_default_mastery():
             "total": 0,
             "scored": 0
         },
-        "clinical_application": {
+        "application": {
             "total": 0,
             "scored": 0
         }
@@ -40,7 +40,7 @@ class Layer3_completion_status(Document):
     total_page=IntField()
     completed_page=IntField()
     time_taken_page=IntField()
-    mastery_l3 = ListField(DictField(), default=[get_default_mastery])
+    mastery_l3 =DictField(default=lambda: get_default_mastery())
 
 
     def to_json(self):
