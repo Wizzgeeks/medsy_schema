@@ -10,18 +10,21 @@ from Models.layer3_page_model import Layer3_page
 from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.prompt_content_model import Prompt_content
+from uuid import uuid4
 
 class Series(EmbeddedDocument):
-    question=StringField(required=True)
+    id = StringField(default=lambda: str(uuid4()), required=True, unique=True)
+    question = StringField(required=True)
     options = DictField(required=True)
-    question_type = StringField()
-    category = StringField()
+    question_type = StringField(choices=["mcq","textbasedevaluation"],required=True)
+    category = StringField(choices=["direct", "critical_thinking", "reasoning", "application"],required=True)
     answer = StringField(required=True)
     explanation = StringField(required=True)
     meta_tags = DictField()
-    
+
     def to_dict(self):
         return {
+            "id":str(self.id) if self.id else None,
             "question": self.question,
             "options": self.options,
             "question_type": self.question_type,
@@ -57,7 +60,6 @@ class TestSeries(Document):
             'layer2':str(self.layer2.id) if self.layer2 else None,
             'layer3':str(self.layer3.id) if self.layer3 else None,
             'series': [s.to_dict() for s in self.series],
-            # 'series': self.series,
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
@@ -79,6 +81,5 @@ class TestSeries(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             'series': [s.to_dict() for s in self.series],
-            # 'series': self.series,
             
         }
