@@ -15,11 +15,11 @@ from uuid import uuid4
 class MCQ(EmbeddedDocument):
     id = StringField(default=lambda: str(uuid4()), required=True)
     question = StringField(required=True)
-    options = DictField(required=True)
+    options = DictField()
     question_type = StringField(choices=["mcq","textbasedevaluation"],required=True)
     category = StringField(choices=["direct", "critical_thinking", "reasoning", "application"],required=True)
-    answer = StringField(required=True)
-    explanation = StringField(required=True)
+    answer = StringField()
+    explanation = StringField()
     meta_tags = DictField()
 
     def to_dict(self):
