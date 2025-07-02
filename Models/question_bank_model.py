@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField
+from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField,BooleanField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -47,6 +47,7 @@ class Question_bank(Document):
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     questions=ListField(EmbeddedDocumentField(MCQ))
+    active = BooleanField(default=False)
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 
@@ -64,7 +65,8 @@ class Question_bank(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            "prompt": self.prompt.to_json() if self.prompt else None
+            "prompt": self.prompt.to_json() if self.prompt else None,
+            "active": self.active if self.active else None
         }
     
     def to_user(self):
@@ -81,5 +83,6 @@ class Question_bank(Document):
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "questions": [q.to_dict() for q in self.questions],
+            "active": self.active if self.active else None
             
         }
