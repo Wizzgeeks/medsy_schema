@@ -13,7 +13,7 @@ from Models.prompt_content_model import Prompt_content
 from uuid import uuid4
 
 class Series(EmbeddedDocument):
-    id = StringField(default=lambda: str(uuid4()), required=True)
+    id = StringField(default=lambda: str(uuid4()), required=True,unique=True)
     question = StringField(required=True)
     options = DictField(required=True)
     question_type = StringField(choices=["mcq","textbasedevaluation"],required=True)
