@@ -1,4 +1,5 @@
-from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField,IntField
+from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField,IntField,DateTimeField
+import datetime
 from Models.course_model import Course
 from Models.year_model import Year
 from Models.user_model import User
@@ -39,10 +40,8 @@ class User_evaluation_result(Document):
     user=ReferenceField(User,reverse_delete_rule=2,required=True)
     attempted_data=ListField(EmbeddedDocumentField(User_result))
     page_type=StringField(choices=['mcq','test_series','exam'],required=True)
-    meta = {
-        'timestamps': True
-    }
-
+    created_at = DateTimeField(default=datetime.datetime.utcnow)
+    updated_at = DateTimeField(default=datetime.datetime.utcnow)
     def to_json(self):
         return {
             "id":str(self.id),
