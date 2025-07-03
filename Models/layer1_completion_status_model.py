@@ -21,7 +21,7 @@ class Layer1_completion_status(Document):
     completed_page_count=IntField()
     total_layer2_count=IntField()
     completed_layer2_count=IntField()
-    mastery_l1 = ListField(DictField(default=lambda:get_default_mastery()))
+    mastery_l1 = DictField(default=lambda:get_default_mastery())
     l2_summary=DictField(default=lambda: get_l3_summary_mastery("l2"))
     l3_summary=DictField(default=lambda:get_l3_summary_mastery("l3"))
 
