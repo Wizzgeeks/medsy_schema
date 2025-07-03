@@ -101,6 +101,5 @@ class Adaptive_learning_mcq(Document):
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
             "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
-            'updated_at':self.updated_at.strftime("%d %b %Y") if self.updated_at else None,
-            'created_at':self.created_at.strftime("%d %b %Y")
+
         }

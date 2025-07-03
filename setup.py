@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="medsy_schema",
-    version="4.0.3",
+    version="4.0.4",
     description="Schema for Flask Admin and User backends",
     author="wizzgeeks",
     author_email="",
