@@ -85,3 +85,22 @@ class Adaptive_learning_mcq(Document):
             "subject_page":str(self.subject_page.id) if self.subject_page else None,
             "mcq": [q.to_dict() for q in self.mcq],
         }
+        
+        
+    def to_active(self):
+        return {
+            "id": str(self.id),
+            'course': {"name":str(self.course.name),"key":str(self.course.key)} if self.course else None,
+            'user': str(self.user.username) if self.user else None,
+            'year': {"name":str(self.year.year),"key":str(self.year.key)} if self.year else None,
+            "subject": {"name":str(self.subject.name),"key":str(self.subject.key),"id":str(self.subject.id)} if self.subject else None,
+            "layer1":{"name":str(self.layer1.name) ,"key":str(self.layer1.key),"id":str(self.layer1.id) } if self.layer1 else None,
+            "layer2": {"name":str(self.layer2.name) ,"key":str(self.layer2.key),"id":str(self.layer2.id)} if self.layer2 else None,
+            "layer3": {"name":str(self.layer3.name) ,"key":str(self.layer3.key),"id":str(self.layer3.id)} if self.layer3 else None,
+            "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
+            "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
+            "layer3_page": str(self.layer3_page.id) if self.layer3_page else None,
+            "subject_page":str(self.subject_page.id) if self.subject_page else None,
+            'updated_at':self.updated_at.strftime("%d %b %Y") if self.updated_at else None,
+            'created_at':self.created_at.strftime("%d %b %Y")
+        }
