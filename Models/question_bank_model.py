@@ -48,7 +48,7 @@ class Question_bank(Document):
     subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
     questions=ListField(EmbeddedDocumentField(MCQ))
     active = BooleanField(default=False)
-    page_type = StringField(choices=['mcq','exam','test_series'],required=True)
+    page_type = StringField(choices=['mcq','exam','test_series'], null=True)
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
 
 
