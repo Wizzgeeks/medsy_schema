@@ -27,6 +27,7 @@ class PageContent(Document):
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
     deep_dive=BooleanField(default=False)
     summarize=BooleanField(default=False)
+    ignore=BooleanField(default=False)
 
     def to_json(self):
         return {
@@ -45,6 +46,7 @@ class PageContent(Document):
             "prompt": self.prompt.to_json() if self.prompt else None,
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
+            "ignore":self.ignore if self.ignore else False,
         }
     
     def to_user(self):
@@ -63,4 +65,6 @@ class PageContent(Document):
             "content": self.content,
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
+            "ignore":self.ignore if self.ignore else False,
+            
         }
