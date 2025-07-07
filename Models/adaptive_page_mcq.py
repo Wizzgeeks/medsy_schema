@@ -12,19 +12,22 @@ from Models.year_model import Year
 from Models.user_model import User
 from Models.prompt_content_model import Prompt_content
 from datetime import datetime,timezone
+from uuid import uuid4
 
 
 class MCQ(EmbeddedDocument):
+    id = StringField(default=lambda: str(uuid4()))
     question = StringField(required=True)
     options = DictField(required=True)
-    question_type = StringField()
-    category = StringField()
+    question_type = StringField(choices=["mcq","textbasedevaluation"],required=True)
+    category = StringField(choices=["direct", "critical_thinking", "reasoning", "application"],required=True)
     answer = StringField(required=True)
     explanation = StringField(required=True)
     meta_tags = DictField()
 
     def to_dict(self):
         return {
+            "id":self.id if self.id else None,
             "question": self.question,
             "options": self.options,
             "question_type": self.question_type,
