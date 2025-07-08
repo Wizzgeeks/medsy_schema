@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,BooleanField,ListField,IntField
+from mongoengine import Document, StringField,BooleanField,ListField,IntField,DateTimeField
 from datetime import datetime,timezone
 class User(Document):
     course =StringField()
@@ -18,6 +18,7 @@ class User(Document):
     refered_by=StringField()
     refered_users=ListField(default=[])
     coins = IntField(default=0)
+    created_at=DateTimeField(default=datetime.now(timezone.utc))
 
     def update(self, **kwargs):
         self.clean()
@@ -46,6 +47,7 @@ class User(Document):
             "refered_by":self.refered_by if self.refered_by else None,
             "refered_users":self.refered_users if self.refered_users else None,
             "coins":self.coins if self.coins else 0,
+            'created_at':str(self.created_at) if self.created_at else None,
         }
 
     def with_key(self):
@@ -66,7 +68,7 @@ class User(Document):
             "refered_by":self.refered_by if self.refered_by else None,
             "refered_users":self.refered_users if self.refered_users else None,
             "coins":self.coins if self.coins else 0,
-
+            'created_at':str(self.created_at) if self.created_at else None,
         }
     def remove_expired_tokens(self):
         current_time = datetime.now(timezone.utc)
