@@ -80,6 +80,13 @@ class Layer_2(Document):
             "key":self.key,
             "sequence":self.sequence if self.sequence else 0 if self.sequence else 0
         }
+        
+    def nav_json(self):
+        return {
+            "id": str(self.id),
+            "name":self.name,
+            "key":self.key,
+        }
     
     def update(self, **kwargs):
         self.clean()

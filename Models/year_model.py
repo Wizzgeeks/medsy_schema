@@ -68,6 +68,13 @@ class Year(Document):
             "key":self.key,
             "squence":self.sequence
         }
+    
+    def nav_json(self):
+        return {
+            "id":str(self.id),
+            "name":self.year,
+            "key":self.key,
+        }
         
     def update(self, **kwargs):
         self.clean()

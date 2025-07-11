@@ -74,6 +74,13 @@ class Layer_1(Document):
             "sequence":self.sequence if self.sequence else 0,
         }
     
+    def nav_json(self):
+        return {
+            "id": str(self.id),
+            "name":self.name,
+            "key":self.key,
+        }
+    
     def update(self, **kwargs):
         self.clean()
         return super().update(**kwargs)
