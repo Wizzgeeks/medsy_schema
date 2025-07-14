@@ -15,9 +15,7 @@ class Layer1_time_spent(Document):
     attempts =ListField(DictField())
     types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content','exam'],required=True)
     completed=BooleanField(default=False)
-    child=BooleanField(default=False)
-    parent=BooleanField(default=False)
-    
+    child=BooleanField(default=False) 
 
     
 
@@ -37,6 +35,5 @@ class Layer1_time_spent(Document):
             "attempts":self.attempts,
             "types":self.types,
             "completed":self.completed,
-            "child": self.child,
-            "parent": self.parent
+            "child": self.child
             }
