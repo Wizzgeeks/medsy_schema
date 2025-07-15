@@ -42,7 +42,7 @@ class Prompt(Document):
             "prompt_framework":self.prompt_framework,
             "name":self.name,
             "default":self.default,
-            'json_schema':self.json_schema,
+            'json_schema':self.json_schema if self.json_schema else None,
             'json_mode':self.json_mode if self.json_mode else False,
             'thinking_mode':self.thinking_mode if self.thinking_mode else False,
         }
