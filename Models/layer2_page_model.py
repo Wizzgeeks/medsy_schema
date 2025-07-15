@@ -17,7 +17,8 @@ class Layer2_page(Document):
     prompts = ListField(ReferenceField(Prompt_content,reverse_delete_rule=2,required=True))  
     optional = BooleanField(default=False)
     ignore = BooleanField(default=False)
-    min_page = IntField(default=0)    
+    min_page = IntField(default=0) 
+    parent = BooleanField(default=False)   
     
   
     def to_json(self):
@@ -33,7 +34,8 @@ class Layer2_page(Document):
             "prompts": [prompt.to_json() for prompt in self.prompts] if self.prompts else None,
             "optional": self.optional,
             "ignore": self.ignore,
-            "min_page": self.min_page if self.min_page else 0
+            "min_page": self.min_page if self.min_page else 0,
+            "parent": self.parent
         }
     
     def to_user(self):
@@ -48,7 +50,8 @@ class Layer2_page(Document):
             "child_pages": [child.to_user() for child in self.child_pages] if self.child_pages else [],
             "optional": self.optional,
             "ignore": self.ignore,
-            "min_page": self.min_page if self.min_page else 0
+            "min_page": self.min_page if self.min_page else 0,
+            "parent": self.parent
         }
     
     def to_admin(self):
@@ -64,5 +67,6 @@ class Layer2_page(Document):
             "prompts": [str(prompt.id) for prompt in self.prompts] if self.prompts else None,
             "optional": self.optional,
             "ignore": self.ignore,
-            "min_page": self.min_page if self.min_page else 0
+            "min_page": self.min_page if self.min_page else 0,
+            "parent": self.parent
         }
