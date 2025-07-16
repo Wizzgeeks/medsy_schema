@@ -1,9 +1,10 @@
-from mongoengine import Document,ReferenceField,StringField
+from mongoengine import Document,BooleanField,StringField
 from Models.prompt_model import Prompt
 
 class Dependent_components(Document):
     name=StringField()
     types=StringField(required=True,unique=True)
+    active=BooleanField(default=False)
 
     def update(self, **kwargs):
         self.clean()
@@ -13,6 +14,7 @@ class Dependent_components(Document):
         return {
             'id': str(self.id),
             "name":self.name,
-            "types":self.types
+            "types":self.types,
+            "active":self.active
         }
     
