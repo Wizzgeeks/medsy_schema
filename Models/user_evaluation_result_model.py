@@ -16,13 +16,16 @@ class User_result(EmbeddedDocument):
     q_id = StringField(required=True)
     score=IntField(required=True)
     user_answer=StringField(required=True)
-    
+    explanation=StringField()
+    correct_answer=StringField()
     
     def to_dict(self):
         return {
             "q_id": self.q_id,
             "score": self.score,
             "user_answer": self.user_answer,
+            "explanation": self.explanation if self.explanation else None,
+            "correct_answer": self.correct_answer if self.correct_answer else None
         }
 
 
