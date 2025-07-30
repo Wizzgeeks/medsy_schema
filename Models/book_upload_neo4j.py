@@ -26,7 +26,7 @@ class Book_upload(Document):
     
     
 
-def to_json_expand(self):
+def to_json(self):
     return {
         'id': str(self.id),
         'course': str(self.course.id) if self.course else None,
