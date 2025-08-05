@@ -1,6 +1,11 @@
-from mongoengine import Document, StringField,BooleanField,ListField,IntField,DateTimeField
+from mongoengine import Document, StringField,BooleanField,ListField,IntField,DateTimeField,ReferenceField,CASCADE
 from datetime import datetime,timezone
+from Models.institution_model import Institution
+from Models.university_model import University
+
 class User(Document):
+    university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
+    institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
     course =StringField()
     year = StringField()
     username = StringField(required=True)
@@ -32,6 +37,8 @@ class User(Document):
     def to_json(self):
         return {
             "id": str(self.id),
+            "university":str(self.university.id) if self.university else None,
+            "institution":str(self.institution.id) if self.institution else None,
             "course": (self.course) if self.course else None,
             "year": (self.year) if self.year else None,
             "username": self.username,
@@ -53,6 +60,8 @@ class User(Document):
     def with_key(self):
         return {
             "id": str(self.id),
+            "university":str(self.university.id) if self.university else None,
+            "institution":str(self.institution.id) if self.institution else None,
             "course": self.course if self.course else None,
             "year": self.year if self.year else None,
             "username": self.username,

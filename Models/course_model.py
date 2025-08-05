@@ -1,6 +1,10 @@
-from mongoengine import Document,StringField,BooleanField,ValidationError,IntField
+from mongoengine import Document,StringField,BooleanField,ValidationError,ReferenceField,CASCADE
+from Models.institution_model import Institution
+from Models.university_model import University
 
 class Course(Document):
+    university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
+    institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
     name = StringField(required=True,unique=True)
     duration = StringField(required=True)
     country = StringField(required=True)
@@ -11,6 +15,7 @@ class Course(Document):
     meta_content = StringField()
     has_prompt = BooleanField(required=True,default=False)
     key = StringField(required=True,unique=True)
+    
 
     def clean(self):
         if not self.duration.strip():
@@ -28,6 +33,8 @@ class Course(Document):
     def to_json(self):
         return {
             "id": str(self.id),
+            "university":str(self.university.id) if self.university else None,
+            "institution":str(self.institution.id) if self.institution else None,
             "name":self.name,
             "duration":self.duration,
             "country":self.country,
@@ -37,10 +44,12 @@ class Course(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
-        }
+            "key":self.key,
+            }
     def admin_json(self):
         return {
+            "university":str(self.university.id) if self.university else None,
+            "institution":str(self.institution.id) if self.institution else None,
             "name":self.name,
             "duration":self.duration,
             "country":self.country,
