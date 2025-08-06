@@ -2,7 +2,7 @@ from Models.job_detail import Job_detail
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.year_model import Year
-from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,ListField,DictField
 from datetime import datetime,timezone
 
 class Subject_page_creation_job(Document):

@@ -2,6 +2,9 @@ from mongoengine import Document, StringField,BooleanField,ListField,IntField,Da
 from datetime import datetime,timezone
 from Models.institution_model import Institution
 from Models.university_model import University
+# from Models.course_model import Course
+# from Models.year_model import Year
+
 
 class User(Document):
     university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
