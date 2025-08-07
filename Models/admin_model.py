@@ -33,10 +33,8 @@ class Admin(Document):
         }
     def remove_expired_tokens(self):
         current_time = datetime.now(timezone.utc)
-        valid_tokens = [token for token in self.authToken if 'exp' in token and token['exp'] > current_time]
-        self.update(set__authToken=valid_tokens if valid_tokens else "")
-        
-        
-        
-        
+        valid_tokens = [token for token in self.auth_token if 'exp' in token and token['exp'] > current_time]
+        self.update(set__auth_token=valid_tokens if valid_tokens else "")
+
+
         
