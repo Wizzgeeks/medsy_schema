@@ -1,17 +1,17 @@
-from mongoengine import Document,ReferenceField,StringField,IntField,ListField,BooleanField
+from mongoengine import Document,ReferenceField,StringField,IntField,ListField,BooleanField,CASCADE
 from Models.course_model import Course
 from Models.prompt_content_model import Prompt_content
 
 
 class Subject_page(Document):
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     name = StringField(required=True)
     types = StringField(choices=['content','mcq','test_series','exam','adaptive_learning','adaptive_learning_mcq','adaptive_learning_content',"related_videos","active_recall","active_recall_mcq","active_recall_content"],required=True)
     sequence = IntField(required=True)
     hierarcy_level = IntField(default=0)
     enable_days = IntField(default=0)
-    child_pages = ListField(ReferenceField("Subject_page", reverse_delete_rule=2, required=True))
-    prompts = ListField(ReferenceField(Prompt_content,reverse_delete_rule=2,required=True))  
+    child_pages = ListField(ReferenceField("Subject_page", reverse_delete_rule=CASCADE, required=True))
+    prompts = ListField(ReferenceField(Prompt_content,reverse_delete_rule=CASCADE,required=True))  
     optional=BooleanField(default=False)
     ignore=BooleanField(default=False)
     min_page=IntField(default=0)

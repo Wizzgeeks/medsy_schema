@@ -1,15 +1,15 @@
-from mongoengine import Document,StringField,ReferenceField,DateTimeField,IntField,BooleanField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,IntField,BooleanField,CASCADE
 from Models.course_model import Course
 from Models.actions import Action
 from datetime import datetime,timezone
 
 class Action_coins(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
     name = StringField()
     coins = IntField(default=0)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     active = BooleanField(default=True)
-    action = ReferenceField(Action,required=True,reverse_delete_rule=2)
+    action = ReferenceField(Action,required=True,reverse_delete_rule=CASCADE)
 
     def to_json(self):
         return {

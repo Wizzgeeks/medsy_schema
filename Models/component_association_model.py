@@ -1,16 +1,16 @@
-from mongoengine import Document,ReferenceField,ListField
+from mongoengine import Document,ReferenceField,ListField,CASCADE
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.year_model import Year
 from Models.component_model import Component
 
 class Component_association(Document):
-    course = ReferenceField(Course,required=True,unique=True,reverse_delete_rule=2)
-    # subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
-    # year = ReferenceField(Year,required=True,reverse_delete_rule=2)
-    layer1 = ListField(ReferenceField(Component,reverse_delete_rule=2))
-    layer2 = ListField(ReferenceField(Component,reverse_delete_rule=2))
-    layer3 = ListField(ReferenceField(Component,reverse_delete_rule=2))
+    course = ReferenceField(Course,required=True,unique=True,reverse_delete_rule=CASCADE)
+    # subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    # year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    layer1 = ListField(ReferenceField(Component,reverse_delete_rule=CASCADE))
+    layer2 = ListField(ReferenceField(Component,reverse_delete_rule=CASCADE))
+    layer3 = ListField(ReferenceField(Component,reverse_delete_rule=CASCADE))
 
         
     def to_json(self):

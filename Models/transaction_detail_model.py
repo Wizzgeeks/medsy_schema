@@ -1,11 +1,11 @@
-from mongoengine import ReferenceField,Document,StringField,DateTimeField,IntField
+from mongoengine import ReferenceField,Document,StringField,DateTimeField,IntField,CASCADE
 from Models.user_model import User
 from Models.user_subscription_model import User_subscription
 from datetime import datetime,timezone
 
 class Transaction_detail(Document):
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    user_subscription = ReferenceField(User_subscription,required=True,reverse_delete_rule=2)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    user_subscription = ReferenceField(User_subscription,required=True,reverse_delete_rule=CASCADE)
     transaction_time = DateTimeField(required=True,default=datetime.now(timezone.utc))
     order_id = StringField(required=True)
     payment_id = StringField(required=True)

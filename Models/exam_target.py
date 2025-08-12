@@ -1,6 +1,6 @@
 from Models.course_model import Course
 from Models.year_model import Year
-from mongoengine import Document, StringField, ReferenceField, GenericReferenceField, DateTimeField, ListField
+from mongoengine import Document, StringField, ReferenceField, GenericReferenceField, DateTimeField, ListField,CASCADE
 from datetime import datetime
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -12,17 +12,17 @@ from Models.layer3_page_model import Layer3_page
 from Models.subject_page_model import Subject_page
 
 class Exam_target(Document):
-    course = ReferenceField(Course, reverse_delete_rule=2, required=True)
-    year = ReferenceField(Year, reverse_delete_rule=2, required=True)
+    course = ReferenceField(Course, reverse_delete_rule=CASCADE, required=True)
+    year = ReferenceField(Year, reverse_delete_rule=CASCADE, required=True)
     layer = StringField(choices=['subject', 'layer1', 'layer2', 'layer3'], required=True)
-    subject=ReferenceField(Subject,reverse_delete_rule=2)
-    layer1=ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2=ReferenceField(Layer_2,reverse_delete_rule=2)
-    layer3=ReferenceField(Layer_3,reverse_delete_rule=2)
-    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2, null=True)
-    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
-    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
-    subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
+    subject=ReferenceField(Subject,reverse_delete_rule=CASCADE)
+    layer1=ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2=ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
+    layer3=ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
+    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=CASCADE, null=True)
+    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=CASCADE, null=True)
+    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=CASCADE, null=True)
+    subject_page=ReferenceField(Subject_page,reverse_delete_rule=CASCADE, null=True)
     target = ListField(GenericReferenceField(required=True), required=True)
     # page = GenericReferenceField(required=True)
     created_at = DateTimeField(default=datetime.now, required=True)

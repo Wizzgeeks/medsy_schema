@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,DictField,ListField
+from mongoengine import Document,StringField,ReferenceField,DictField,ListField,CASCADE
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -8,12 +8,12 @@ from Models.layer_3_model import Layer_3
 from Models.year_model import Year
 
 class Flashcard(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=2)
-    layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
-    layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2 = ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
+    layer3 = ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
     content = ListField(DictField(required=True))
 
 

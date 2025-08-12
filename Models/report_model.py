@@ -1,9 +1,9 @@
-from mongoengine import Document, ReferenceField, StringField
+from mongoengine import Document, ReferenceField, StringField,CASCADE
 from Models.user_model import User
 from datetime import datetime,timezone
 
 class Report(Document):
-    user = ReferenceField(User, required=True, reverse_delete_rule=2)
+    user = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
     created_at = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y'))
     problem = StringField(required=True)
     category = StringField(required=True)

@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField,ListField,DictField,StringField,BooleanField,IntField
+from mongoengine import Document, ReferenceField,ListField,DictField,StringField,BooleanField,IntField,CASCADE
 # from Models.course_model import Course
 # from Models.subject_model import Subject
 # from Models.layer_1_model import Layer_1
@@ -13,11 +13,11 @@ from Models.user_model import User
 
 
 class Mcq_result(Document):
-    user=ReferenceField(User,reverse_delete_rule=2,required=True)
-    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2, null=True)
-    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
-    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
-    subject_page=ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
+    user=ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
+    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=CASCADE, null=True)
+    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=CASCADE, null=True)
+    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=CASCADE, null=True)
+    subject_page=ReferenceField(Subject_page, reverse_delete_rule=CASCADE, null=True)
     attempt_data = ListField(DictField())
     score=IntField()
     total_questions=IntField()

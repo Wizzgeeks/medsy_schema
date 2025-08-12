@@ -1,9 +1,9 @@
-from mongoengine import Document, ReferenceField, StringField,ListField
+from mongoengine import Document, ReferenceField, StringField,ListField,CASCADE
 from Models.user_model import User
 from datetime import datetime,timezone
 
 class Active_study_time(Document):
-    user = ReferenceField(User, required=True, reverse_delete_rule=2)
+    user = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
     date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y'))
     study_time = ListField(required=True)
 

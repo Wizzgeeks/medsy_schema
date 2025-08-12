@@ -1,10 +1,10 @@
-from mongoengine import ReferenceField,Document,BooleanField
+from mongoengine import ReferenceField,Document,BooleanField,CASCADE
 from Models.flashcard_model import Flashcard
 from Models.user_model import User
 
 class Flashcard_queue(Document):
-    flashcard = ReferenceField(Flashcard,required=True,reverse_delete_rule=2)
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
+    flashcard = ReferenceField(Flashcard,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
     is_triggered = BooleanField(required=True)
 
 

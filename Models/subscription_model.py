@@ -1,16 +1,16 @@
-from mongoengine import Document,StringField,ReferenceField,ValidationError,ListField,FloatField,DictField
+from mongoengine import Document,StringField,ReferenceField,ValidationError,ListField,FloatField,DictField,CASCADE
 from Models.course_model import Course
 from Models.year_model import Year
 from Models.content_catogory_model import ContentCategory
 
 class Subscription(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    year = ListField(ReferenceField(Year,reverse_delete_rule=2,required=True))
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    year = ListField(ReferenceField(Year,reverse_delete_rule=CASCADE,required=True))
     term_in_months = StringField(required=True)
     price = FloatField(required=True)
     subscription_tier=StringField(required=True)
     coins_threshold = StringField(required=True)
-    categories=ListField(ReferenceField(ContentCategory,reverse_delete_rule=2,required=True))
+    categories=ListField(ReferenceField(ContentCategory,reverse_delete_rule=CASCADE,required=True))
     package_name=StringField(required=True)
     max_token=StringField(required=True)
 

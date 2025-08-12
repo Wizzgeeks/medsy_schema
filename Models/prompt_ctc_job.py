@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField
+from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,CASCADE
 from Models.admin_model import Admin
 from Models.course_model import Course
 from datetime import datetime,timezone
@@ -6,16 +6,16 @@ from Models.prompt_model import Prompt
 from Models.dependent_component import Dependent_components
 
 class Prompt_ctc_job(Document):
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     target=StringField(choices=['Subject_prompt_ctc_apply_job','Layer1_prompt_ctc_apply_job','Layer2_prompt_ctc_apply_job','Layer3_prompt_ctc_apply_job'],required=True)
     detail=StringField()
     completed_count=IntField()
     total_count=IntField()
     status=StringField()
-    ctc = ReferenceField(Dependent_components, reverse_delete_rule=2,required=True)
-    prompt = ReferenceField(Prompt, reverse_delete_rule=2,required=True)
+    ctc = ReferenceField(Dependent_components, reverse_delete_rule=CASCADE,required=True)
+    prompt = ReferenceField(Prompt, reverse_delete_rule=CASCADE,required=True)
     updated_at = DateTimeField(null=True)
 
     def to_json(self):
