@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,DateTimeField,ListField,DictField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,ListField,DictField,CASCADE
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -11,15 +11,15 @@ from Models.active_recall import Active_recall
 from Models.user_model import User
 
 class Active_recall_mcq_logs(Document):
-    active = ReferenceField(Active_recall,reverse_delete_rule=2)
-    active_mcq = ReferenceField(Active_recall_mcq,reverse_delete_rule=2)
-    user = ReferenceField(User, reverse_delete_rule=2, required=True)
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    year = ReferenceField(Year,reverse_delete_rule=2,required=True)
-    subject = ReferenceField(Subject,reverse_delete_rule=2)
-    layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
-    layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
+    active = ReferenceField(Active_recall,reverse_delete_rule=CASCADE)
+    active_mcq = ReferenceField(Active_recall_mcq,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User, reverse_delete_rule=CASCADE, required=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2 = ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
+    layer3 = ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
     layer = StringField(choices=['subject', 'layer1', 'layer2', 'layer3'], required=True)
     logs=ListField(DictField())
     conversation = ListField(default=[])

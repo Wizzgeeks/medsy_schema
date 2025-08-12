@@ -1,13 +1,13 @@
-from mongoengine import Document,ReferenceField,IntField
+from mongoengine import Document,ReferenceField,IntField,CASCADE
 from Models.user_model import User
 from Models.layer_2_model import Layer_2
 from Models.component_model import Component
 
 
 class Layer2_component_time_spent(Document):
-    layer2 = ReferenceField(Layer_2,required=True,reverse_delete_rule=2)
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    component = ReferenceField(Component,required=True,reverse_delete_rule=2)
+    layer2 = ReferenceField(Layer_2,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    component = ReferenceField(Component,required=True,reverse_delete_rule=CASCADE)
     time_spent=IntField(required=True)
 
 

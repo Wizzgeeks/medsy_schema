@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField,ListField,DictField
+from mongoengine import Document,ReferenceField,BooleanField,CASCADE,IntField,ListField,DictField,CASCADE
 from Models.user_model import User
 from Models.layer_2_model import Layer_2
 from Models.layer_1_model import Layer_1
@@ -11,7 +11,7 @@ class Layer2_completion_status(Document):
     year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
     subject=ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
-    layer2 = ReferenceField(Layer_2,required=True,reverse_delete_rule=2)
+    layer2 = ReferenceField(Layer_2,required=True,reverse_delete_rule=CASCADE)
     user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)   
     completed=BooleanField(default=False)
     total_time_taken_pages=IntField()

@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,DateTimeField,DictField,ListField,IntField,BooleanField
+from mongoengine import Document,ReferenceField,DateTimeField,DictField,ListField,IntField,BooleanField,CASCADE
 from Models.course_model import Course
 from datetime import datetime,timezone
 from Models.layer_1_model import Layer_1
@@ -12,14 +12,14 @@ from Models.user_model import User
 
 
 class Ctc_completed(Document):
-    user= ReferenceField(User, reverse_delete_rule=2, required=True)
-    course = ReferenceField(Course, reverse_delete_rule=2, required=True)
-    year = ReferenceField(Year, reverse_delete_rule=2, required=True)
-    subject = ReferenceField(Subject, reverse_delete_rule=2)
-    layer1 = ReferenceField(Layer_1, reverse_delete_rule=2)
-    layer2 = ReferenceField(Layer_2, reverse_delete_rule=2)
-    layer3 = ReferenceField(Layer_3, reverse_delete_rule=2)
-    page = ReferenceField(PageContent, reverse_delete_rule=2, required=True)
+    user= ReferenceField(User, reverse_delete_rule=CASCADE, required=True)
+    course = ReferenceField(Course, reverse_delete_rule=CASCADE, required=True)
+    year = ReferenceField(Year, reverse_delete_rule=CASCADE, required=True)
+    subject = ReferenceField(Subject, reverse_delete_rule=CASCADE)
+    layer1 = ReferenceField(Layer_1, reverse_delete_rule=CASCADE)
+    layer2 = ReferenceField(Layer_2, reverse_delete_rule=CASCADE)
+    layer3 = ReferenceField(Layer_3, reverse_delete_rule=CASCADE)
+    page = ReferenceField(PageContent, reverse_delete_rule=CASCADE, required=True)
     total_ctc_count=IntField(default=0)
     completed_ctc_count=IntField(default=0)
     ctc_index = ListField(DictField())

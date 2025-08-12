@@ -1,8 +1,8 @@
-from mongoengine import Document,BooleanField,ReferenceField,DictField,ListField,StringField
+from mongoengine import Document,BooleanField,ReferenceField,DictField,ListField,StringField,CASCADE
 from Models.page_content_model import PageContent
 
 class Images(Document):
-    page = ReferenceField(PageContent,reverse_delete_rule=2)
+    page = ReferenceField(PageContent,reverse_delete_rule=CASCADE)
     images = ListField(DictField())
     query= StringField()
     active=BooleanField(default=True)

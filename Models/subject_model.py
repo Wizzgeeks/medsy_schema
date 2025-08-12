@@ -1,10 +1,10 @@
-from mongoengine import Document,StringField,ReferenceField,BooleanField,ValidationError,IntField
+from mongoengine import Document,StringField,ReferenceField,BooleanField,ValidationError,IntField,CASCADE
 from Models.course_model import Course
 from Models.year_model import Year
 
 class Subject(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
     name = StringField(required=True)
     meta_title = StringField()
     meta_image_url = StringField()

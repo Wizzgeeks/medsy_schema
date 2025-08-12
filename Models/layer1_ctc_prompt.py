@@ -4,15 +4,15 @@ from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
 from Models.year_model import Year
 from Models.dependent_component import Dependent_components
-from mongoengine import Document,ReferenceField
+from mongoengine import Document,ReferenceField,CASCADE
 
 class Layer1_ctc_prompt(Document):
-    prompt=ReferenceField(Prompt,reverse_delete_rule=2,required=True)
-    ctc = ReferenceField(Dependent_components,reverse_delete_rule=2,required=True)
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    year = ReferenceField(Year,reverse_delete_rule=2,required=True)
-    subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
-    layer1 = ReferenceField(Layer_1,reverse_delete_rule=2,required=True)
+    prompt=ReferenceField(Prompt,reverse_delete_rule=CASCADE,required=True)
+    ctc = ReferenceField(Dependent_components,reverse_delete_rule=CASCADE,required=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE,required=True)
 
     def to_json(self):
         return {

@@ -1,15 +1,15 @@
-from mongoengine import Document,ReferenceField,IntField,DictField,ListField,StringField,BooleanField
+from mongoengine import Document,ReferenceField,IntField,DictField,ListField,StringField,BooleanField,CASCADE
 from Models.user_model import User
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.year_model import Year
 from Models.subject_page_model import Subject_page
 class Subject_time_spent(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=2)
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    subject_page = ReferenceField(Subject_page,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    subject_page = ReferenceField(Subject_page,required=True,reverse_delete_rule=CASCADE)
     attempts =ListField(DictField())
     types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content','exam'],required=True)
     completed=BooleanField(default=False)

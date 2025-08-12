@@ -1,12 +1,12 @@
-from mongoengine import Document,ReferenceField,ListField
+from mongoengine import Document,ReferenceField,ListField,CASCADE
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.year_model import Year
 
 class Channels(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE)
     channels = ListField()
     
 

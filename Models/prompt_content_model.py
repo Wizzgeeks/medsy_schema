@@ -1,13 +1,13 @@
-from mongoengine import Document,ReferenceField,DictField,ListField,StringField,BooleanField
+from mongoengine import Document,ReferenceField,DictField,ListField,StringField,BooleanField,CASCADE
 from Models.course_model import Course
 from Models.model_model import Model
 
 class Prompt_content(Document):
     name = StringField(required=True)
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     system_content = StringField(required=True)
     framework = ListField(DictField())
-    model = ReferenceField(Model,reverse_delete_rule=2,required=True)
+    model = ReferenceField(Model,reverse_delete_rule=CASCADE,required=True)
     deep_dive = StringField()
     summarize = StringField()
     json_schema=StringField()

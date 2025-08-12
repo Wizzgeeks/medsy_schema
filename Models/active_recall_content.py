@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField,BooleanField,ListField,DateTimeField
+from mongoengine import Document, ReferenceField,BooleanField,ListField,DateTimeField,CASCADE
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -14,19 +14,19 @@ from Models.prompt_content_model import Prompt_content
 from datetime import datetime,timezone
 
 class Active_recall_content(Document):
-    course = ReferenceField(Course, reverse_delete_rule=2, required=True)
-    year = ReferenceField(Year, reverse_delete_rule=2, required=True)
-    user = ReferenceField(User, reverse_delete_rule=2, required=True)
-    subject = ReferenceField(Subject, reverse_delete_rule=2, required=True)
-    layer1 = ReferenceField(Layer_1, reverse_delete_rule=2)
-    layer2 = ReferenceField(Layer_2, reverse_delete_rule=2)
-    layer3 = ReferenceField(Layer_3, reverse_delete_rule=2)
-    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2, null=True)
-    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
-    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
-    subject_page= ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
+    course = ReferenceField(Course, reverse_delete_rule=CASCADE, required=True)
+    year = ReferenceField(Year, reverse_delete_rule=CASCADE, required=True)
+    user = ReferenceField(User, reverse_delete_rule=CASCADE, required=True)
+    subject = ReferenceField(Subject, reverse_delete_rule=CASCADE, required=True)
+    layer1 = ReferenceField(Layer_1, reverse_delete_rule=CASCADE)
+    layer2 = ReferenceField(Layer_2, reverse_delete_rule=CASCADE)
+    layer3 = ReferenceField(Layer_3, reverse_delete_rule=CASCADE)
+    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=CASCADE, null=True)
+    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=CASCADE, null=True)
+    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=CASCADE, null=True)
+    subject_page= ReferenceField(Subject_page, reverse_delete_rule=CASCADE, null=True)
     contents = ListField()
-    prompt = ReferenceField(Prompt_content, reverse_delete_rule=2, required=True)
+    prompt = ReferenceField(Prompt_content, reverse_delete_rule=CASCADE, required=True)
     deep_dive=BooleanField(default=False)
     summarize=BooleanField(default=False)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)

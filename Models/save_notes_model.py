@@ -1,12 +1,12 @@
 from datetime import datetime,timezone
-from mongoengine import Document, ReferenceField, StringField,DateTimeField,ValidationError,IntField
+from mongoengine import Document, ReferenceField, StringField,DateTimeField,ValidationError,IntField,CASCADE
 from Models.user_model import User
 from Models.lesson_note_model import Lesson_note
 from Models.page_content_model import PageContent
 
 class Saved_notes(Document):
-    user = ReferenceField(User,reverse_delete_rule=2)
-    page= ReferenceField(PageContent,required=True,reverse_delete_rule=2)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE)
+    page= ReferenceField(PageContent,required=True,reverse_delete_rule=CASCADE)
     type = StringField(choices=['RevisedLater','Important','Reference','Snapshot'],required=True)
     path_name=StringField()
     path_url=StringField()

@@ -1,9 +1,9 @@
-from mongoengine import Document, ReferenceField,StringField
+from mongoengine import Document, ReferenceField,StringField,CASCADE
 from Models.user_model import User
 from datetime import datetime,timezone
 
 class Active_user_details(Document):  
-    user = ReferenceField(User, required=True, reverse_delete_rule=2)
+    user = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
     date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y'))
 
     def to_json(self):
