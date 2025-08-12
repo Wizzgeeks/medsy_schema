@@ -7,7 +7,9 @@ class Institution(Document):
     established_year = IntField()
     type = StringField()
     address = DictField()
-    university_id = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
+    university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
+    key = StringField()
+
 
     def to_json(self):
         return {
@@ -17,5 +19,6 @@ class Institution(Document):
             'established_year': self.established_year,
             'type': self.type,
             'address': self.address if self.address else None,
-            'university_id': str(self.university_id.id) if self.university_id else None
+            'university_id': str(self.university.id) if self.university else None,
+            'key': self.key if self.key else None
         }
