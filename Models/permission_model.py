@@ -1,7 +1,5 @@
-from mongoengine import Document, ReferenceField, StringField, DictField, CASCADE
-from Models.admin_model import Admin
+from mongoengine import Document, StringField, DictField
 
 class AdminPermission(Document):
-    admin = ReferenceField(Admin, required=True, unique=True, reverse_delete_rule=CASCADE)
-    role = StringField(choices=["superadmin", "admin", "staff"], required=True)
+    role = StringField(required=True)
     module_permissions = DictField()

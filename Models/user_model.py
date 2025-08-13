@@ -8,7 +8,8 @@ from Models.university_model import University
 
 class User(Document):
     university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
-    institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
+    institutions = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
+    section = StringField()
     course =StringField()
     year = StringField()
     username = StringField(required=True)
@@ -41,7 +42,8 @@ class User(Document):
         return {
             "id": str(self.id),
             "university":str(self.university.id) if self.university else None,
-            "institution":str(self.institution.id) if self.institution else None,
+            "institutions":str(self.institutions.id) if self.institutions else None,
+            "section":self.section if self.section else None,
             "course": (self.course) if self.course else None,
             "year": (self.year) if self.year else None,
             "username": self.username,
@@ -64,7 +66,8 @@ class User(Document):
         return {
             "id": str(self.id),
             "university":str(self.university.id) if self.university else None,
-            "institution":str(self.institution.id) if self.institution else None,
+            "institutions":str(self.institutions.id) if self.institutions else None,
+            "section":str(self.section.id) if self.section else None,
             "course": self.course if self.course else None,
             "year": self.year if self.year else None,
             "username": self.username,

@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,EmailField,ReferenceField,CASCADE,ListField,DateTimeField
+from mongoengine import Document, StringField,EmailField,ReferenceField,IntField,ListField,DateTimeField
 
 from datetime import datetime,timezone
 from Models.institution_model import Institution
@@ -10,11 +10,18 @@ class Admin(Document):
     email=EmailField(required=True,unique=True)
     name = StringField(required=True)
     password=StringField(required=True)
+    qualification = StringField()
+    designation = StringField()
+    experience = StringField()
+    phone = IntField()
     role = StringField(choices=['admin','superadmin','staff'],required=True)
-    university = ListField(ReferenceField(University, reverse_delete_rule=CASCADE))
-    institution = ListField(ReferenceField(Institution, reverse_delete_rule=CASCADE))
-    course = ListField(ReferenceField(Course, reverse_delete_rule=CASCADE))
-    subject = ListField(ReferenceField(Subject, reverse_delete_rule=CASCADE))
+    permission_roles = ListField(StringField())
+    university = ListField(ReferenceField(University))
+    institution = ListField(ReferenceField(Institution))
+    course = ListField(ReferenceField(Course))
+    subject = ListField(ReferenceField(Subject))
+    section = ListField(StringField())
+    status = StringField()
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     auth_token=StringField()
 
@@ -24,10 +31,17 @@ class Admin(Document):
             'email': self.email,
             'name': self.name,
             'role': self.role,
+            'phone': self.phone,
+            'qualification': self.qualification,
+            'designation': self.designation,
+            'experience': self.experience,
+            'permission_roles': self.permission_roles,
             'university': [str(u.id) for u in self.university],
             'institution': [str(i.id) for i in self.institution],
             'course': [str(c.id) for c in self.course],
             'subject': [str(s.id) for s in self.subject],
+            'section': self.section,
+            'status': self.status,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'auth_token': self.auth_token
         }
