@@ -11,9 +11,8 @@ class Admin(Document):
     admin_id = StringField(required=True, unique=True)
     name = StringField(required=True)
     password=StringField(required=True)
-    qualification = StringField()
-    designation = StringField()
-    phone = IntField()
+    designation = StringField(required=True)
+    phone = StringField(required=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
     university = ListField(ReferenceField(University))
@@ -22,6 +21,7 @@ class Admin(Document):
     subject = ListField(ReferenceField(Subject))
     section = ListField(StringField())
     status = StringField()
+    active = StringField(choices=['active','inactive'],default='active')
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     auth_token=StringField()
 
@@ -33,7 +33,6 @@ class Admin(Document):
             'name': self.name,
             'role': self.role,
             'phone': self.phone,
-            'qualification': self.qualification,
             'designation': self.designation,
             'permission_roles': self.permission_roles,
             'university': [str(u.id) for u in self.university],
@@ -42,6 +41,7 @@ class Admin(Document):
             'subject': [str(s.id) for s in self.subject],
             'section': self.section,
             'status': self.status,
+            'active': self.active,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'auth_token': self.auth_token
         }
