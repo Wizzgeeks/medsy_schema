@@ -11,7 +11,7 @@ class Admin(Document):
     admin_id = StringField(required=True, unique=True)
     name = StringField(required=True)
     password=StringField(required=True)
-    designation = StringField(required=True)
+    designation = StringField()
     phone = StringField(required=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
