@@ -1,11 +1,11 @@
 from mongoengine import Document, StringField, DictField,BooleanField,DateTimeField
-import datetime
+from datetime import datetime,timezone
 
 class AdminPermission(Document):
     role = StringField(required=True)
     module_permissions = DictField()
     active = BooleanField(default=True)
-    created_at = DateTimeField(default=datetime.now(datetime.timezone.utc))
+    created_at = DateTimeField(default=datetime.now(timezone.utc))
 
 
     def to_json(self):
