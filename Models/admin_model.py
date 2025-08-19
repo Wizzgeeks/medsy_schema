@@ -8,11 +8,11 @@ from Models.subject_model import Subject
 
 class Admin(Document):
     email=EmailField(required=True,unique=True)
+    admin_id = StringField(required=True, unique=True)
     name = StringField(required=True)
     password=StringField(required=True)
     qualification = StringField()
     designation = StringField()
-    experience = StringField()
     phone = IntField()
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
@@ -28,13 +28,13 @@ class Admin(Document):
     def to_json(self):
         return {
             'id': str(self.id),
+            'admin_id': self.admin_id,
             'email': self.email,
             'name': self.name,
             'role': self.role,
             'phone': self.phone,
             'qualification': self.qualification,
             'designation': self.designation,
-            'experience': self.experience,
             'permission_roles': self.permission_roles,
             'university': [str(u.id) for u in self.university],
             'institution': [str(i.id) for i in self.institution],
