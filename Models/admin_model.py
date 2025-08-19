@@ -20,8 +20,8 @@ class Admin(Document):
     course = ListField(ReferenceField(Course))
     subject = ListField(ReferenceField(Subject))
     section = ListField(StringField())
-    status = StringField()
-    active = StringField(choices=['active','inactive'],default='active')
+    status = ListField(StringField())
+    active = StringField(choices=['Active','Inactive'],default='Active')
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     auth_token=StringField()
 
