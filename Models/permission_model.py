@@ -1,8 +1,8 @@
-import datetime
 from mongoengine import Document, StringField, DictField,BooleanField,DateTimeField
+import datetime
 
 class AdminPermission(Document):
-    role = StringField(required=True,unique=True)
+    role = StringField(required=True)
     module_permissions = DictField()
     active = BooleanField(default=True)
     created_at = DateTimeField(default=datetime.now(datetime.timezone.utc))
