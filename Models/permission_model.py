@@ -4,7 +4,7 @@ from mongoengine import Document, StringField, DictField,BooleanField,DateTimeFi
 class AdminPermission(Document):
     role = StringField(required=True,unique=True)
     module_permissions = DictField()
-    active = BooleanField(default=True) 
+    active = BooleanField(default=True)
     created_at = DateTimeField(default=datetime.now(datetime.timezone.utc))
 
 

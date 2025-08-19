@@ -9,6 +9,7 @@ from Models.university_model import University
 class User(Document):
     university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
     institutions = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
+    user_id = StringField(required=True, unique=True)
     section = StringField()
     course =StringField()
     year = StringField()
@@ -41,6 +42,7 @@ class User(Document):
     def to_json(self):
         return {
             "id": str(self.id),
+            "user_id": self.user_id if self.user_id else None,
             "university":str(self.university.id) if self.university else None,
             "institutions":str(self.institutions.id) if self.institutions else None,
             "section":self.section if self.section else None,
