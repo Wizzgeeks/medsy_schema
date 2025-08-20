@@ -2,14 +2,14 @@ from Models.prompt_job_model import Prompt_job
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.year_model import Year
-from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField
+from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField,CASCADE
 from datetime import datetime,timezone
 
 class Subject_prompt_apply_job(Document):
-    job_id=ReferenceField(Prompt_job,reverse_delete_rule=2,required=True)
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    year = ReferenceField(Year,reverse_delete_rule=2,required=True)
-    subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
+    job_id=ReferenceField(Prompt_job,reverse_delete_rule=CASCADE,required=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
     updated_at = DateTimeField(null=True)
     status=StringField()

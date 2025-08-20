@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,IntField,DictField,ListField,StringField,BooleanField
+from mongoengine import Document,ReferenceField,IntField,DictField,ListField,StringField,BooleanField,CASCADE
 from Models.user_model import User
 from Models.layer_1_model import Layer_1
 from Models.course_model import Course
@@ -9,13 +9,13 @@ from Models.layer_2_model import Layer_2
 from Models.layer2_page_model import Layer2_page
 
 class Layer2_time_spent(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=2)
-    layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2=ReferenceField(Layer_2,required=True,reverse_delete_rule=2)
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    layer2_page = ReferenceField(Layer2_page,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2=ReferenceField(Layer_2,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    layer2_page = ReferenceField(Layer2_page,required=True,reverse_delete_rule=CASCADE)
     attempts =ListField(DictField())
     types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content',"exam"],required=True)
     completed=BooleanField(default=False)

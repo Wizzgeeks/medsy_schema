@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField,IntField,DateTimeField
+from mongoengine import Document, ReferenceField, ListField, DictField, StringField, EmbeddedDocument, EmbeddedDocumentField,IntField,DateTimeField,CASCADE
 import datetime
 from Models.course_model import Course
 from Models.year_model import Year
@@ -30,17 +30,17 @@ class User_result(EmbeddedDocument):
 
 
 class User_evaluation_result(Document):
-    course=ReferenceField(Course,reverse_delete_rule=2,required=True)
-    year=ReferenceField(Year,reverse_delete_rule=2,required=True)
-    subject=ReferenceField(Subject,reverse_delete_rule=2)
-    layer1=ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2=ReferenceField(Layer_2,reverse_delete_rule=2)
-    layer3=ReferenceField(Layer_3,reverse_delete_rule=2)
-    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2, null=True)
-    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2, null=True)
-    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2, null=True)
-    subject_page=ReferenceField(Subject_page,reverse_delete_rule=2, null=True)
-    user=ReferenceField(User,reverse_delete_rule=2,required=True)
+    course=ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year=ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject=ReferenceField(Subject,reverse_delete_rule=CASCADE)
+    layer1=ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2=ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
+    layer3=ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
+    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=CASCADE, null=True)
+    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=CASCADE, null=True)
+    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=CASCADE, null=True)
+    subject_page=ReferenceField(Subject_page,reverse_delete_rule=CASCADE, null=True)
+    user=ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
     attempted_data=ListField(EmbeddedDocumentField(User_result))
     page_type=StringField(choices=['mcq','test_series','exam'],required=True)
     created_at = DateTimeField(default=datetime.datetime.utcnow)

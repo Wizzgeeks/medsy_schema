@@ -1,8 +1,8 @@
-from mongoengine import Document,StringField,ReferenceField,DateTimeField,BooleanField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,BooleanField,CASCADE
 from Models.admin_model import Admin
 from datetime import datetime,timezone
 class Blog(Document):
-    admin = ReferenceField(Admin,required=True,reverse_delete_rule=2)
+    admin = ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
     blog_image_url=StringField()
     blog_title=StringField()
     blog_description=StringField()

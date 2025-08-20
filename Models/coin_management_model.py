@@ -1,11 +1,11 @@
-from mongoengine import Document,ReferenceField,IntField,StringField
+from mongoengine import Document,ReferenceField,IntField,StringField,CASCADE
 from Models.course_model import Course
 from Models.user_model import User
 from datetime import datetime,timezone
 
 class Coin_management(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
     coins = IntField(required=True)
     action = StringField(required=True)
     date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y')) 

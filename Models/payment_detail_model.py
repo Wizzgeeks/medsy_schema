@@ -1,12 +1,12 @@
-from mongoengine import ReferenceField,Document,IntField
+from mongoengine import ReferenceField,Document,IntField,CASCADE
 from Models.user_model import User
 from Models.user_subscription_model import User_subscription
 from Models.transaction_detail_model import Transaction_detail
 
 class Payment_detail(Document):
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    user_subscription = ReferenceField(User_subscription,required=True,reverse_delete_rule=2)
-    transaction_detail = ReferenceField(Transaction_detail,required=True,reverse_delete_rule=2)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    user_subscription = ReferenceField(User_subscription,required=True,reverse_delete_rule=CASCADE)
+    transaction_detail = ReferenceField(Transaction_detail,required=True,reverse_delete_rule=CASCADE)
     net_amount = IntField(required=True)
     amount_with_tax = IntField(required=True)
 

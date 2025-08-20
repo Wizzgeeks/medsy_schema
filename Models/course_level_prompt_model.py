@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,DictField,StringField,BooleanField,DateTimeField
+from mongoengine import Document,ReferenceField,DictField,StringField,BooleanField,DateTimeField,CASCADE
 from Models.component_model import Component
 from Models.course_model import Course
 from Models.layer_1_model import Layer_1
@@ -10,14 +10,14 @@ from Models.year_model import Year
 from datetime import datetime,timezone 
 
 class Course_level_prompt(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    model = ReferenceField(Model,required=True,reverse_delete_rule=2)
-    # year = ReferenceField(Year,reverse_delete_rule=2)
-    # subject = ReferenceField(Subject,reverse_delete_rule=2)
-    # layer1 = ReferenceField(Layer_1,reverse_delete_rule=2)
-    # layer2 = ReferenceField(Layer_2,reverse_delete_rule=2)
-    # layer3 = ReferenceField(Layer_3,reverse_delete_rule=2)
-    component = ReferenceField(Component,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    model = ReferenceField(Model,required=True,reverse_delete_rule=CASCADE)
+    # year = ReferenceField(Year,reverse_delete_rule=CASCADE)
+    # subject = ReferenceField(Subject,reverse_delete_rule=CASCADE)
+    # layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    # layer2 = ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
+    # layer3 = ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
+    component = ReferenceField(Component,reverse_delete_rule=CASCADE)
     createdAt=DateTimeField(required=True,default=datetime.now(timezone.utc))
     prompt_framework = DictField(required=True)
     isCurrent=BooleanField(required=True,default=True)

@@ -1,9 +1,9 @@
-from mongoengine import Document, ReferenceField, StringField, DateTimeField
+from mongoengine import Document, ReferenceField, StringField, DateTimeField,CASCADE
 from datetime import datetime,timezone
 from Models.user_model import User
 
 class Self_note(Document):
-    user = ReferenceField(User, required=True, reverse_delete_rule=2)
+    user = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
     title = StringField(required=True)
     notes_content = StringField(required=True)
     date = DateTimeField(required=True, default=datetime.utcnow )

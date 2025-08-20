@@ -1,9 +1,9 @@
-from mongoengine import Document,StringField,ReferenceField,DateTimeField,IntField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,IntField,CASCADE
 from Models.user_model import User
 from datetime import datetime,timezone
 
 class Coins_spending(Document):
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
     used_for = StringField()
     coins = IntField()
     date = DateTimeField(default=datetime.now(timezone.utc))

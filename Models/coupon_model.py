@@ -1,9 +1,9 @@
-from mongoengine import Document,StringField,ReferenceField,ValidationError,DateTimeField,IntField
+from mongoengine import Document,StringField,ReferenceField,ValidationError,DateTimeField,IntField,CASCADE
 from Models.course_model import Course
 from datetime import datetime,timezone
 
 class Coupon(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
     name = StringField(required=True)
     discount_in_percentage = StringField()
     discount_in_flat = IntField()

@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,DateTimeField,DictField,ListField
+from mongoengine import Document,ReferenceField,DateTimeField,DictField,ListField,CASCADE
 from Models.course_model import Course
 from datetime import datetime,timezone
 from Models.layer_1_model import Layer_1
@@ -9,13 +9,13 @@ from Models.year_model import Year
 from Models.page_content_model import PageContent
 
 class Mastery_components(Document):
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    year = ReferenceField(Year,reverse_delete_rule=2,required=True)
-    page = ReferenceField(PageContent,reverse_delete_rule=2,required=True)
-    layer1 = ReferenceField(Layer_1, reverse_delete_rule=2)
-    layer2 = ReferenceField(Layer_2, reverse_delete_rule=2)
-    layer3 = ReferenceField(Layer_3, reverse_delete_rule=2)
-    subject = ReferenceField(Subject, reverse_delete_rule=2, null=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    page = ReferenceField(PageContent,reverse_delete_rule=CASCADE,required=True)
+    layer1 = ReferenceField(Layer_1, reverse_delete_rule=CASCADE)
+    layer2 = ReferenceField(Layer_2, reverse_delete_rule=CASCADE)
+    layer3 = ReferenceField(Layer_3, reverse_delete_rule=CASCADE)
+    subject = ReferenceField(Subject, reverse_delete_rule=CASCADE, null=True)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     ctc_count=DictField(default={"image":0,"video":0,"conversation":0,
                                  "fillups":0,"justify":0,"mcq":0,"trueorfalse":0,

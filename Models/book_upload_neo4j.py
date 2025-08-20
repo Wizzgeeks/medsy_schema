@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,ReferenceField,DateTimeField,BooleanField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,BooleanField,CASCADE
 from Models.admin_model import Admin
 from Models.course_model import Course
 from datetime import datetime,timezone
@@ -9,13 +9,13 @@ from Models.layer_3_model import Layer_3
 from Models.year_model import Year
 
 class Book_upload(Document):
-    course=ReferenceField(Course,reverse_delete_rule=2,required=True)
-    year=ReferenceField(Year,reverse_delete_rule=2,required=True)
-    subject=ReferenceField(Subject,reverse_delete_rule=2)
-    layer1=ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2=ReferenceField(Layer_2,reverse_delete_rule=2)
-    layer3=ReferenceField(Layer_3,reverse_delete_rule=2)
-    uploaded_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
+    course=ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year=ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject=ReferenceField(Subject,reverse_delete_rule=CASCADE)
+    layer1=ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2=ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
+    layer3=ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
+    uploaded_by=ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
     uploaded_at = DateTimeField(default=datetime.now(timezone.utc))
     layer=StringField(choices=['subject','layer1','layer2','layer3'],required=True)
     book_name =StringField(required=True)

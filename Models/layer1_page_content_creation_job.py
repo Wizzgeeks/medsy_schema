@@ -3,15 +3,15 @@ from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
 from Models.year_model import Year
-from mongoengine import Document,StringField,ReferenceField,DateTimeField,ListField,DictField
+from mongoengine import Document,StringField,ReferenceField,DateTimeField,ListField,DictField,CASCADE
 from datetime import datetime,timezone
 
 class Layer1_page_creation_job(Document):
-    job_id=ReferenceField(Job_detail,reverse_delete_rule=2,required=True)
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    year = ReferenceField(Year,reverse_delete_rule=2,required=True)
-    subject = ReferenceField(Subject,reverse_delete_rule=2,required=True)
-    layer1 = ReferenceField(Layer_1,reverse_delete_rule=2,required=True)
+    job_id=ReferenceField(Job_detail,reverse_delete_rule=CASCADE,required=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE,required=True)
     logs=ListField(DictField())
     conversation = ListField(default=[])
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)

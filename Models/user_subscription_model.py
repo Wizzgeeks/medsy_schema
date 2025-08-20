@@ -1,12 +1,12 @@
-from mongoengine import Document,IntField,ReferenceField,DateTimeField
+from mongoengine import Document,IntField,ReferenceField,DateTimeField,CASCADE
 from Models.coupon_model import Coupon
 from Models.subscription_model import Subscription
 from Models.user_model import User
 
 class User_subscription(Document):
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
-    subscription = ReferenceField(Subscription,required=True,reverse_delete_rule=2)
-    coupon = ReferenceField(Coupon,reverse_delete_rule=2)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    subscription = ReferenceField(Subscription,required=True,reverse_delete_rule=CASCADE)
+    coupon = ReferenceField(Coupon,reverse_delete_rule=CASCADE)
     coins_redeemed=IntField()
     expiry = DateTimeField(required=True)
 

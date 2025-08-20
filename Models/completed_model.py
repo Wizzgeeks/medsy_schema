@@ -1,4 +1,4 @@
-from mongoengine import Document,ReferenceField,BooleanField,ListField
+from mongoengine import Document,ReferenceField,BooleanField,ListField,CASCADE
 from Models.user_model import User
 from Models.course_model import Course
 from Models.year_model import Year
@@ -7,13 +7,13 @@ from Models.subject_model import Subject
 
 class Completed(Document):
     
-    course = ReferenceField(Course,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
     subject=ListField()
     layer1 = ListField()
     layer2 = ListField()
     layer3 = ListField()
-    user = ReferenceField(User,required=True,reverse_delete_rule=2)
+    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
     completed=BooleanField(default=False)
 
 

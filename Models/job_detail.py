@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField
+from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField,CASCADE
 from Models.admin_model import Admin
 from Models.course_model import Course
 from datetime import datetime,timezone
@@ -8,8 +8,8 @@ from Models.layer3_page_model import Layer3_page
 from Models.subject_page_model import Subject_page
 
 class Job_detail(Document):
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     target=StringField(choices=['Subject_page_creation_job','Layer1_page_creation_job','Layer2_page_creation_job','Layer3_page_creation_job'],required=True)
     detail=StringField()
@@ -17,10 +17,10 @@ class Job_detail(Document):
     total_count=IntField()
     status=StringField()
     jobtype = StringField(choices=['mcq','test_series','content','exam'],null=True)
-    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2)
-    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2)
-    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2)
-    subject_page= ReferenceField(Subject_page, reverse_delete_rule=2, null=True)
+    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=CASCADE)
+    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=CASCADE)
+    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=CASCADE)
+    subject_page= ReferenceField(Subject_page, reverse_delete_rule=CASCADE, null=True)
     updated_at = DateTimeField(null=True)
     
 

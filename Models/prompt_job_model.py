@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField
+from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeField,ListField,DictField,CASCADE
 from Models.admin_model import Admin
 from Models.course_model import Course
 from datetime import datetime,timezone
@@ -9,20 +9,20 @@ from Models.prompt_content_model import Prompt_content
 from Models.subject_page_model import Subject_page
 
 class Prompt_job(Document):
-    course = ReferenceField(Course,reverse_delete_rule=2,required=True)
-    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=2)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     target=StringField(choices=['Subject_prompt_apply_job','Layer1_prompt_apply_job','Layer2_prompt_apply_job','Layer3_prompt_apply_job'],required=True)
     detail=StringField()
     completed_count=IntField()
     total_count=IntField()
     status=StringField()
-    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=2)
-    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=2)
-    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=2)
-    subject_page = ReferenceField(Subject_page, reverse_delete_rule=2)
+    layer1_page = ReferenceField(Layer1_page, reverse_delete_rule=CASCADE)
+    layer2_page = ReferenceField(Layer2_page, reverse_delete_rule=CASCADE)
+    layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=CASCADE)
+    subject_page = ReferenceField(Subject_page, reverse_delete_rule=CASCADE)
     component = StringField(choices=['image','video','conversation','content','mcq','test_series'])
-    prompt = ReferenceField(Prompt_content, reverse_delete_rule=2,required=True)
+    prompt = ReferenceField(Prompt_content, reverse_delete_rule=CASCADE,required=True)
     updated_at = DateTimeField(null=True)
 
     def to_json(self):

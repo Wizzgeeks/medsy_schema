@@ -1,13 +1,13 @@
-from mongoengine import Document,ReferenceField,DictField,StringField,BooleanField
+from mongoengine import Document,ReferenceField,DictField,StringField,BooleanField,CASCADE
 from Models.course_model import Course
 from Models.model_model import Model
 from Models.year_model import Year
 
 
 class Prompt(Document):
-    course = ReferenceField(Course,reverse_delete_rule=2)
-    model = ReferenceField(Model,required=True,reverse_delete_rule=2)
-    year = ReferenceField(Year,reverse_delete_rule=2)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE)
+    model = ReferenceField(Model,required=True,reverse_delete_rule=CASCADE)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE)
     types=StringField(required=True)
     prompt_framework = DictField(required=True)
     name=StringField(default='CTC Prompt')

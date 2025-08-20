@@ -1,4 +1,4 @@
-from mongoengine  import Document,ReferenceField,ListField,DictField,GenericReferenceField,StringField,IntField
+from mongoengine  import Document,ReferenceField,ListField,DictField,GenericReferenceField,StringField,IntField,CASCADE
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -9,13 +9,13 @@ from Models.user_model import User
 
 
 class Exam_results(Document):
-    course=ReferenceField(Course,reverse_delete_rule=2,required=True)
-    user=ReferenceField(User,reverse_delete_rule=2,required=True)
-    year=ReferenceField(Year,reverse_delete_rule=2,required=True)
-    subject=ReferenceField(Subject,reverse_delete_rule=2)
-    layer1=ReferenceField(Layer_1,reverse_delete_rule=2)
-    layer2=ReferenceField(Layer_2,reverse_delete_rule=2)
-    layer3=ReferenceField(Layer_3,reverse_delete_rule=2)
+    course=ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    user=ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
+    year=ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject=ReferenceField(Subject,reverse_delete_rule=CASCADE)
+    layer1=ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
+    layer2=ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
+    layer3=ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
     page = GenericReferenceField(required=True)
     result=ListField(DictField())
     status = StringField()
