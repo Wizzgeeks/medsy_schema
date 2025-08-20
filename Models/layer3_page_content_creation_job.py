@@ -21,6 +21,9 @@ class Layer3_page_creation_job(Document):
     created_at=DateTimeField(default=datetime.now(timezone.utc),required=True)
     updated_at = DateTimeField(null=True)
     status=StringField()
+    neo4j_book = ListField(StringField())
+    book_s3_url = ListField(StringField())
+    
 
     def to_json(self):
         return {
@@ -36,7 +39,9 @@ class Layer3_page_creation_job(Document):
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':str(self.created_at)
+            'created_at':str(self.created_at),
+            'neo4j_book':self.neo4j_book if self.neo4j_book else [],
+            'book_s3_url':self.book_s3_url if self.book_s3_url else [],
             }
     
     def to_admin(self):
@@ -53,5 +58,7 @@ class Layer3_page_creation_job(Document):
             'logs':self.logs,
             'conversation':self.conversation if self.conversation else [],
             'updated_at':str(self.updated_at) if self.updated_at else None,
-            'created_at':str(self.created_at)
+            'created_at':str(self.created_at),
+            'neo4j_book':self.neo4j_book if self.neo4j_book else [],
+            'book_s3_url':self.book_s3_url if self.book_s3_url else [],
             }
