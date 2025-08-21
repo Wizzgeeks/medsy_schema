@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,EmailField,ReferenceField,IntField,ListField,DateTimeField
+from mongoengine import Document, StringField,EmailField,ReferenceField,IntField,ListField,DateTimeField,CASCADE
 
 from datetime import datetime,timezone
 from Models.institution_model import Institution
@@ -15,8 +15,8 @@ class Admin(Document):
     phone = StringField(required=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
-    university = ListField(ReferenceField(University))
-    institution = ListField(ReferenceField(Institution))
+    # university = ReferenceField(University,required=True,reverse_delete_rule=CASCADE)
+    # institution = ReferenceField(Institution,required=True,reverse_delete_rule=CASCADE)
     course = ListField(ReferenceField(Course))
     subject = ListField(ReferenceField(Subject))
     section = ListField(StringField())
@@ -35,8 +35,8 @@ class Admin(Document):
             'phone': self.phone,
             'designation': self.designation,
             'permission_roles': self.permission_roles,
-            'university': [str(u.id) for u in self.university],
-            'institution': [str(i.id) for i in self.institution],
+            # 'university': [str(u.id) for u in self.university],
+            # 'institution': [str(i.id) for i in self.institution],
             'course': [str(c.id) for c in self.course],
             'subject': [str(s.id) for s in self.subject],
             'section': self.section,
