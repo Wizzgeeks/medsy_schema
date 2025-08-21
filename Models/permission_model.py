@@ -2,7 +2,7 @@ from mongoengine import Document, StringField, DictField,BooleanField,DateTimeFi
 from datetime import datetime,timezone
 
 class AdminPermission(Document):
-    role = StringField(required=True)
+    role = StringField(required=True,unique=True)
     module_permissions = DictField()
     active = BooleanField(default=True)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
