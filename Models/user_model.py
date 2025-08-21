@@ -99,11 +99,16 @@ class User(Document):
     def admin_get(self):
         return {
             "id": str(self.id),
-            "course_id": self.course_id.name if self.course_id else None,
-            "year_id": self.year_id.year if self.year_id else None,
+            "course_id": str(self.course_id.id) if self.course_id else None,
+            "year_id": str(self.year_id.id) if self.year_id else None,
+            "course_name": self.course_id.name if self.course_id else None,
+            "year_name": self.year_id.year if self.year_id else None,
             "user_id": self.user_id if self.user_id else None,
             # "university": self.university if self.university else None,
             # "institutions": self.institutions if self.institutions else None,
+            "profile":self.profile if self.profile else None,
+            "course": (self.course) if self.course else None,
+            "year": (self.year) if self.year else None,
             "section": self.section if self.section else None,
             "username": self.username,
             'created_at':str(self.created_at) if self.created_at else None,
