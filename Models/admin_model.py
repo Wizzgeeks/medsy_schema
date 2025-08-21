@@ -15,8 +15,8 @@ class Admin(Document):
     phone = StringField(required=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
-    university = ReferenceField(University,required=True,reverse_delete_rule=CASCADE)
-    institution = ReferenceField(Institution,required=True,reverse_delete_rule=CASCADE)
+    # university = ReferenceField(University,required=True,reverse_delete_rule=CASCADE)
+    # institution = ReferenceField(Institution,required=True,reverse_delete_rule=CASCADE)
     course = ListField(ReferenceField(Course))
     subject = ListField(ReferenceField(Subject))
     section = ListField(StringField())
@@ -35,8 +35,8 @@ class Admin(Document):
             'phone': self.phone,
             'designation': self.designation,
             'permission_roles': self.permission_roles,
-            'university': str(self.university.id) if self.university else None,
-            'institution': str(self.institution.id) if self.institution else None,
+            # 'university': str(self.university.id) if self.university else None,
+            # 'institution': str(self.institution.id) if self.institution else None,
             'course': [str(c.id) for c in self.course],
             'subject': [str(s.id) for s in self.subject],
             'section': self.section,
