@@ -63,7 +63,7 @@ class Course(Document):
         }
     def simple_data(self):
         return {
-            "id": str(self.id),
+            # "id": str(self.id),
             "name":self.name,
             "country":self.country,
             "key":self.key
