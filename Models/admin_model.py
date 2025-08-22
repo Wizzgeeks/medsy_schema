@@ -48,6 +48,30 @@ class Admin(Document):
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'auth_token': self.auth_token
         }
+    
+
+    def with_json(self):
+        return {
+            'id': str(self.id),
+            'admin_id': self.admin_id,
+            'email': self.email,
+            'name': self.name,
+            'role': self.role,
+            'phone': self.phone,
+            'designation': self.designation,
+            'permission_roles': self.permission_roles,
+            'university': {"id": str(self.university.id), "name": self.university.name} if self.university else None,
+            'institution': {"id": str(self.institution.id), "name": self.institution.name} if self.institution else None,
+            'course': [{"id": str(c.id), "name": c.name} for c in self.course],
+            'year': [{"id": str(y.id), "name": y.year} for y in self.year],
+            'subject': [{"id": str(s.id), "name": s.name} for s in self.subject],
+            'section': self.section,
+            'status': self.status,
+            'active': self.active,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'auth_token': self.auth_token
+        }
+
     def remove_expired_tokens(self):
         current_time = datetime.now(timezone.utc)
         valid_tokens = [token for token in self.auth_token if 'exp' in token and token['exp'] > current_time]
