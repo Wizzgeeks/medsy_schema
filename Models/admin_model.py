@@ -4,6 +4,7 @@ from datetime import datetime,timezone
 from Models.institution_model import Institution
 from Models.university_model import University
 from Models.course_model import Course
+from Models.year_model import Year
 from Models.subject_model import Subject
 
 class Admin(Document):
@@ -15,9 +16,10 @@ class Admin(Document):
     phone = StringField(required=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
-    # university = ReferenceField(University,required=True,reverse_delete_rule=CASCADE)
-    # institution = ReferenceField(Institution,required=True,reverse_delete_rule=CASCADE)
+    university = ReferenceField(University,reverse_delete_rule=CASCADE)
+    institution = ReferenceField(Institution,reverse_delete_rule=CASCADE)
     course = ListField(ReferenceField(Course))
+    year = ListField(ReferenceField(Year))
     subject = ListField(ReferenceField(Subject))
     section = ListField(StringField())
     status = ListField(StringField())
@@ -35,9 +37,10 @@ class Admin(Document):
             'phone': self.phone,
             'designation': self.designation,
             'permission_roles': self.permission_roles,
-            # 'university': str(self.university.id) if self.university else None,
-            # 'institution': str(self.institution.id) if self.institution else None,
+            'university': str(self.university.id) if self.university else None,
+            'institution': str(self.institution.id) if self.institution else None,
             'course': [str(c.id) for c in self.course],
+            'year': [str(y.id) for y in self.year],
             'subject': [str(s.id) for s in self.subject],
             'section': self.section,
             'status': self.status,
