@@ -18,9 +18,9 @@ class Admin(Document):
     permission_roles = ListField(StringField())
     university = ReferenceField(University,reverse_delete_rule=CASCADE)
     institution = ReferenceField(Institution,reverse_delete_rule=CASCADE)
-    course = ListField(ReferenceField(Course))
-    year = ListField(ReferenceField(Year))
-    subject = ListField(ReferenceField(Subject))
+    course = ListField(StringField())
+    year = ListField(StringField())
+    subject = ListField(StringField())
     section = ListField(StringField())
     status = ListField(StringField())
     active = StringField(choices=['Active','Inactive'],default='Active')
@@ -39,9 +39,9 @@ class Admin(Document):
             'permission_roles': self.permission_roles,
             'university': str(self.university.id) if self.university else None,
             'institution': str(self.institution.id) if self.institution else None,
-            'course': [str(c.id) for c in self.course],
-            'year': [str(y.id) for y in self.year],
-            'subject': [str(s.id) for s in self.subject],
+            'course': self.course,
+            'year': self.year,
+            'subject': self.subject,
             'section': self.section,
             'status': self.status,
             'active': self.active,
@@ -62,9 +62,9 @@ class Admin(Document):
             'permission_roles': self.permission_roles,
             'university': {"id": str(self.university.id), "name": self.university.name} if self.university else None,
             'institution': {"id": str(self.institution.id), "name": self.institution.name} if self.institution else None,
-            'course': [{"id": str(c.id), "name": c.name,"key": c.key} for c in self.course],
-            'year': [{"id": str(y.id), "name": y.year,"key": y.key} for y in self.year],
-            'subject': [{"id": str(s.id), "name": s.name,"key": s.key} for s in self.subject],
+            'course': self.course,
+            'year': self.year,
+            'subject': self.subject,
             'section': self.section,
             'status': self.status,
             'active': self.active,
