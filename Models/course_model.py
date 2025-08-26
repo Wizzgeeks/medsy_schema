@@ -3,8 +3,8 @@ from Models.institution_model import Institution
 from Models.university_model import University
 
 class Course(Document):
-    university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
-    institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
+    # university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
+    # institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
     name = StringField(required=True,unique=True)
     duration = StringField(required=True)
     country = StringField(required=True)
@@ -33,8 +33,8 @@ class Course(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "university":str(self.university.id) if self.university else None,
-            "institution":str(self.institution.id) if self.institution else None,
+            # "university":str(self.university.id) if self.university else None,
+            # "institution":str(self.institution.id) if self.institution else None,
             "name":self.name,
             "duration":self.duration,
             "country":self.country,
@@ -48,8 +48,8 @@ class Course(Document):
             }
     def admin_json(self):
         return {
-            "university":str(self.university.id) if self.university else None,
-            "institution":str(self.institution.id) if self.institution else None,
+            # "university":str(self.university.id) if self.university else None,
+            # "institution":str(self.institution.id) if self.institution else None,
             "name":self.name,
             "duration":self.duration,
             "country":self.country,

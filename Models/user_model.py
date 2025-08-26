@@ -7,16 +7,16 @@ from Models.year_model import Year
 
 
 class User(Document):
-    university_id = ReferenceField(University, required=True, reverse_delete_rule=CASCADE)
-    institution_id = ReferenceField(Institution, required=True, reverse_delete_rule=CASCADE)
-    course_id = ReferenceField(Course, required=True, reverse_delete_rule=CASCADE)
-    year_id = ReferenceField(Year, required=True, reverse_delete_rule=CASCADE)
-    user_id = StringField(required=True, unique=True)
-    university = StringField(required=True)
-    institutions = StringField(required=True)
+    # university_id = ReferenceField(University, required=True, reverse_delete_rule=CASCADE)
+    # institution_id = ReferenceField(Institution, required=True, reverse_delete_rule=CASCADE)
+    # course_id = ReferenceField(Course, required=True, reverse_delete_rule=CASCADE)
+    # year_id = ReferenceField(Year, required=True, reverse_delete_rule=CASCADE)
+    # user_id = StringField(required=True, unique=True)
+    # university = StringField(required=True)
+    # institutions = StringField(required=True)
     course =StringField(required=True)
     year = StringField(required=True)
-    section = StringField(required=True)
+    # section = StringField(required=True)
     username = StringField(required=True)
     profile=StringField()
     role=StringField(choices=['student'],required=True)
@@ -41,14 +41,14 @@ class User(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "university_id": str(self.university_id.id) if self.university_id else None,
-            "institution_id": str(self.institution_id.id) if self.institution_id else None,
-            "course_id": str(self.course_id.id) if self.course_id else None,
-            "year_id": str(self.year_id.id) if self.year_id else None,
-            "user_id": self.user_id if self.user_id else None,
-            "university":self.university if self.university else None,
-            "institutions":self.institutions if self.institutions else None,
-            "section":self.section if self.section else None,
+            # "university_id": str(self.university_id.id) if self.university_id else None,
+            # "institution_id": str(self.institution_id.id) if self.institution_id else None,
+            # "course_id": str(self.course_id.id) if self.course_id else None,
+            # "year_id": str(self.year_id.id) if self.year_id else None,
+            # "user_id": self.user_id if self.user_id else None,
+            # "university":self.university if self.university else None,
+            # "institutions":self.institutions if self.institutions else None,
+            # "section":self.section if self.section else None,
             "course": (self.course) if self.course else None,
             "year": (self.year) if self.year else None,
             "username": self.username,
@@ -70,14 +70,14 @@ class User(Document):
     def with_key(self):
         return {
             "id": str(self.id),
-            "university_id": str(self.university_id.id) if self.university_id else None,
-            "institution_id": str(self.institution_id.id) if self.institution_id else None,
-            "course_id": str(self.course_id.id) if self.course_id else None,
-            "year_id": str(self.year_id.id) if self.year_id else None,
-            "user_id": self.user_id if self.user_id else None,
-            "university": self.university if self.university else None,
-            "institutions": self.institutions if self.institutions else None,
-            "section": self.section if self.section else None,
+            # "university_id": str(self.university_id.id) if self.university_id else None,
+            # "institution_id": str(self.institution_id.id) if self.institution_id else None,
+            # "course_id": str(self.course_id.id) if self.course_id else None,
+            # "year_id": str(self.year_id.id) if self.year_id else None,
+            # "user_id": self.user_id if self.user_id else None,
+            # "university": self.university if self.university else None,
+            # "institutions": self.institutions if self.institutions else None,
+            # "section": self.section if self.section else None,
             "course": (self.course) if self.course else None,
             "year": (self.year) if self.year else None,
             "username": self.username,
@@ -99,17 +99,17 @@ class User(Document):
     def admin_get(self):
         return {
             "id": str(self.id),
-            "course_id": str(self.course_id.id) if self.course_id else None,
-            "year_id": str(self.year_id.id) if self.year_id else None,
-            "course_name": self.course_id.name if self.course_id else None,
-            "year_name": self.year_id.year if self.year_id else None,
-            "user_id": self.user_id if self.user_id else None,
+            # "course_id": str(self.course_id.id) if self.course_id else None,
+            # "year_id": str(self.year_id.id) if self.year_id else None,
+            # "course_name": self.course_id.name if self.course_id else None,
+            # "year_name": self.year_id.year if self.year_id else None,
+            # "user_id": self.user_id if self.user_id else None,
             # "university": self.university if self.university else None,
             # "institutions": self.institutions if self.institutions else None,
             "profile":self.profile if self.profile else None,
             "course": (self.course) if self.course else None,
             "year": (self.year) if self.year else None,
-            "section": self.section if self.section else None,
+            # "section": self.section if self.section else None,
             "username": self.username,
             'created_at':str(self.created_at) if self.created_at else None,
         }

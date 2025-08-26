@@ -9,43 +9,43 @@ from Models.subject_model import Subject
 
 class Admin(Document):
     email=EmailField(required=True,unique=True)
-    admin_id = StringField(required=True, unique=True)
+    # admin_id = StringField(required=True, unique=True)
     name = StringField(required=True)
     password=StringField(required=True)
-    designation = StringField()
-    phone = StringField(required=True)
-    role = StringField(choices=['admin','superadmin','staff'],required=True)
-    permission_roles = ListField(StringField())
-    university = ReferenceField(University,reverse_delete_rule=CASCADE)
-    institution = ReferenceField(Institution,reverse_delete_rule=CASCADE)
-    course = ListField(StringField())
-    year = ListField(StringField())
-    subject = ListField(StringField())
-    section = ListField(StringField())
-    status = ListField(StringField())
-    active = StringField(choices=['Active','Inactive'],default='Active')
-    created_at = DateTimeField(default=datetime.now(timezone.utc))
+    # designation = StringField()
+    # phone = StringField(required=True)
+    # role = StringField(choices=['admin','superadmin','staff'],required=True)
+    # permission_roles = ListField(StringField())
+    # university = ReferenceField(University,reverse_delete_rule=CASCADE)
+    # institution = ReferenceField(Institution,reverse_delete_rule=CASCADE)
+    # course = ListField(StringField())
+    # year = ListField(StringField())
+    # subject = ListField(StringField())
+    # section = ListField(StringField())
+    # status = ListField(StringField())
+    # active = StringField(choices=['Active','Inactive'],default='Active')
+    # created_at = DateTimeField(default=datetime.now(timezone.utc))
     auth_token=StringField()
 
     def to_json(self):
         return {
             'id': str(self.id),
-            'admin_id': self.admin_id,
+            # 'admin_id': self.admin_id,
             'email': self.email,
             'name': self.name,
-            'role': self.role,
-            'phone': self.phone,
-            'designation': self.designation,
-            'permission_roles': self.permission_roles,
-            'university': str(self.university.id) if self.university else None,
-            'institution': str(self.institution.id) if self.institution else None,
-            'course': self.course,
-            'year': self.year,
-            'subject': self.subject,
-            'section': self.section,
-            'status': self.status,
-            'active': self.active,
-            'created_at': self.created_at.isoformat() if self.created_at else None,
+            # 'role': self.role,
+            # 'phone': self.phone,
+            # 'designation': self.designation,
+            # 'permission_roles': self.permission_roles,
+            # 'university': str(self.university.id) if self.university else None,
+            # 'institution': str(self.institution.id) if self.institution else None,
+            # 'course': self.course,
+            # 'year': self.year,
+            # 'subject': self.subject,
+            # 'section': self.section,
+            # 'status': self.status,
+            # 'active': self.active,
+            # 'created_at': self.created_at.isoformat() if self.created_at else None,
             'auth_token': self.auth_token
         }
     
@@ -53,22 +53,22 @@ class Admin(Document):
     def with_json(self):
         return {
             'id': str(self.id),
-            'admin_id': self.admin_id,
+            # 'admin_id': self.admin_id,
             'email': self.email,
             'name': self.name,
-            'role': self.role,
-            'phone': self.phone,
-            'designation': self.designation,
-            'permission_roles': self.permission_roles,
-            'university': {"id": str(self.university.id), "name": self.university.name} if self.university else None,
-            'institution': {"id": str(self.institution.id), "name": self.institution.name} if self.institution else None,
-            'course': self.course,
-            'year': self.year,
-            'subject': self.subject,
-            'section': self.section,
-            'status': self.status,
-            'active': self.active,
-            'created_at': self.created_at.isoformat() if self.created_at else None,
+            # 'role': self.role,
+            # 'phone': self.phone,
+            # 'designation': self.designation,
+            # 'permission_roles': self.permission_roles,
+            # 'university': {"id": str(self.university.id), "name": self.university.name} if self.university else None,
+            # 'institution': {"id": str(self.institution.id), "name": self.institution.name} if self.institution else None,
+            # 'course': self.course,
+            # 'year': self.year,
+            # 'subject': self.subject,
+            # 'section': self.section,
+            # 'status': self.status,
+            # 'active': self.active,
+            # 'created_at': self.created_at.isoformat() if self.created_at else None,
             'auth_token': self.auth_token
         }
 
