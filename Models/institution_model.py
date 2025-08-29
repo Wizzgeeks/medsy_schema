@@ -8,7 +8,7 @@ class Institution(Document):
     type = StringField()
     address = DictField()
     university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
-    key = StringField()
+    key = StringField(required=True, unique=True)
 
 
     def to_json(self):

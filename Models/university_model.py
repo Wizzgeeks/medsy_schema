@@ -6,7 +6,7 @@ class University(Document):
     established_year = IntField()
     type = StringField()
     address = DictField()
-    key = StringField()
+    key = StringField(required=True, unique=True)
 
     def to_json(self):
         return {
