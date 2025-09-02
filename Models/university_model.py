@@ -7,6 +7,7 @@ class University(Document):
     type = StringField()
     address = DictField()
     key = StringField(required=True, unique=True)
+    icon = StringField()
 
     def to_json(self):
         return {
@@ -16,4 +17,5 @@ class University(Document):
             'type': self.type,
             'address': self.address if self.address else None,
             'key': self.key if self.key else None,
+            'icon': self.icon if self.icon else None,
         }

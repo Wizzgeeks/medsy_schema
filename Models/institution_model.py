@@ -9,6 +9,7 @@ class Institution(Document):
     address = DictField()
     university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
     key = StringField(required=True, unique=True)
+    icon = StringField()
 
 
     def to_json(self):
@@ -20,5 +21,6 @@ class Institution(Document):
             'type': self.type,
             'address': self.address if self.address else None,
             'university_id': str(self.university.id) if self.university else None,
-            'key': self.key if self.key else None
+            'key': self.key if self.key else None,
+            'icon': self.icon if self.icon else None,
         }
