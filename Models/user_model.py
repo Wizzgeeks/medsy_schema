@@ -16,7 +16,7 @@ class User(Document):
     institutions = StringField(required=True)
     course =StringField(required=True)
     year = StringField(required=True)
-    section = StringField(required=True)
+    section = StringField()
     username = StringField(required=True)
     profile=StringField()
     role=StringField(choices=['student'],required=True)
