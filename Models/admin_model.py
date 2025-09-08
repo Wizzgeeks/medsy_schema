@@ -3,9 +3,9 @@ from mongoengine import Document, StringField,EmailField,ReferenceField,IntField
 from datetime import datetime,timezone
 from Models.institution_model import Institution
 from Models.university_model import University
-from Models.course_model import Course
-from Models.year_model import Year
-from Models.subject_model import Subject
+# from Models.course_model import Course
+# from Models.year_model import Year
+# from Models.subject_model import Subject
 
 class Admin(Document):
     email=EmailField(required=True,unique=True)
@@ -19,6 +19,7 @@ class Admin(Document):
     university = ReferenceField(University,reverse_delete_rule=CASCADE)
     institution = ReferenceField(Institution,reverse_delete_rule=CASCADE)
     course = ListField(StringField())
+    department = ListField(StringField())
     year = ListField(StringField())
     subject = ListField(StringField())
     section = ListField(StringField())
@@ -39,6 +40,7 @@ class Admin(Document):
             'permission_roles': self.permission_roles,
             'university': str(self.university.id) if self.university else None,
             'institution': str(self.institution.id) if self.institution else None,
+            'department': self.department,
             'course': self.course,
             'year': self.year,
             'subject': self.subject,
@@ -62,6 +64,7 @@ class Admin(Document):
             'permission_roles': self.permission_roles,
             'university': {"id": str(self.university.id), "name": self.university.name} if self.university else None,
             'institution': {"id": str(self.institution.id), "name": self.institution.name} if self.institution else None,
+            'department': self.department,
             'course': self.course,
             'year': self.year,
             'subject': self.subject,
