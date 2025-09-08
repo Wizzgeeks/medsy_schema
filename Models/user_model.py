@@ -14,7 +14,7 @@ class User(Document):
     user_id = StringField(required=True, unique=True)
     university = StringField(required=True)
     institutions = StringField(required=True)
-    department = StringField()
+    # department = StringField()
     course =StringField(required=True)
     year = StringField(required=True)
     section = StringField()
@@ -49,7 +49,7 @@ class User(Document):
             "user_id": self.user_id if self.user_id else None,
             "university":self.university if self.university else None,
             "institutions":self.institutions if self.institutions else None,
-            "department": self.department if self.department else None,
+            # "department": self.department if self.department else None,
             "section":self.section if self.section else None,
             "course": (self.course) if self.course else None,
             "year": (self.year) if self.year else None,
@@ -79,7 +79,7 @@ class User(Document):
             "user_id": self.user_id if self.user_id else None,
             "university": self.university if self.university else None,
             "institutions": self.institutions if self.institutions else None,
-            "department": self.department if self.department else None,
+            # "department": self.department if self.department else None,
             "section": self.section if self.section else None,
             "course": (self.course) if self.course else None,
             "year": (self.year) if self.year else None,
@@ -107,7 +107,7 @@ class User(Document):
             "course_name": self.course_id.name if self.course_id else None,
             "year_name": self.year_id.year if self.year_id else None,
             "user_id": self.user_id if self.user_id else None,
-            "department": self.department if self.department else None,
+            # "department": self.department if self.department else None,
             # "university": self.university if self.university else None,
             # "institutions": self.institutions if self.institutions else None,
             "profile":self.profile if self.profile else None,

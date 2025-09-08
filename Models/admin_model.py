@@ -13,13 +13,14 @@ class Admin(Document):
     name = StringField(required=True)
     password=StringField(required=True)
     designation = StringField()
+    country_code = StringField(required=True,default="+91")
     phone = StringField(required=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
     university = ReferenceField(University,reverse_delete_rule=CASCADE)
     institution = ReferenceField(Institution,reverse_delete_rule=CASCADE)
     course = ListField(StringField())
-    department = ListField(StringField())
+    # department = ListField(StringField())
     year = ListField(StringField())
     subject = ListField(StringField())
     section = ListField(StringField())
@@ -35,12 +36,13 @@ class Admin(Document):
             'email': self.email,
             'name': self.name,
             'role': self.role,
+            'country_code': self.country_code if self.country_code else "+91",
             'phone': self.phone,
             'designation': self.designation,
             'permission_roles': self.permission_roles,
             'university': str(self.university.id) if self.university else None,
             'institution': str(self.institution.id) if self.institution else None,
-            'department': self.department,
+            # 'department': self.department,
             'course': self.course,
             'year': self.year,
             'subject': self.subject,
@@ -59,12 +61,13 @@ class Admin(Document):
             'email': self.email,
             'name': self.name,
             'role': self.role,
+            'country_code': self.country_code if self.country_code else "+91",
             'phone': self.phone,
             'designation': self.designation,
             'permission_roles': self.permission_roles,
             'university': {"id": str(self.university.id), "name": self.university.name} if self.university else None,
             'institution': {"id": str(self.institution.id), "name": self.institution.name} if self.institution else None,
-            'department': self.department,
+            # 'department': self.department,
             'course': self.course,
             'year': self.year,
             'subject': self.subject,
