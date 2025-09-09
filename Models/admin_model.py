@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,EmailField,ReferenceField,IntField,ListField,DateTimeField,CASCADE
+from mongoengine import Document, StringField,EmailField,ReferenceField,BooleanField,ListField,DateTimeField,CASCADE
 
 from datetime import datetime,timezone
 from Models.institution_model import Institution
@@ -28,6 +28,7 @@ class Admin(Document):
     active = StringField(choices=['Active','Inactive'],default='Active')
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     auth_token=StringField()
+    new_staff = BooleanField(default=False)
 
     def to_json(self):
         return {
@@ -50,6 +51,7 @@ class Admin(Document):
             'status': self.status,
             'active': self.active,
             'created_at': self.created_at.isoformat() if self.created_at else None,
+            'new_staff': self.new_staff,
             'auth_token': self.auth_token
         }
     
@@ -75,6 +77,7 @@ class Admin(Document):
             'status': self.status,
             'active': self.active,
             'created_at': self.created_at.isoformat() if self.created_at else None,
+            'new_staff': self.new_staff,
             'auth_token': self.auth_token
         }
 
