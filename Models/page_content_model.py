@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField,BooleanField,ListField,CASCADE
+from mongoengine import Document, ReferenceField,BooleanField,ListField,CASCADE,DictField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -28,6 +28,11 @@ class PageContent(Document):
     deep_dive=BooleanField(default=False)
     summarize=BooleanField(default=False)
     ignore=BooleanField(default=False)
+    big6_matches = ListField(DictField())
+    systems = ListField(DictField())
+    mechanisms = ListField(DictField())
+    entities =  ListField(DictField())
+    extra_meta = DictField()
 
     def to_json(self):
         return {
