@@ -19,6 +19,8 @@ class Layer_3(Document):
     has_prompt = BooleanField(required=True,default=False)
     key = StringField(required=True,unique=True)
     competency_key = StringField()
+    context = StringField()
+    goal = StringField()
     sequence=IntField()
 
     def clean(self):
@@ -43,7 +45,9 @@ class Layer_3(Document):
             "has_prompt":self.has_prompt,
             "key":self.key,
             "competency_key":self.competency_key,
-            "sequence":self.sequence if self.sequence else 0 if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0 if self.sequence else 0,
+            "context":self.context if self.context else "",
+            "goal":self.goal if self.goal else ""
         }
     
     def with_key(self):
@@ -62,7 +66,9 @@ class Layer_3(Document):
             "has_prompt":self.has_prompt,
             "key":self.key,
             "competency_key":self.competency_key,
-            "sequence":self.sequence if self.sequence else 0 if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0 if self.sequence else 0,
+            "context":self.context if self.context else "",
+            "goal":self.goal if self.goal else ""
 
         }
     def  admin_json(self):
@@ -80,7 +86,9 @@ class Layer_3(Document):
             "has_prompt":self.has_prompt,
             "key":self.key,
             "competency_key":self.competency_key,
-            "sequence":self.sequence if self.sequence else 0 if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0 if self.sequence else 0,
+            "context":self.context if self.context else "",
+            "goal":self.goal if self.goal else ""
 
         }
     def accordian_json(self):

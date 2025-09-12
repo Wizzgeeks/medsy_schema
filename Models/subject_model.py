@@ -14,6 +14,8 @@ class Subject(Document):
     key = StringField(required=True,unique=True)
     has_3_layers = BooleanField()
     sequence=IntField()
+    context = StringField()
+    goal = StringField()
 
     def clean(self):
         if not self.name.strip():
@@ -34,7 +36,9 @@ class Subject(Document):
             "has_prompt":self.has_prompt,
             "has_3_layers":self.has_3_layers,
             "key":self.key,
-            "sequence":self.sequence if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0,
+            "context":self.context if self.context else "",
+            "goal":self.goal if self.goal else ""
         }
     
     def with_key(self):
@@ -50,7 +54,9 @@ class Subject(Document):
             "has_prompt":self.has_prompt,
             "has_3_layers":self.has_3_layers,
             "key":self.key,
-            "sequence":self.sequence if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0,
+            "context":self.context if self.context else "",
+            "goal":self.goal if self.goal else ""
         }
     def admin_json(self):
         return {
@@ -65,7 +71,9 @@ class Subject(Document):
             "has_prompt":self.has_prompt,
             "has_3_layers":self.has_3_layers,
             "key":self.key,
-            "sequence":self.sequence if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0,
+            "context":self.context if self.context else "",
+            "goal":self.goal if self.goal else ""
         }
     
     def accordian_json(self):
