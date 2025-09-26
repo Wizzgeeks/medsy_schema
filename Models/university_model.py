@@ -2,8 +2,11 @@ from mongoengine import Document, StringField, IntField,DictField
 
 
 class University(Document):
-    name = StringField(required=True, unique=True)
+    university_id = StringField(required=True, unique=True)
+    name = StringField(required=True)
     established_year = IntField()
+    country = StringField()
+    website_url = StringField()
     type = StringField()
     address = DictField()
     key = StringField(required=True, unique=True)
@@ -12,8 +15,11 @@ class University(Document):
     def to_json(self):
         return {
             'id': str(self.id),
+            'university_id': self.university_id,
             'name': self.name,
             'established_year': self.established_year,
+            'country': self.country,
+            'website_url': self.website_url,
             'type': self.type,
             'address': self.address if self.address else None,
             'key': self.key if self.key else None,
