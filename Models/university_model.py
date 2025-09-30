@@ -1,10 +1,9 @@
-from mongoengine import Document, StringField, IntField,DictField
+from mongoengine import Document, StringField,DictField
 
 
 class University(Document):
     university_id = StringField(required=True, unique=True)
     name = StringField(required=True)
-    established_year = IntField()
     country = StringField()
     website_url = StringField()
     type = StringField()
@@ -17,7 +16,6 @@ class University(Document):
             'id': str(self.id),
             'university_id': self.university_id,
             'name': self.name,
-            'established_year': self.established_year,
             'country': self.country,
             'website_url': self.website_url,
             'type': self.type,
