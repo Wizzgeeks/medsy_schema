@@ -13,7 +13,7 @@ class Institution(Document):
     cover_image = StringField()
     about_us = StringField()
     website_url = StringField()
-    phone_country = StringField(default="India")
+    phone_country = StringField(default="IND")
     country_code = StringField(default="+91")
     phone = StringField()
     email = StringField()
@@ -39,4 +39,5 @@ class Institution(Document):
             'country_code': self.country_code if self.country_code else None,
             'phone': self.phone if self.phone else None,
             'email': self.email if self.email else None,
+            
         }
