@@ -8,7 +8,7 @@ class Onboard_details(Document):
     university = ReferenceField(University, required=True, reverse_delete_rule=CASCADE)
     institution = ReferenceField(Institution, required=True, reverse_delete_rule=CASCADE)
     domain = StringField()
-    phone_country = StringField(required=True, default="India")
+    phone_country = StringField(required=True, default="IND")
     country_code = StringField(required=True, default="+91")
     phone = StringField(required=True)
     email = StringField(required=True)
