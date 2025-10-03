@@ -13,6 +13,7 @@ class Admin(Document):
     name = StringField(required=True)
     password=StringField(required=True)
     designation = StringField()
+    phone_country = StringField(required=True,default="IND")
     country_code = StringField(required=True,default="+91")
     phone_country = StringField(required=True,default="IND")
     phone = StringField(required=True)
