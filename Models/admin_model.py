@@ -15,6 +15,7 @@ class Admin(Document):
     designation = StringField()
     phone_country = StringField(required=True,default="IND")
     country_code = StringField(required=True,default="+91")
+    phone_country = StringField(required=True,default="IND")
     phone = StringField(required=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
@@ -66,6 +67,7 @@ class Admin(Document):
             'name': self.name,
             'role': self.role,
             'country_code': self.country_code if self.country_code else "+91",
+            'phone_country': self.phone_country if self.phone_country else "IND",
             'phone': self.phone,
             'designation': self.designation,
             'permission_roles': self.permission_roles,
