@@ -9,3 +9,16 @@ class Admin_Onboard(Document):
     phone = StringField(required=True, unique=True)
     active = StringField(default=True)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
+
+
+    def to_json(self):
+        return {
+            'id': str(self.id),
+            'name': self.name,
+            'phone_country': self.phone_country if self.phone_country else None,
+            'country_code': self.country_code if self.country_code else None,
+            'phone': self.phone if self.phone else None,
+            'active': self.active if self.active else None,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+        }
+
