@@ -3,6 +3,7 @@ from mongoengine import  Document, StringField, IntField,DateTimeField
 
 
 class Admin_Otp(Document):
+    country_code = StringField(default="+91")
     phone = StringField(required=True, unique=True)
     otp = IntField()
     exp=DateTimeField()
