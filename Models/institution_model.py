@@ -17,10 +17,12 @@ class Institution(Document):
     country_code = StringField(default="+91")
     phone = StringField()
     email = StringField()
+    username1 = StringField()
     phone_country1 = StringField(default="IND")
     country_code1 = StringField(default="+91")
     phone1 = StringField()
     email1 = StringField()
+    username2 = StringField()
     phone_country2 = StringField(default="IND")
     country_code2 = StringField(default="+91")
     phone2 = StringField()
@@ -49,10 +51,12 @@ class Institution(Document):
             'country_code': self.country_code if self.country_code else None,
             'phone': self.phone if self.phone else None,
             'email': self.email if self.email else None,
+            'username1': self.username1 if self.username1 else None,
             'phone_country1': self.phone_country1 if self.phone_country1 else None,
             'country_code1': self.country_code1 if self.country_code1 else None,
             'phone1': self.phone1 if self.phone1 else None,
             'email1': self.email1 if self.email1 else None,
+            'username2': self.username2 if self.username2 else None,
             'phone_country2': self.phone_country2 if self.phone_country2 else None,
             'country_code2': self.country_code2 if self.country_code2 else None,
             'phone2': self.phone2 if self.phone2 else None, 
