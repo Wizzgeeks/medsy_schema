@@ -15,6 +15,7 @@ class Course(Document):
     meta_content = StringField()
     has_prompt = BooleanField(required=True,default=False)
     key = StringField(required=True,unique=True)
+    onboarded = BooleanField(default=False)
     
 
     def clean(self):
@@ -45,6 +46,7 @@ class Course(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
+            "onboarded":self.onboarded if self.onboarded else False
             }
     def admin_json(self):
         return {
@@ -59,7 +61,9 @@ class Course(Document):
             "meta_description":self.meta_description,
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
-            "key":self.key
+            "key":self.key,
+            "onboarded":self.onboarded if self.onboarded else False
+            
         }
     def simple_data(self):
         return {

@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,BooleanField,ValidationError,ReferenceField,IntField,CASCADE
+from mongoengine import Document,StringField,BooleanField,ValidationError,ReferenceField,IntField,CASCADE,DateTimeField
 from Models.course_model import Course
 
 class Year(Document):
@@ -12,6 +12,11 @@ class Year(Document):
     has_prompt = BooleanField(required=True,default=False)
     key = StringField(required=True,unique=True)
     sequence=IntField()
+    onboarded = BooleanField(default=False)
+    phase = StringField(choices=['Demo/Trial','Pilot','Paid Plan',''],default='',returned=True)
+    start_date = DateTimeField()
+    end_date = DateTimeField()
+    status = StringField(choices=['Activated','Deactivated'],default='Deactivated',returned=True)
 
     def clean(self):
         if not self.year.strip():
@@ -32,7 +37,12 @@ class Year(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0,
+            "onboarded":self.onboarded if self.onboarded else False,
+            "phase":self.phase if self.phase else None,
+            "start_date":self.start_date.isoformat('%d/%m/%Y') if self.start_date else None,
+            "end_date":self.end_date.isoformat('%d/%m/%Y') if self.end_date else None,
+            "status":self.status if self.status else None
         }
     
     def with_key(self):
@@ -47,7 +57,12 @@ class Year(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0,
+            "onboarded":self.onboarded if self.onboarded else False,
+            "phase":self.phase if self.phase else None,
+            "start_date":self.start_date.isoformat('%d/%m/%Y') if self.start_date else None,
+            "end_date":self.end_date.isoformat('%d/%m/%Y') if self.end_date else None,
+            "status":self.status if self.status else None
         }
     def admin_json(self):
         return {
@@ -61,7 +76,12 @@ class Year(Document):
             "meta_content":self.meta_content,
             "has_prompt":self.has_prompt,
             "key":self.key,
-            "sequence":self.sequence if self.sequence else 0
+            "sequence":self.sequence if self.sequence else 0,
+            "onboarded":self.onboarded if self.onboarded else False,
+            "phase":self.phase if self.phase else None,
+            "start_date":self.start_date.isoformat('%d/%m/%Y') if self.start_date else None,
+            "end_date":self.end_date.isoformat('%d/%m/%Y') if self.end_date else None,
+            "status":self.status if self.status else None
         }
     def accordian_json(self):
         return {
