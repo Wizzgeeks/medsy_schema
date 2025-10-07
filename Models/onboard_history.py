@@ -24,10 +24,10 @@ class OnboardHistory(Document):
             "year":str(self.year.id) if self.year else None,
             "remarks":self.remarks if self.remarks else None,
             "phase":self.phase if self.phase else None,
-            "start_date":self.start_date.isoformat('%d/%m/%Y') if self.start_date else None,
-            "end_date":self.end_date.isoformat('%d/%m/%Y') if self.end_date else None,
+            "start_date":self.start_date.strftime('%d/%m/%Y') if self.start_date else None,
+            "end_date":self.end_date.strftime('%d/%m/%Y') if self.end_date else None,
             "status":self.status if self.status else None,
-            "created_at":self.created_at.isoformat('%d/%m/%Y') if self.created_at else None
+            "created_at":self.created_at.strftime('%d/%m/%Y') if self.created_at else None
         }
     
 

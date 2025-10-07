@@ -44,7 +44,7 @@ class Institution(Document):
             'cover_image': self.cover_image if self.cover_image else None,
             'about_us': self.about_us if self.about_us else None,
             'website_url': self.website_url,
-            'created_at': self.created_at.isoformat('%d/%m/%Y') if self.created_at else None,
+            'created_at': self.created_at.strftime('%d/%m/%Y') if self.created_at else None,
             'phone_country': self.phone_country if self.phone_country else None,
             'country_code': self.country_code if self.country_code else None,
             'phone': self.phone if self.phone else None,
@@ -58,6 +58,6 @@ class Institution(Document):
             'phone2': self.phone2 if self.phone2 else None, 
             'email2': self.email2 if self.email2 else None,
             'onboarded': self.onboarded if self.onboarded else False,
-            'onboarded_at': self.onboarded_at.isoformat('%d/%m/%Y') if self.onboarded_at else None,
+            'onboarded_at': self.onboarded_at.strftime('%d/%m/%Y') if self.onboarded_at else None,
 
         }
