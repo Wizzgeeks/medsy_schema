@@ -20,8 +20,8 @@ class OnboardHistory(Document):
         return {
             "id":str(self.id),
             "institution":str(self.institution.id) if self.institution else None,
-            "course":str(self.course.id) if self.course else None,
-            "year":str(self.year.id) if self.year else None,
+            "course":{"id":str(self.course.id),"name":self.course.name} if self.course else None,
+            "year":{"id":str(self.year.id),"name":self.year.name} if self.year else None,
             "remarks":self.remarks if self.remarks else None,
             "phase":self.phase if self.phase else None,
             "start_date":self.start_date.strftime('%d/%m/%Y') if self.start_date else None,
