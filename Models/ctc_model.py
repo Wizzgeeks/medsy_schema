@@ -20,7 +20,7 @@ class Ctc(Document):
     page = ReferenceField(PageContent, reverse_delete_rule=CASCADE, required=True)
     ctc_index = IntField()
     ctc = DictField(required=True)
-    created_at = DateTimeField(datetime.now(timezone.utc))
+    created_at = DateTimeField(default=datetime.now(timezone.utc))
 
     def to_json(self):
         return {
