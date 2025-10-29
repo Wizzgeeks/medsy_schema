@@ -9,7 +9,7 @@ from Models.university_model import University
 
 class Admin(Document):
     email=EmailField(required=True,unique=True)
-    admin_id = StringField(required=True, unique=True)
+    admin_id = StringField(required=True)
     name = StringField(required=True)
     password=StringField(required=True)
     designation = StringField()

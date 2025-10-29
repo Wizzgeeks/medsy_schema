@@ -11,7 +11,7 @@ class User(Document):
     institution_id = ReferenceField(Institution, required=True, reverse_delete_rule=CASCADE)
     course_id = ReferenceField(Course, required=True, reverse_delete_rule=CASCADE)
     year_id = ReferenceField(Year, required=True, reverse_delete_rule=CASCADE)
-    user_id = StringField(required=True, unique=True)
+    user_id = StringField(required=True)
     university = StringField(required=True)
     institutions = StringField(required=True)
     # department = StringField()
