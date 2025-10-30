@@ -5,7 +5,7 @@ from Models.university_model import University
 class Course(Document):
     university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
     institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
-    name = StringField(required=True,unique=True)
+    name = StringField(required=True)
     duration = StringField(required=True)
     country = StringField(required=True)
     coin_value = StringField(required=True)
