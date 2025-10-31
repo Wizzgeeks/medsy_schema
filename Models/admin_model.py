@@ -15,7 +15,7 @@ class Admin(Document):
     designation = StringField()
     country_code = StringField(required=True,default="+91")
     phone_country = StringField(required=True,default="IND")
-    phone = StringField(required=True)
+    phone = StringField(required=True,unique=True)
     role = StringField(choices=['admin','superadmin','staff'],required=True)
     permission_roles = ListField(StringField())
     university = ReferenceField(University,reverse_delete_rule=CASCADE)
