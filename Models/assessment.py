@@ -11,7 +11,7 @@ class Assessment(Document):
     name = StringField(required=True)
     description = StringField()
     test_type = StringField(choices=["mcq", "qa", "hybrid"], required=True)
-    category = StringField(choices=["internal", "midterm", "final", "viva"], required=True)
+    category = StringField(choices=["internal", "midterm", "final", "viva",""])
     duration = IntField(required=True)
     start_time = DateTimeField(required=True)
     end_time = DateTimeField(required=True)
@@ -22,8 +22,7 @@ class Assessment(Document):
     section = StringField(required=True)
     created_by = ReferenceField(Admin, required=True)
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
-    mcq_questions = ListField(ReferenceField(ClassQuestionBank,reversedelete_rule=CASCADE))
-    qa_questions = ListField(ReferenceField(ClassQuestionBank,reversedelete_rule=CASCADE))
+    questions = ListField(ReferenceField(ClassQuestionBank,reversedelete_rule=CASCADE))
     active = BooleanField(default=True)
     published = BooleanField(default=False)
     prompts = ListField(ReferenceField(AssessmentPrompt,reversedelete_rule=CASCADE))
@@ -45,8 +44,7 @@ class Assessment(Document):
             "year": str(self.year.id) if self.year else None,
             "created_by": str(self.created_by.id) if self.created_by else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
-            "mcq_questions": [str(q.id) for q in self.mcq_questions],
-            "qa_questions": [str(q.id) for q in self.qa_questions],
+            "questions": [str(q.id) for q in self.questions],
             "published": self.published,
             "section": self.section,
             "active": self.active,
