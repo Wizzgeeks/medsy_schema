@@ -8,6 +8,12 @@ from Models.assessment_prompt import AssessmentPrompt
 
 
 class Assessment(Document):
+    course = ReferenceField(Course, required=True, reversedelete_rule=CASCADE)
+    year = ReferenceField(Year, required=True, reversedelete_rule=CASCADE)
+    created_by = ReferenceField(Admin, required=True, reversedelete_rule=CASCADE)
+    questions = ListField(ReferenceField(ClassQuestionBank,reversedelete_rule=CASCADE))
+    prompts = ListField(ReferenceField(AssessmentPrompt,reversedelete_rule=CASCADE))
+    section = StringField(required=True)
     name = StringField(required=True)
     description = StringField()
     test_type = StringField(choices=["mcq", "qa", "hybrid"], required=True)
@@ -17,15 +23,9 @@ class Assessment(Document):
     end_time = DateTimeField(required=True)
     total_marks = IntField()
     instructions = StringField()
-    course = ReferenceField(Course, required=True)
-    year = ReferenceField(Year, required=True)
-    section = StringField(required=True)
-    created_by = ReferenceField(Admin, required=True)
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
-    questions = ListField(ReferenceField(ClassQuestionBank,reversedelete_rule=CASCADE))
     active = BooleanField(default=True)
     published = BooleanField(default=False)
-    prompts = ListField(ReferenceField(AssessmentPrompt,reversedelete_rule=CASCADE))
     
 
     def to_json(self):

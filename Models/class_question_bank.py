@@ -7,6 +7,7 @@ class ClassQuestionBank(Document):
     options = DictField()
     explanation = StringField()
     category = StringField(choices=["direct", "critical_thinking", "reasoning", "application"])
+    image_url = StringField()
     cognitive_level = ListField(StringField())
     difficulty_level = StringField()
     skill_focus = ListField(StringField())
@@ -34,6 +35,7 @@ class ClassQuestionBank(Document):
             "explanation": self.explanation,
             "category": self.category,
             "cognitive_level": self.cognitive_level if self.cognitive_level else [],
+            "image_url": self.image_url if self.image_url else "",
             "difficulty_level": self.difficulty_level,
             "skill_focus": self.skill_focus if self.skill_focus else [],
             "function": self.function if self.function else [],
