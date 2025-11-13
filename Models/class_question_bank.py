@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,DictField,ListField,BooleanField
+from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField
 
 
 class ClassQuestionBank(Document):
@@ -25,6 +25,7 @@ class ClassQuestionBank(Document):
     answer = StringField()
     meta_tags = DictField()
     active = BooleanField(default=True)
+    mark = IntField(default=1)
 
     def to_json(self):
         return {
@@ -49,5 +50,6 @@ class ClassQuestionBank(Document):
             "competency": self.competency if self.competency else [],
             "answer": self.answer,
             "meta_tags": self.meta_tags if self.meta_tags else {},
-            "active": self.active
+            "active": self.active,
+            "mark": self.mark,
         }
