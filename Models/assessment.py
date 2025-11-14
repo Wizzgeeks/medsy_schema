@@ -1,4 +1,4 @@
-from mongoengine import ( Document, StringField, ReferenceField, ListField, DateTimeField, IntField, BooleanField ,CASCADE)
+from mongoengine import ( Document, StringField, ReferenceField, ListField, DateTimeField, IntField, BooleanField ,CASCADE, EmbeddedDocument, EmbeddedDocumentField)
 from datetime import datetime,timezone
 from Models.course_model import Course
 from Models.year_model import Year
@@ -7,11 +7,37 @@ from Models.class_question_bank import ClassQuestionBank
 from Models.assessment_prompt import AssessmentPrompt
 
 
+class AssessmentSubQuestion(EmbeddedDocument):
+    sub_question_id = ReferenceField(ClassQuestionBank,required=True,reversedelete_rule=CASCADE)
+    marks = IntField(default=0)
+
+    def to_json(self):
+        return {
+            "sub_question_id": self.sub_question_id.to_json() if self.sub_question_id else None,
+            "marks": self.marks,
+        }
+
+
+class AssessmentQuestion(EmbeddedDocument):
+    question_id = ReferenceField(ClassQuestionBank,required=True,reversedelete_rule=CASCADE)
+    marks = IntField(default=0)
+    sub_questions = ListField(EmbeddedDocumentField(AssessmentSubQuestion))
+
+    def to_json(self):
+        return {
+            "question_id": self.question_id.to_json() if self.question_id else None,
+            "marks": self.marks,
+            "sub_questions": [
+                sq.to_json()
+                for sq in self.sub_questions
+            ],
+        }
+
 class Assessment(Document):
     course = ReferenceField(Course, required=True, reversedelete_rule=CASCADE)
     year = ReferenceField(Year, required=True, reversedelete_rule=CASCADE)
     created_by = ReferenceField(Admin, required=True, reversedelete_rule=CASCADE)
-    questions = ListField(ReferenceField(ClassQuestionBank,reversedelete_rule=CASCADE))
+    questions = ListField(EmbeddedDocumentField(AssessmentQuestion))
     prompts = ListField(ReferenceField(AssessmentPrompt,reversedelete_rule=CASCADE))
     section = StringField(required=True)
     name = StringField(required=True)
@@ -44,7 +70,7 @@ class Assessment(Document):
             "year": str(self.year.id) if self.year else None,
             "created_by": str(self.created_by.id) if self.created_by else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
-            "questions": [str(q.id) for q in self.questions],
+            "questions": [q.to_json() for q in self.questions],
             "published": self.published,
             "section": self.section,
             "active": self.active,
