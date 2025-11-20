@@ -50,6 +50,10 @@ class Assessment(Document):
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     active = BooleanField(default=True)
     status = StringField()
+    subject = ListField(StringField())
+    topic = ListField(StringField())
+    section = ListField(StringField())
+    competency = ListField(StringField())
     published = BooleanField(default=False)
     
 
@@ -74,4 +78,8 @@ class Assessment(Document):
             "section": self.section,
             "active": self.active,
             "status": self.status,
+            "subject": self.subject if self.subject else [],
+            "topic": self.topic if self.topic else [],
+            "section": self.section if self.section else [],
+            "competency": self.competency if self.competency else [],
         }
