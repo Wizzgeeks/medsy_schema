@@ -4,7 +4,6 @@ from Models.course_model import Course
 from Models.year_model import Year
 from Models.admin_model import Admin
 from Models.class_question_bank import ClassQuestionBank
-from Models.assessment_prompt import AssessmentPrompt
 
 
 class AssessmentSubQuestion(EmbeddedDocument):
@@ -34,11 +33,10 @@ class AssessmentQuestion(EmbeddedDocument):
         }
 
 class Assessment(Document):
-    course = ReferenceField(Course, required=True, reversedelete_rule=CASCADE)
-    year = ReferenceField(Year, required=True, reversedelete_rule=CASCADE)
+    course = ReferenceField(Course, reversedelete_rule=CASCADE)
+    year = ReferenceField(Year, reversedelete_rule=CASCADE)
     created_by = ReferenceField(Admin, required=True, reversedelete_rule=CASCADE)
     questions = ListField(EmbeddedDocumentField(AssessmentQuestion))
-    prompts = ListField(ReferenceField(AssessmentPrompt,reversedelete_rule=CASCADE))
     section = StringField(required=True)
     name = StringField(required=True)
     description = StringField()
@@ -51,6 +49,7 @@ class Assessment(Document):
     instructions = StringField()
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     active = BooleanField(default=True)
+    status = StringField()
     published = BooleanField(default=False)
     
 
@@ -74,5 +73,5 @@ class Assessment(Document):
             "published": self.published,
             "section": self.section,
             "active": self.active,
-            "prompts": [str(p.id) for p in self.prompts],
+            "status": self.status,
         }
