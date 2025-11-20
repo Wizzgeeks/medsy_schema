@@ -35,6 +35,7 @@ class AssessmentQuestion(EmbeddedDocument):
 class Assessment(Document):
     course = ReferenceField(Course, reversedelete_rule=CASCADE)
     year = ReferenceField(Year, reversedelete_rule=CASCADE)
+    month_year = DateTimeField(required=True)
     created_by = ReferenceField(Admin, required=True, reversedelete_rule=CASCADE)
     questions = ListField(EmbeddedDocumentField(AssessmentQuestion))
     section = StringField()
@@ -62,6 +63,7 @@ class Assessment(Document):
             "id": str(self.id),
             "name": self.name,
             "description": self.description,
+            "month_year": self.month_year.isoformat() if self.month_year else None,
             "test_type": self.test_type,
             "category": self.category,
             "duration": self.duration,
