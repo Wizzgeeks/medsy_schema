@@ -42,7 +42,7 @@ class Assessment(Document):
     name = StringField(required=True)
     description = StringField()
     test_type = StringField(choices=["mcq", "qa", "hybrid"], required=True)
-    category = StringField(choices=["internal", "midterm", "final", "viva",""], required=True)
+    category = StringField(choices=["internal", "midterm", "final", "viva"], required=True)
     duration = IntField(required=True)
     start_time = DateTimeField(null=True)
     end_time = DateTimeField(null=True)
