@@ -102,3 +102,32 @@ class Assessment(Document):
             "competency": self.competency if self.competency else [],
             "draft": self.draft,            
         }
+        
+    def get_all(self):
+        return {
+            "id": str(self.id),
+            "name": self.name,
+            "description": self.description,
+            "month_year": self.month_year.isoformat() if self.month_year else None,
+            "test_type": self.test_type,
+            "category": self.category,
+            "duration": self.duration,
+            "start_time": self.start_time.isoformat() if self.start_time else None,
+            "end_time": self.end_time.isoformat() if self.end_time else None,
+            "total_marks": self.total_marks,
+            # "instructions": self.instructions,
+            "course": str(self.course.id) if self.course else None,
+            "year": str(self.year.id) if self.year else None,
+            "created_by": str(self.created_by.id) if self.created_by else None,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            # "sections": [s.to_json() for s in self.sections],
+            "published": self.published,
+            "section": self.section,
+            "active": self.active,
+            "status": self.status,
+            # "subject": self.subject if self.subject else [],
+            # "topic": self.topic if self.topic else [],
+            # "section": self.section if self.section else [],
+            # "competency": self.competency if self.competency else [],
+            "draft": self.draft,            
+        }
