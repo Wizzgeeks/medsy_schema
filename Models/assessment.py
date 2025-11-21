@@ -31,13 +31,28 @@ class AssessmentQuestion(EmbeddedDocument):
                 for sq in self.sub_questions
             ],
         }
+        
+class AssessmentSectionQuestion(EmbeddedDocument):
+    section_name = StringField(required=True)
+    questions = ListField(EmbeddedDocumentField(AssessmentQuestion))
+    total_marks = IntField(default=0)
+
+    def to_json(self):
+        return {
+            "section_name": self.section_name,
+            "total_marks": self.total_marks,
+            "questions": [
+                q.to_json()
+                for q in self.questions
+            ],
+        }
 
 class Assessment(Document):
     course = ReferenceField(Course, reversedelete_rule=CASCADE)
     year = ReferenceField(Year, reversedelete_rule=CASCADE)
     month_year = DateTimeField(required=True)
     created_by = ReferenceField(Admin, required=True, reversedelete_rule=CASCADE)
-    questions = ListField(EmbeddedDocumentField(AssessmentQuestion))
+    sections = ListField(EmbeddedDocumentField(AssessmentSectionQuestion))
     section = StringField()
     name = StringField(required=True)
     description = StringField()
@@ -55,6 +70,7 @@ class Assessment(Document):
     topic = ListField(StringField())
     section = ListField(StringField())
     competency = ListField(StringField())
+    draft = BooleanField(default=True)
     published = BooleanField(default=False)
     
 
@@ -75,7 +91,7 @@ class Assessment(Document):
             "year": str(self.year.id) if self.year else None,
             "created_by": str(self.created_by.id) if self.created_by else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
-            "questions": [q.to_json() for q in self.questions],
+            "sections": [s.to_json() for s in self.sections],
             "published": self.published,
             "section": self.section,
             "active": self.active,
@@ -84,4 +100,5 @@ class Assessment(Document):
             "topic": self.topic if self.topic else [],
             "section": self.section if self.section else [],
             "competency": self.competency if self.competency else [],
+            "draft": self.draft,            
         }
