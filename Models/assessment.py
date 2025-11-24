@@ -1,4 +1,4 @@
-from mongoengine import ( Document, StringField, ReferenceField, ListField, DateTimeField, IntField, BooleanField ,CASCADE, EmbeddedDocument, EmbeddedDocumentField)
+from mongoengine import ( Document, StringField, ReferenceField, ListField, DateTimeField, IntField, BooleanField ,CASCADE, EmbeddedDocument, EmbeddedDocumentField,DictField)
 from datetime import datetime,timezone
 from Models.course_model import Course
 from Models.year_model import Year
@@ -56,11 +56,17 @@ class Assessment(Document):
     section = StringField()
     name = StringField(required=True)
     description = StringField()
-    test_type = StringField(choices=["mcq", "qa", "hybrid"], required=True)
+    test_type = StringField(choices=["mcq", "descriptive", "hybrid"], required=True)
     category = StringField(choices=["internal", "midterm", "final", "viva"], required=True)
     duration = IntField(required=True)
     start_time = DateTimeField(null=True)
     end_time = DateTimeField(null=True)
+    offline_start_time = DateTimeField(null=True)
+    offline_end_time = DateTimeField(null=True)
+    log_details = ListField(DictField())
+    mcq_publish_type_online = BooleanField(default=True)
+    descriptive_publish_type_online = BooleanField(default=False)
+    auto_result_mcq = BooleanField(default=False)
     total_marks = IntField()
     instructions = StringField()
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
@@ -84,6 +90,12 @@ class Assessment(Document):
             "duration": self.duration,
             "start_time": self.start_time.isoformat() if self.start_time else None,
             "end_time": self.end_time.isoformat() if self.end_time else None,
+            "offline_start_time": self.offline_start_time.isoformat() if self.offline_start_time else None,
+            "offline_end_time": self.offline_end_time.isoformat() if self.offline_end_time else None,
+            "log_details": self.log_details if self.log_details else [],
+            "mcq_publish_type_online": self.mcq_publish_type_online,
+            "descriptive_publish_type_online": self.descriptive_publish_type_online,
+            "auto_result_mcq": self.auto_result_mcq,
             "total_marks": self.total_marks,
             "instructions": self.instructions,
             "course": str(self.course.id) if self.course else None,
@@ -112,6 +124,12 @@ class Assessment(Document):
             "duration": self.duration,
             "start_time": self.start_time.isoformat() if self.start_time else None,
             "end_time": self.end_time.isoformat() if self.end_time else None,
+            "offline_start_time": self.offline_start_time.isoformat() if self.offline_start_time else None,
+            "offline_end_time": self.offline_end_time.isoformat() if self.offline_end_time else None,
+            "log_details": self.log_details if self.log_details else [],
+            "mcq_publish_type_online": self.mcq_publish_type_online,
+            "descriptive_publish_type_online": self.descriptive_publish_type_online,
+            "auto_result_mcq": self.auto_result_mcq,
             "total_marks": self.total_marks,
             "course": str(self.course.id) if self.course else None,
             "year": str(self.year.id) if self.year else None,
