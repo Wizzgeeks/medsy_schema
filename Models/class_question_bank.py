@@ -3,7 +3,7 @@ from mongoengine import Document,StringField,DictField,ListField,BooleanField,In
 
 class ClassQuestionBank(Document):
     question = StringField(required=True)
-    question_type = StringField(choices=["mcq", "qa"], required=True)
+    question_type = StringField(choices=["mcq", "descriptive"], required=True)
     options = DictField()
     explanation = StringField()
     category = StringField(choices=["direct", "critical_thinking", "reasoning", "application"])
