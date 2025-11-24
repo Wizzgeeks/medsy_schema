@@ -72,9 +72,9 @@ class Assessment(Document):
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     active = BooleanField(default=True)
     status = StringField()
-    subject = ListField(StringField())
-    topic = ListField(StringField())
-    competency = ListField(StringField())
+    subject = ListField(DictField())
+    topic = ListField(DictField())
+    competency = ListField(DictField())
     draft = BooleanField(default=True)
     published = BooleanField(default=False)
     
