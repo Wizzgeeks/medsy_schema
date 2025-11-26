@@ -1,9 +1,12 @@
-from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField
+from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField,ReferenceField,CASCADE
 
 
 class ClassQuestionBank(Document):
     question = StringField(required=True)
     question_type = StringField(choices=["mcq", "descriptive"], required=True)
+    is_main_question = BooleanField(default=True)
+    main_question = ReferenceField("ClassQuestionBank",reverse_delete_rule=CASCADE)
+    sub_questions = ListField(ReferenceField("ClassQuestionBank",reverse_delete_rule=CASCADE))
     options = DictField()
     explanation = StringField()
     category = StringField(choices=["direct", "critical_thinking", "reasoning", "application"])
@@ -32,6 +35,9 @@ class ClassQuestionBank(Document):
             "id": str(self.id),
             "question": self.question,
             "question_type": self.question_type,
+            "is_main_question": self.is_main_question,
+            "main_question": str(self.main_question.id) if self.main_question else None,
+            "sub_questions": [str(q.id) for q in self.sub_questions],
             "options": self.options if self.options else {},
             "explanation": self.explanation,
             "category": self.category,

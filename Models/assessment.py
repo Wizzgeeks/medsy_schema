@@ -6,30 +6,17 @@ from Models.admin_model import Admin
 from Models.class_question_bank import ClassQuestionBank
 
 
-class AssessmentSubQuestion(EmbeddedDocument):
-    sub_question_id = ReferenceField(ClassQuestionBank,required=True,reversedelete_rule=CASCADE)
-    marks = IntField(default=0)
-
-    def to_json(self):
-        return {
-            "sub_question_id": self.sub_question_id.to_json() if self.sub_question_id else None,
-            "marks": self.marks,
-        }
-
 
 class AssessmentQuestion(EmbeddedDocument):
     question_id = ReferenceField(ClassQuestionBank,required=True,reversedelete_rule=CASCADE)
     marks = IntField(default=0)
-    sub_questions = ListField(EmbeddedDocumentField(AssessmentSubQuestion))
+    sequence = IntField(default=0)
 
     def to_json(self):
         return {
             "question_id": self.question_id.to_json() if self.question_id else None,
             "marks": self.marks,
-            "sub_questions": [
-                sq.to_json()
-                for sq in self.sub_questions
-            ],
+            "sequence": self.sequence
         }
         
 class AssessmentSectionQuestion(EmbeddedDocument):
