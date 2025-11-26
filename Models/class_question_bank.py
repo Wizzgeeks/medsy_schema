@@ -37,7 +37,7 @@ class ClassQuestionBank(Document):
             "question_type": self.question_type,
             "is_main_question": self.is_main_question,
             "main_question": str(self.main_question.id) if self.main_question else None,
-            "sub_questions": [str(q.id) for q in self.sub_questions],
+            "sub_questions": [ q.to_json() for q in self.sub_questions],
             "options": self.options if self.options else {},
             "explanation": self.explanation,
             "category": self.category,
