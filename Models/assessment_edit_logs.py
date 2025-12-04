@@ -16,7 +16,7 @@ class AssessmentEditLogs(Document):
             "assessment_id": str(self.assessment_id.id) if self.assessment_id else None,
             "updated_by": {"id": str(self.updated_by.id),"name": self.updated_by.name,"admin_id": self.updated_by.admin_id} if self.updated_by else {},
             "remarks": self.remarks,
-            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "created_at": self.created_at.strftime("%I:%M %p %b %d, %Y").lower() if self.created_at else None,
         }
         
     
