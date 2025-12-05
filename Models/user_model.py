@@ -41,8 +41,8 @@ class User(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "university_id": [str(self.university_id.id) for self.university_id in self.university_id] if self.university_id else [],
-            "institution_id": [str(self.institution_id.id) for self.institution_id in self.institution_id] if self.institution_id else [],
+            "university_id": [str(u.id) for u in self.university_id] if self.university_id else [],
+            "institution_id": [str(i.id) for i in self.institution_id] if self.institution_id else [],
             "course_id": str(self.course_id.id) if self.course_id else None,
             "year_id": str(self.year_id.id) if self.year_id else None,
             "user_id": self.user_id if self.user_id else None,
@@ -70,8 +70,8 @@ class User(Document):
     def with_key(self):
         return {
             "id": str(self.id),
-            "university_id": [str(self.university_id.id) for self.university_id in self.university_id] if self.university_id else [],
-            "institution_id": [str(self.institution_id.id) for self.institution_id in self.institution_id] if self.institution_id else [],
+            "university_id": [str(u.id) for u in self.university_id] if self.university_id else [],
+            "institution_id": [str(i.id) for i in self.institution_id] if self.institution_id else [],
             "course_id": str(self.course_id.id) if self.course_id else None,
             "year_id": str(self.year_id.id) if self.year_id else None,
             "user_id": self.user_id if self.user_id else None,
