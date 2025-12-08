@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField,DictField,DateTimeField
+from mongoengine import Document, StringField,DictField,DateTimeField,BooleanField
 from datetime import datetime,timezone
 
 class University(Document):
@@ -10,6 +10,7 @@ class University(Document):
     key = StringField(required=True, unique=True)
     icon = StringField()
     created_at = DateTimeField(default=datetime.now(timezone.utc))
+    default = BooleanField(default=False)
 
     def to_json(self):
         return {
@@ -22,4 +23,5 @@ class University(Document):
             'key': self.key if self.key else None,
             'icon': self.icon if self.icon else None,
             'created_at': self.created_at.isoformat() if self.created_at else None,
+            'default': self.default
         }
