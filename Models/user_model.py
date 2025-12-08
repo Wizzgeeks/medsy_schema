@@ -41,8 +41,8 @@ class User(Document):
     def to_json(self):
         return {
             "id": str(self.id),
-            "university_id": [str(self.university_id.id) for self.university_id in self.university_id] if self.university_id else [],
-            "institution_id": [str(self.institution_id.id) for self.institution_id in self.institution_id] if self.institution_id else [],
+            "university_id": [str(univer_id.id) for univer_id in self.university_id] if self.university_id else [],
+            "institution_id": [str(insti_id.id) for insti_id in self.institution_id] if self.institution_id else [],
             "course_id": str(self.course_id.id) if self.course_id else None,
             "year_id": str(self.year_id.id) if self.year_id else None,
             "user_id": self.user_id if self.user_id else None,
@@ -70,8 +70,8 @@ class User(Document):
     def with_key(self):
         return {
             "id": str(self.id),
-            "university_id": [str(self.university_id.id) for self.university_id in self.university_id] if self.university_id else [],
-            "institution_id": [str(self.institution_id.id) for self.institution_id in self.institution_id] if self.institution_id else [],
+            "university_id": [str(univer_id.id) for univer_id in self.university_id] if self.university_id else [],
+            "institution_id": [str(insti_id.id) for insti_id in self.institution_id] if self.institution_id else [],
             "course_id": str(self.course_id.id) if self.course_id else None,
             "year_id": str(self.year_id.id) if self.year_id else None,
             "user_id": self.user_id if self.user_id else None,
@@ -99,8 +99,8 @@ class User(Document):
     def admin_get(self):
         return {
             "id": str(self.id),
-            "university_id": [{"id":self.university_id.id,"name":self.university_id.name,"key":self.university_id.key} for self.university_id in self.university_id] if self.university_id else [],
-            "institution_id": [{"id":self.institution_id.id,"name":self.institution_id.name,"key":self.institution_id.key} for self.institution_id in self.institution_id] if self.institution_id else [],
+            "university_id": [{"id":str(uni_id.id),"name":uni_id.name,"key":uni_id.key} for uni_id in self.university_id] if self.university_id else [],
+            "institution_id": [{"id":str(insti_id.id),"name":insti_id.name,"key":insti_id.key} for insti_id in self.institution_id] if self.institution_id else [],
             "role":self.role if self.role else None,
             "course_id": str(self.course_id.id) if self.course_id else None,
             "year_id": str(self.year_id.id) if self.year_id else None,
