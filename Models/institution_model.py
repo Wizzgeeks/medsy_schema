@@ -68,7 +68,7 @@ class Institution(Document):
             'email2': self.email2 if self.email2 else None,
             'onboarded': self.onboarded if self.onboarded else False,
             'onboarded_at': self.onboarded_at.strftime('%d/%m/%Y') if self.onboarded_at else None,
-            'default': self.default
+            'default': self.default if self.default else False
 
         }
 
@@ -103,6 +103,6 @@ class Institution(Document):
             'email2': self.email2 if self.email2 else None,
             'onboarded': self.onboarded if self.onboarded else False,
             'onboarded_at': self.onboarded_at.strftime('%d/%m/%Y') if self.onboarded_at else None,
-            'default': self.default
+            'default': self.default if self.default else False
 
         }

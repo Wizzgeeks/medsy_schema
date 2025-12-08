@@ -23,5 +23,6 @@ class University(Document):
             'key': self.key if self.key else None,
             'icon': self.icon if self.icon else None,
             'created_at': self.created_at.isoformat() if self.created_at else None,
-            'default': self.default
+            'default': self.default if self.default else False
+        
         }
