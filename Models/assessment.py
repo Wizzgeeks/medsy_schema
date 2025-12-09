@@ -64,6 +64,9 @@ class Assessment(Document):
     competency = ListField(DictField())
     draft = BooleanField(default=True)
     published = BooleanField(default=False)
+    evaluation = BooleanField(default=False)
+    evaluation_status = StringField()
+
     
 
     def to_json(self):
@@ -97,7 +100,9 @@ class Assessment(Document):
             "subject": self.subject if self.subject else [],
             "topic": self.topic if self.topic else [],
             "competency": self.competency if self.competency else [],
-            "draft": self.draft,            
+            "draft": self.draft,
+            "evaluation": self.evaluation,
+            "evaluation_status": self.evaluation_status if self.evaluation_status else ""            
         }
         
     def get_all(self):
@@ -126,5 +131,7 @@ class Assessment(Document):
             "section": self.section,
             "active": self.active,
             "status": self.status,
-            "draft": self.draft,            
+            "draft": self.draft,   
+            "evaluation": self.evaluation,
+            "evaluation_status": self.evaluation_status if self.evaluation_status else ""          
         }
