@@ -25,7 +25,7 @@ class CourseCloneJob(Document):
             "course":self.course.name if self.course else None,
             # "year":self.year.name if self.year else None,
             "institution":self.institution.name if self.institution else None,
-            "created_by":self.created_by.username if self.created_by else None,
+            "created_by":self.created_by.name if self.created_by else None,
             'updated_at':str(self.updated_at) if self.updated_at else None,
             "created_at":str(self.created_at),
             "error_logs":self.error_logs,

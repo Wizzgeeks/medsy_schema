@@ -16,6 +16,7 @@ class AssessmentResult(Document):
     percentage = IntField(default=0)
     result_data = ListField(DictField())
     marks = IntField(default=0)
+    analytics_data = ListField(DictField())
     completed = BooleanField(default=False)
     eval_status = StringField(default="Incomplete",choices=["Incomplete","Complete","Pending","InProgress"])
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
@@ -36,6 +37,7 @@ class AssessmentResult(Document):
             "result_data": self.result_data,
             "marks": self.marks,
             "completed": self.completed,
+            "analytics_data": self.analytics_data,
             "eval_status": self.eval_status,
             "attendance": self.attendance,
             "created_at": self.created_at.isoformat() if self.created_at else None,

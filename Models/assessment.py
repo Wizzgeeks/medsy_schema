@@ -66,6 +66,9 @@ class Assessment(Document):
     published = BooleanField(default=False)
     evaluation = BooleanField(default=False)
     evaluation_status = StringField()
+    analytics = BooleanField(default=False)
+    analytics_data = ListField(DictField())
+    
 
     
 
@@ -102,6 +105,8 @@ class Assessment(Document):
             "competency": self.competency if self.competency else [],
             "draft": self.draft,
             "evaluation": self.evaluation,
+            "analytics": self.analytics,
+            "analytics_data": self.analytics_data,
             "evaluation_status": self.evaluation_status if self.evaluation_status else ""            
         }
         
@@ -133,5 +138,7 @@ class Assessment(Document):
             "status": self.status,
             "draft": self.draft,   
             "evaluation": self.evaluation,
+            "analytics": self.analytics,
+            "analytics_data": self.analytics_data,
             "evaluation_status": self.evaluation_status if self.evaluation_status else ""          
         }
