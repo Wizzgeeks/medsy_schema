@@ -21,7 +21,7 @@ class AssessmentResult(Document):
     marks = IntField(default=0)
     analytics_data = ListField(DictField())
     completed = BooleanField(default=False)
-    eval_status = StringField(default="Incomplete",choices=["Incomplete","Complete","Pending","InProgress"])
+    eval_status = StringField(default="Incomplete",choices=["Incomplete","Completed","Pending","InProgress"])
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     updated_at = DateTimeField(null=True)
     
