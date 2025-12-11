@@ -11,7 +11,10 @@ class AssessmentResult(Document):
     completed_time = DateTimeField(null=True)
     mcq_marks = IntField(default=0)
     descriptive_marks = IntField(default=0)
-    attented_questions = IntField(default=0)
+    mcq_attempted = IntField(default=0)
+    descriptive_attempted = IntField(default=0)
+    total_attempted = IntField(default=0)
+    not_attempted = IntField(default=0)
     max_marks = IntField(default=0)
     percentage = IntField(default=0)
     result_data = ListField(DictField())
@@ -31,7 +34,10 @@ class AssessmentResult(Document):
             "completed_time": self.completed_time.isoformat() if self.completed_time else None,
             "mcq_marks": self.mcq_marks,
             "descriptive_marks": self.descriptive_marks,
-            "attented_questions": self.attented_questions,
+            "mcq_attempted": self.mcq_attempted,
+            "descriptive_attempted": self.descriptive_attempted,
+            "total_attempted": self.total_attempted,
+            "not_attempted": self.not_attempted,
             "max_marks": self.max_marks,
             "percentage": self.percentage,
             "result_data": self.result_data,
