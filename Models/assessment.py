@@ -65,7 +65,7 @@ class Assessment(Document):
     draft = BooleanField(default=True)
     published = BooleanField(default=False)
     evaluation = BooleanField(default=False)
-    evaluation_status = StringField()
+    evaluation_status = StringField(default="Incomplete")
     analytics = BooleanField(default=False)
     analytics_data = ListField(DictField())
     
