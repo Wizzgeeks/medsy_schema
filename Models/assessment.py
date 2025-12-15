@@ -142,3 +142,34 @@ class Assessment(Document):
             "analytics_data": self.analytics_data,
             "evaluation_status": self.evaluation_status if self.evaluation_status else ""          
         }
+        
+        
+    def to_dict(self):
+        """Convert assessment to dictionary without ObjectId references"""
+        data = self.to_mongo().to_dict()
+        data['id'] = str(self.id)
+        
+        # Handle ReferenceFields
+        if self.course:
+            data['course'] = str(self.course.id)
+        if self.year:
+            data['year'] = str(self.year.id)
+        if self.created_by:
+            data['created_by'] = str(self.created_by.id)
+        
+        # Handle embedded documents
+        if self.sections:
+            data['sections'] = []
+            for section in self.sections:
+                section_dict = section.to_mongo().to_dict()
+                section_dict['questions'] = [
+                    {
+                        'question_id': str(q.question_id.id) if q.question_id else None,
+                        'marks': q.marks,
+                        'sequence': q.sequence
+                    }
+                    for q in section.questions
+                ]
+                data['sections'].append(section_dict)
+        
+        return data
