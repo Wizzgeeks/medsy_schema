@@ -4,6 +4,8 @@ from Models.course_model import Course
 from Models.year_model import Year
 from Models.admin_model import Admin
 from Models.class_question_bank import ClassQuestionBank
+from Models.university_model import University
+from Models.institution_model import Institution
 
 
 
@@ -35,6 +37,8 @@ class AssessmentSectionQuestion(EmbeddedDocument):
         }
 
 class Assessment(Document):
+    university = ReferenceField(University, reversedelete_rule=CASCADE)
+    institution = ReferenceField(Institution, reversedelete_rule=CASCADE)
     course = ReferenceField(Course, reversedelete_rule=CASCADE)
     year = ReferenceField(Year, reversedelete_rule=CASCADE)
     month_year = DateTimeField(required=True)
@@ -75,6 +79,8 @@ class Assessment(Document):
     def to_json(self):
         return {
             "id": str(self.id),
+            "university": str(self.university.id) if self.university else None,
+            "institution": str(self.institution.id) if self.institution else None,
             "name": self.name,
             "description": self.description,
             "month_year": self.month_year.isoformat() if self.month_year else None,
