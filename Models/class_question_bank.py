@@ -5,7 +5,7 @@ from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
 
 class QuestionBank(EmbeddedDocument):
-    question = ReferenceField("ClassQuestionBank",reverse_delete_rule=CASCADE)
+    question = ReferenceField("ClassQuestionBank", required=True)
     sequence = IntField(default=0)
     
     def to_json(self):
