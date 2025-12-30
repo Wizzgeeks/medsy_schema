@@ -10,7 +10,7 @@ class QuestionBank(EmbeddedDocument):
     
     def to_json(self):
         return {
-            "question": str(self.question.id) if self.question else None,
+            "question": self.question.to_json() if self.question else None,
             "sequence": self.sequence
         }
 
