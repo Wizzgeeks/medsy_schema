@@ -53,8 +53,8 @@ class AssessmentResult(Document):
     def to_get(self):
         return {
             "id": str(self.id),
-            "user": {"id":str(self.user.id),"name":self.user.username,"user_id":self.user.user_id,"course":self.user.course_id.name,"year":self.user.year_id.year} if self.user else None,
-            "assessment": {"id":str(self.assessment.id),"name":self.assessment.name,"test_type":self.assessment.test_type,"category":self.assessment.category,"total_marks":self.assessment.total_marks,"month_year":self.assessment.month_year.isoformat()} if self.assessment else None,
+            "user": {"id":str(self.user.id),"name":self.user.username,"user_id":self.user.user_id} if self.user else {},
+            "assessment": {"id":str(self.assessment.id),"name":self.assessment.name,"test_type":self.assessment.test_type,"category":self.assessment.category,"total_marks":self.assessment.total_marks,"month_year":self.assessment.month_year.isoformat(),"course":self.assessment.course.name,"year":self.assessment.year.year,"course_id":str(self.assessment.course.id),"year_id":str(self.assessment.year.id)} if self.assessment else {},
             "completed_time": self.completed_time.isoformat() if self.completed_time else None,
             "mcq_marks": self.mcq_marks,
             "descriptive_marks": self.descriptive_marks,

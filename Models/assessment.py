@@ -4,6 +4,12 @@ from Models.course_model import Course
 from Models.year_model import Year
 from Models.admin_model import Admin
 from Models.class_question_bank import ClassQuestionBank
+from Models.university_model import University
+from Models.institution_model import Institution
+from Models.subject_model import Subject
+from Models.layer_1_model import Layer_1
+from Models.layer_2_model import Layer_2
+from Models.layer_3_model import Layer_3
 
 
 
@@ -35,6 +41,8 @@ class AssessmentSectionQuestion(EmbeddedDocument):
         }
 
 class Assessment(Document):
+    university = ReferenceField(University, reversedelete_rule=CASCADE)
+    institution = ReferenceField(Institution, reversedelete_rule=CASCADE)
     course = ReferenceField(Course, reversedelete_rule=CASCADE)
     year = ReferenceField(Year, reversedelete_rule=CASCADE)
     month_year = DateTimeField(required=True)
@@ -59,9 +67,10 @@ class Assessment(Document):
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     active = BooleanField(default=True)
     status = StringField()
-    subject = ListField(DictField())
-    topic = ListField(DictField())
-    competency = ListField(DictField())
+    subject = ListField(ReferenceField(Subject,reverse_delete_rule=CASCADE, required=True))
+    layer1 = ListField(ReferenceField(Layer_1,reverse_delete_rule=CASCADE, required=True))
+    layer2 = ListField(ReferenceField(Layer_2,reverse_delete_rule=CASCADE, required=True))
+    layer3 = ListField(ReferenceField(Layer_3,reverse_delete_rule=CASCADE, required=True))
     draft = BooleanField(default=True)
     published = BooleanField(default=False)
     evaluation = BooleanField(default=False)
@@ -75,6 +84,8 @@ class Assessment(Document):
     def to_json(self):
         return {
             "id": str(self.id),
+            "university": str(self.university.id) if self.university else None,
+            "institution": str(self.institution.id) if self.institution else None,
             "name": self.name,
             "description": self.description,
             "month_year": self.month_year.isoformat() if self.month_year else None,
@@ -91,8 +102,8 @@ class Assessment(Document):
             "auto_result_mcq": self.auto_result_mcq,
             "total_marks": self.total_marks,
             "instructions": self.instructions,
-            "course": str(self.course.id) if self.course else None,
-            "year": str(self.year.id) if self.year else None,
+            "course": {"id": str(self.course.id), "name": self.course.name,"key":self.course.key} if self.course else {},
+            "year": {"id": str(self.year.id), "name": self.year.year,"key":self.year.key} if self.year else {},
             "created_by": str(self.created_by.id) if self.created_by else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "sections": [s.to_json() for s in self.sections],
@@ -100,9 +111,10 @@ class Assessment(Document):
             "section": self.section,
             "active": self.active,
             "status": self.status,
-            "subject": self.subject if self.subject else [],
-            "topic": self.topic if self.topic else [],
-            "competency": self.competency if self.competency else [],
+            "subject": [{"id": str(subject.id), "name": subject.name, "key": subject.key} for subject in self.subject] if self.subject else [],
+            "layer1": [{"id": str(layer1.id), "name": layer1.name, "key": layer1.key} for layer1 in self.layer1] if self.layer1 else [],
+            "layer2": [{"id": str(layer2.id), "name": layer2.name, "key": layer2.key} for layer2 in self.layer2] if self.layer2 else [],
+            "layer3": [{"id": str(layer3.id), "name": layer3.name, "key": layer3.key} for layer3 in self.layer3] if self.layer3 else [],
             "draft": self.draft,
             "evaluation": self.evaluation,
             "analytics": self.analytics,
@@ -128,8 +140,8 @@ class Assessment(Document):
             "descriptive_publish_type_online": self.descriptive_publish_type_online,
             "auto_result_mcq": self.auto_result_mcq,
             "total_marks": self.total_marks,
-            "course": str(self.course.id) if self.course else None,
-            "year": str(self.year.id) if self.year else None,
+            "course": {"id": str(self.course.id), "name": self.course.name,"key":self.course.key} if self.course else {},
+            "year": {"id": str(self.year.id), "name": self.year.year,"key":self.year.key} if self.year else {},
             "created_by": str(self.created_by.id) if self.created_by else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "published": self.published,
