@@ -9,12 +9,12 @@ from Models.year_model import Year
 class User(Document):
     university_id = ListField(ReferenceField(University, required=True, reverse_delete_rule=CASCADE))
     institution_id = ListField(ReferenceField(Institution, required=True, reverse_delete_rule=CASCADE))
-    course_id = ListField(ReferenceField(Course, required=True, reverse_delete_rule=CASCADE))
+    course_id = ReferenceField(Course, required=True, reverse_delete_rule=CASCADE)
     year_id = ListField(ReferenceField(Year, required=True, reverse_delete_rule=CASCADE))
     user_id = StringField(required=True)
     university = ListField(StringField(required=True))
     institutions = ListField(StringField(required=True))
-    course = ListField(StringField(required=True))
+    course = StringField(required=True)
     year = ListField(StringField(required=True))
     section = StringField()
     username = StringField(required=True)
@@ -43,13 +43,13 @@ class User(Document):
             "id": str(self.id),
             "university_id": [str(univer_id.id) for univer_id in self.university_id] if self.university_id else [],
             "institution_id": [str(insti_id.id) for insti_id in self.institution_id] if self.institution_id else [],
-            "course_id": [str(course_ids.id) for course_ids in self.course_id] if self.course_id else [],
+            "course_id": str(self.course_id.id) if self.course_id else None,
             "year_id": [str(year_ids.id) for year_ids in self.year_id] if self.year_id else [],
             "user_id": self.user_id if self.user_id else None,
             "university": self.university if self.university else [],
             "institutions": self.institutions if self.institutions else [],
             "section":self.section if self.section else None,
-            "course": [courses for courses in self.course] if self.course else [],
+            "course": (self.course) if self.course else None,
             "year": self.year if self.year else [],
             "username": self.username,
             "profile":self.profile if self.profile else None,
