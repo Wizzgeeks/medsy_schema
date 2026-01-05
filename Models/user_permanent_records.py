@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 class UserRecords(Document):
     email_hash = StringField(unique=True, sparse=True)
     phone_hash = StringField(unique=True, sparse=True)
-    phone_country = StringField()
     country_code = StringField()
     created_at = DateTimeField(default=datetime.now(timezone.utc))
 
