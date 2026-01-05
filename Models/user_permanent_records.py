@@ -4,12 +4,11 @@ from datetime import datetime, timezone
 class UserRecords(Document):
     email_hash = StringField(unique=True, sparse=True)
     phone_hash = StringField(unique=True, sparse=True)
+
     country_code = StringField()
     created_at = DateTimeField(default=datetime.now(timezone.utc))
 
     meta = {
-        "indexes": [
-            "email_hash",
-            "phone_hash"
-        ]
+        "collection": "user_records",
+        "indexes": ["email_hash", "phone_hash"]
     }
