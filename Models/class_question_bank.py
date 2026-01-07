@@ -43,7 +43,7 @@ class ClassQuestionBank(Document):
     meta_tags = DictField()
     active = BooleanField(default=True)
     mark = IntField(default=1)
-    author=StringField()
+    author=StringField(defualt="new")
     
 
     def to_json(self):
