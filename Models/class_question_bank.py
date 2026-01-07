@@ -43,6 +43,8 @@ class ClassQuestionBank(Document):
     meta_tags = DictField()
     active = BooleanField(default=True)
     mark = IntField(default=1)
+    author=StringField()
+    
 
     def to_json(self):
         return {
@@ -72,4 +74,7 @@ class ClassQuestionBank(Document):
             "meta_tags": self.meta_tags if self.meta_tags else {},
             "active": self.active,
             "mark": self.mark,
+            "author": self.author if self.author else "",
+            "key_concept": self.key_concept if self.key_concept else [],
+            "learning_objective": self.learning_objective if self.learning_objective else ""
         }
