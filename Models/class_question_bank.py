@@ -31,6 +31,7 @@ class ClassQuestionBank(Document):
     function = ListField(StringField())
     thinking_level = StringField()
     organ_system = ListField(StringField())
+    organ_sub_system = ListField(StringField())
     disease_tags = ListField(StringField())
     distractor_error_tags = DictField()
     key_concept = ListField(StringField())
@@ -76,5 +77,6 @@ class ClassQuestionBank(Document):
             "mark": self.mark,
             "author": self.author if self.author else "",
             "key_concept": self.key_concept if self.key_concept else [],
+            "organ_sub_system": self.organ_sub_system if self.organ_sub_system else [],
             "learning_objective": self.learning_objective if self.learning_objective else ""
         }
