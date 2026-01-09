@@ -1,8 +1,4 @@
 from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField,ReferenceField,CASCADE,EmbeddedDocumentField,EmbeddedDocument
-from Models.subject_model import Subject
-from Models.layer_1_model import Layer_1
-from Models.layer_2_model import Layer_2
-from Models.layer_3_model import Layer_3
 from Models.admin_model import Admin
 
 class QuestionBank(EmbeddedDocument):
@@ -37,10 +33,10 @@ class ClassQuestionBank(Document):
     distractor_error_tags = DictField()
     key_concept = ListField(StringField())
     learning_objective = StringField()
-    subject = ListField(ReferenceField(Subject,reverse_delete_rule=CASCADE, required=True))
-    layer1 = ListField(ReferenceField(Layer_1,reverse_delete_rule=CASCADE, required=True))
-    layer2 = ListField(ReferenceField(Layer_2,reverse_delete_rule=CASCADE, required=True))
-    layer3 = ListField(ReferenceField(Layer_3,reverse_delete_rule=CASCADE, required=True))
+    subject = ListField()
+    layer1 = ListField()
+    layer2 = ListField()
+    layer3 = ListField()
     answer = StringField()
     meta_tags = DictField()
     active = BooleanField(default=True)
@@ -69,10 +65,10 @@ class ClassQuestionBank(Document):
             "organ_system": self.organ_system if self.organ_system else [],
             "disease_tags": self.disease_tags if self.disease_tags else [],
             "distractor_error_tags": self.distractor_error_tags if self.distractor_error_tags else {},
-            "subject": [{"id": str(subject.id), "name": subject.name, "key": subject.key} for subject in self.subject] if self.subject else [],
-            "layer1": [{"id": str(layer1.id), "name": layer1.name, "key": layer1.key} for layer1 in self.layer1] if self.layer1 else [],
-            "layer2": [{"id": str(layer2.id), "name": layer2.name, "key": layer2.key} for layer2 in self.layer2] if self.layer2 else [],
-            "layer3": [{"id": str(layer3.id), "name": layer3.name, "key": layer3.key} for layer3 in self.layer3] if self.layer3 else [],
+            "subject": self.subject if self.subject else [],
+            "layer1": self.layer1 if self.layer1 else [],
+            "layer2": self.layer2 if self.layer2 else [],
+            "layer3": self.layer3 if self.layer3 else [],
             "answer": self.answer,
             "meta_tags": self.meta_tags if self.meta_tags else {},
             "active": self.active,
