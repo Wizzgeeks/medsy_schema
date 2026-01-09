@@ -3,6 +3,7 @@ from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
 from Models.layer_2_model import Layer_2
 from Models.layer_3_model import Layer_3
+from Models.admin_model import Admin
 
 class QuestionBank(EmbeddedDocument):
     question = ReferenceField("ClassQuestionBank", required=True)
@@ -44,7 +45,8 @@ class ClassQuestionBank(Document):
     meta_tags = DictField()
     active = BooleanField(default=True)
     mark = IntField(default=1)
-    author=StringField(defualt="new")
+    author = StringField()
+    author_id = ReferenceField(Admin, reverse_delete_rule=CASCADE, required=True)
     
 
     def to_json(self):
@@ -78,5 +80,6 @@ class ClassQuestionBank(Document):
             "author": self.author if self.author else "",
             "key_concept": self.key_concept if self.key_concept else [],
             "organ_sub_system": self.organ_sub_system if self.organ_sub_system else [],
-            "learning_objective": self.learning_objective if self.learning_objective else ""
+            "learning_objective": self.learning_objective if self.learning_objective else "",
+            "author_id": {"id":str(self.author_id.id),"name":self.author_id.name,"faculty_id":self.author_id.admin_id} if self.author_id else "",
         }
