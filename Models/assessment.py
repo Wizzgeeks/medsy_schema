@@ -6,11 +6,6 @@ from Models.admin_model import Admin
 from Models.class_question_bank import ClassQuestionBank
 from Models.university_model import University
 from Models.institution_model import Institution
-from Models.subject_model import Subject
-from Models.layer_1_model import Layer_1
-from Models.layer_2_model import Layer_2
-from Models.layer_3_model import Layer_3
-
 
 
 class AssessmentQuestion(EmbeddedDocument):
@@ -67,10 +62,10 @@ class Assessment(Document):
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     active = BooleanField(default=True)
     status = StringField()
-    subject = ListField(ReferenceField(Subject,reverse_delete_rule=CASCADE, required=True))
-    layer1 = ListField(ReferenceField(Layer_1,reverse_delete_rule=CASCADE, required=True))
-    layer2 = ListField(ReferenceField(Layer_2,reverse_delete_rule=CASCADE, required=True))
-    layer3 = ListField(ReferenceField(Layer_3,reverse_delete_rule=CASCADE, required=True))
+    subject = ListField()
+    layer1 = ListField()
+    layer2 = ListField()
+    layer3 = ListField()
     draft = BooleanField(default=True)
     published = BooleanField(default=False)
     evaluation = BooleanField(default=False)
@@ -111,10 +106,10 @@ class Assessment(Document):
             "section": self.section,
             "active": self.active,
             "status": self.status,
-            "subject": [{"id": str(subject.id), "name": subject.name, "key": subject.key} for subject in self.subject] if self.subject else [],
-            "layer1": [{"id": str(layer1.id), "name": layer1.name, "key": layer1.key} for layer1 in self.layer1] if self.layer1 else [],
-            "layer2": [{"id": str(layer2.id), "name": layer2.name, "key": layer2.key} for layer2 in self.layer2] if self.layer2 else [],
-            "layer3": [{"id": str(layer3.id), "name": layer3.name, "key": layer3.key} for layer3 in self.layer3] if self.layer3 else [],
+            "subject": self.subject if self.subject else [],
+            "layer1": self.layer1 if self.layer1 else [],
+            "layer2": self.layer2 if self.layer2 else [],
+            "layer3": self.layer3 if self.layer3 else [],
             "draft": self.draft,
             "evaluation": self.evaluation,
             "analytics": self.analytics,
