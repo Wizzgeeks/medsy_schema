@@ -1,4 +1,4 @@
-from mongoengine import ( Document, StringField, ReferenceField, ListField, DateTimeField, IntField, BooleanField ,CASCADE, NULLIFY, EmbeddedDocument, EmbeddedDocumentField,DictField)
+from mongoengine import ( Document, StringField, ReferenceField, ListField, DateTimeField, IntField, BooleanField ,CASCADE, EmbeddedDocument, EmbeddedDocumentField,DictField)
 from datetime import datetime,timezone
 from Models.course_model import Course
 from Models.year_model import Year
@@ -41,7 +41,7 @@ class Assessment(Document):
     course = ReferenceField(Course, reversedelete_rule=CASCADE)
     year = ReferenceField(Year, reversedelete_rule=CASCADE)
     month_year = DateTimeField(required=True)
-    created_by = ReferenceField(Admin,reversedelete_rule=NULLIFY,required=True)
+    created_by = ReferenceField(Admin,reversedelete_rule=CASCADE,required=True)
     sections = ListField(EmbeddedDocumentField(AssessmentSectionQuestion))
     section = StringField()
     name = StringField(required=True)

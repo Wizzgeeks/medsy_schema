@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField,ReferenceField,CASCADE,NULLIFY,EmbeddedDocumentField,EmbeddedDocument
+from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField,ReferenceField,CASCADE,EmbeddedDocumentField,EmbeddedDocument
 from Models.admin_model import Admin
 
 class QuestionBank(EmbeddedDocument):
@@ -42,7 +42,7 @@ class ClassQuestionBank(Document):
     active = BooleanField(default=True)
     mark = IntField(default=1)
     author = StringField()
-    author_id = ReferenceField(Admin, reverse_delete_rule=NULLIFY, required=True)
+    author_id = ReferenceField(Admin, reverse_delete_rule=CASCADE, required=True)
     
 
     def to_json(self):
