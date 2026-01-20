@@ -1,4 +1,4 @@
-from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField,ReferenceField,CASCADE,EmbeddedDocumentField,EmbeddedDocument
+from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField,ReferenceField,CASCADE,NULLIFY,EmbeddedDocumentField,EmbeddedDocument
 from Models.admin_model import Admin
 
 class QuestionBank(EmbeddedDocument):
@@ -42,7 +42,7 @@ class ClassQuestionBank(Document):
     active = BooleanField(default=True)
     mark = IntField(default=1)
     author = StringField()
-    author_id = ReferenceField(Admin, reverse_delete_rule=CASCADE, required=True)
+    author_id = ReferenceField(Admin, reverse_delete_rule=NULLIFY, required=True)
     
 
     def to_json(self):
@@ -77,5 +77,5 @@ class ClassQuestionBank(Document):
             "key_concept": self.key_concept if self.key_concept else [],
             "organ_sub_system": self.organ_sub_system if self.organ_sub_system else [],
             "learning_objective": self.learning_objective if self.learning_objective else "",
-            "author_id": {"id":str(self.author_id.id),"name":self.author_id.name,"faculty_id":self.author_id.admin_id} if self.author_id else "",
+            "author_id": {"id":str(self.author_id.id),"name":self.author_id.name,"faculty_id":self.author_id.admin_id} if self.author_id else {},
         }
