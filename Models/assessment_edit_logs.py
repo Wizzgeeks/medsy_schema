@@ -1,4 +1,4 @@
-from mongoengine import ( Document, StringField, ReferenceField, DateTimeField, CASCADE,DictField)
+from mongoengine import ( Document, StringField, ReferenceField, DateTimeField, CASCADE, NULLIFY,DictField)
 from datetime import datetime,timezone
 from Models.admin_model import Admin
 from Models.assessment import Assessment
@@ -9,7 +9,7 @@ class AssessmentEditLogs(Document):
     table_name = StringField()
     updated_data = DictField()
     existing_data = DictField()
-    updated_by = ReferenceField(Admin,reversedelete_rule=CASCADE,required=True)
+    updated_by = ReferenceField(Admin,reversedelete_rule=NULLIFY,required=True)
     remarks = StringField(required=True)
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     
