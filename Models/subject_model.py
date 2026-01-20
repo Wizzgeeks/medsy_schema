@@ -3,8 +3,8 @@ from Models.course_model import Course
 from Models.year_model import Year
 
 class Subject(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
     name = StringField(required=True)
     meta_title = StringField()
     meta_image_url = StringField()

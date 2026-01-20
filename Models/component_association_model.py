@@ -6,8 +6,8 @@ from Models.component_model import Component
 
 class Component_association(Document):
     course = ReferenceField(Course,required=True,unique=True,reverse_delete_rule=CASCADE)
-    # subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
-    # year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    # subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
+    # year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
     layer1 = ListField(ReferenceField(Component,reverse_delete_rule=CASCADE))
     layer2 = ListField(ReferenceField(Component,reverse_delete_rule=CASCADE))
     layer3 = ListField(ReferenceField(Component,reverse_delete_rule=CASCADE))

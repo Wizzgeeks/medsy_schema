@@ -3,8 +3,8 @@ from Models.flashcard_model import Flashcard
 from Models.user_model import User
 
 class Flashcard_queue(Document):
-    flashcard = ReferenceField(Flashcard,required=True,reverse_delete_rule=CASCADE)
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    flashcard = ReferenceField(Flashcard,reverse_delete_rule=CASCADE,required=True)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
     is_triggered = BooleanField(required=True)
 
 

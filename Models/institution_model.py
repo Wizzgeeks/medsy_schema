@@ -3,7 +3,7 @@ from datetime import datetime,timezone
 from Models.university_model import University
 
 class Institution(Document):
-    university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
+    university = ReferenceField(University,reverse_delete_rule=CASCADE,required=True)
     name = StringField(required=True, unique=True)
     code = StringField()
     type = StringField()

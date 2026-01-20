@@ -4,12 +4,12 @@ from Models.actions import Action
 from datetime import datetime,timezone
 
 class Action_coins(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     name = StringField()
     coins = IntField(default=0)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     active = BooleanField(default=True)
-    action = ReferenceField(Action,required=True,reverse_delete_rule=CASCADE)
+    action = ReferenceField(Action,reverse_delete_rule=CASCADE,required=True)
 
     def to_json(self):
         return {

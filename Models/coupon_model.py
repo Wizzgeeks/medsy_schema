@@ -3,7 +3,7 @@ from Models.course_model import Course
 from datetime import datetime,timezone
 
 class Coupon(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     name = StringField(required=True)
     discount_in_percentage = StringField()
     discount_in_flat = IntField()

@@ -6,12 +6,12 @@ from Models.subject_model import Subject
 from Models.layer1_page_model import Layer1_page
 from Models.year_model import Year
 class Layer1_time_spent(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
-    layer1 = ReferenceField(Layer_1,required=True,reverse_delete_rule=CASCADE)
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
-    layer1_page = ReferenceField(Layer1_page,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE,required=True)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
+    layer1_page = ReferenceField(Layer1_page,reverse_delete_rule=CASCADE,required=True)
     attempts =ListField(DictField())
     types=StringField(choices=['mcq','test_series','ctc_fillups','ctc_mcq','ctc_analysis','content','exam'],required=True)
     completed=BooleanField(default=False)

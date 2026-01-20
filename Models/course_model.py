@@ -3,8 +3,8 @@ from Models.institution_model import Institution
 from Models.university_model import University
 
 class Course(Document):
-    university = ReferenceField(University,required=True, reverse_delete_rule=CASCADE)
-    institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
+    university = ReferenceField(University,reverse_delete_rule=CASCADE,required=True)
+    institution = ReferenceField(Institution,reverse_delete_rule=CASCADE,required=True)
     name = StringField(required=True)
     duration = StringField(required=True)
     country = StringField(required=True)

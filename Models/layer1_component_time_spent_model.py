@@ -5,9 +5,9 @@ from Models.component_model import Component
 
 
 class Layer1_component_time_spent(Document):
-    layer1 = ReferenceField(Layer_1,required=True,reverse_delete_rule=CASCADE)
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
-    component = ReferenceField(Component,required=True,reverse_delete_rule=CASCADE)
+    layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE,required=True)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
+    component = ReferenceField(Component,reverse_delete_rule=CASCADE,required=True)
     time_spent=IntField(required=True)
 
 

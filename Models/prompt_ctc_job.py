@@ -7,7 +7,7 @@ from Models.dependent_component import Dependent_components
 
 class Prompt_ctc_job(Document):
     course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
-    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
+    created_by=ReferenceField(Admin,reverse_delete_rule=CASCADE,required=True)
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     target=StringField(choices=['Subject_prompt_ctc_apply_job','Layer1_prompt_ctc_apply_job','Layer2_prompt_ctc_apply_job','Layer3_prompt_ctc_apply_job'],required=True)
     detail=StringField()

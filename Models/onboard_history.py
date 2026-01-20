@@ -5,9 +5,9 @@ from Models.year_model import Year
 from datetime import datetime,timezone
 
 class OnboardHistory(Document):
-    institution = ReferenceField(Institution,required=True, reverse_delete_rule=CASCADE)
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
+    institution = ReferenceField(Institution,reverse_delete_rule=CASCADE,required=True)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
     phase = StringField(choices=['Demo/Trial','Pilot','Paid Plan',''],default='',returned=True)
     start_date = DateTimeField()
     end_date = DateTimeField()

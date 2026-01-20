@@ -9,7 +9,7 @@ from Models.institution_model import Institution
 
 
 class AssessmentQuestion(EmbeddedDocument):
-    question_id = ReferenceField(ClassQuestionBank,required=True,reversedelete_rule=CASCADE)
+    question_id = ReferenceField(ClassQuestionBank,reversedelete_rule=CASCADE,required=True)
     marks = IntField(default=0)
     sequence = IntField(default=0)
 
@@ -41,7 +41,7 @@ class Assessment(Document):
     course = ReferenceField(Course, reversedelete_rule=CASCADE)
     year = ReferenceField(Year, reversedelete_rule=CASCADE)
     month_year = DateTimeField(required=True)
-    created_by = ReferenceField(Admin, required=True, reversedelete_rule=CASCADE)
+    created_by = ReferenceField(Admin,reversedelete_rule=CASCADE,required=True)
     sections = ListField(EmbeddedDocumentField(AssessmentSectionQuestion))
     section = StringField()
     name = StringField(required=True)

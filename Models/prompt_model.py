@@ -6,7 +6,7 @@ from Models.year_model import Year
 
 class Prompt(Document):
     course = ReferenceField(Course,reverse_delete_rule=CASCADE)
-    model = ReferenceField(Model,required=True,reverse_delete_rule=CASCADE)
+    model = ReferenceField(Model,reverse_delete_rule=CASCADE,required=True)
     year = ReferenceField(Year,reverse_delete_rule=CASCADE)
     types=StringField(required=True)
     prompt_framework = DictField(required=True)

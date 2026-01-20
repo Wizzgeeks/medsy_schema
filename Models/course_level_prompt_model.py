@@ -10,8 +10,8 @@ from Models.year_model import Year
 from datetime import datetime,timezone 
 
 class Course_level_prompt(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    model = ReferenceField(Model,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    model = ReferenceField(Model,reverse_delete_rule=CASCADE,required=True)
     # year = ReferenceField(Year,reverse_delete_rule=CASCADE)
     # subject = ReferenceField(Subject,reverse_delete_rule=CASCADE)
     # layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)

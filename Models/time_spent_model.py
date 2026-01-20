@@ -6,13 +6,13 @@ from Models.subject_model import Subject
 
 
 class Time_spent(Document):  
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
-    subject=ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject=ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
     layer1 = ListField()
     layer2 = ListField()
     layer3 = ListField()
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
     total_time=IntField(required=True)
 
 

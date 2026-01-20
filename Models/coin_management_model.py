@@ -4,8 +4,8 @@ from Models.user_model import User
 from datetime import datetime,timezone
 
 class Coin_management(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
     coins = IntField(required=True)
     action = StringField(required=True)
     date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y')) 

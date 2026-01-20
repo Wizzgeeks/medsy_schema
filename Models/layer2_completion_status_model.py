@@ -7,12 +7,12 @@ from Models.subject_model import Subject
 from Models.course_model import Course
 from Models.layer3_completion_status_model import get_default_mastery
 class Layer2_completion_status(Document):
-    course=ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
-    subject=ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    course=ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year=ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject=ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
-    layer2 = ReferenceField(Layer_2,required=True,reverse_delete_rule=CASCADE)
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)   
+    layer2 = ReferenceField(Layer_2,reverse_delete_rule=CASCADE,required=True)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)   
     completed=BooleanField(default=False)
     total_time_taken_pages=IntField()
     total_time_taken_layer3=IntField()

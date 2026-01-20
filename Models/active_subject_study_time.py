@@ -4,8 +4,8 @@ from datetime import datetime,timezone
 from Models.subject_model import Subject
 
 class Active_subject_study_time(Document):
-    user = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
-    subject=ReferenceField(Subject, required=True, reverse_delete_rule=CASCADE)
+    user = ReferenceField(User, reverse_delete_rule=CASCADE,required=True)
+    subject=ReferenceField(Subject, reverse_delete_rule=CASCADE,required=True)
     date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y'))
     study_time = ListField(required=True)
     total_time_spent = IntField(default=0)

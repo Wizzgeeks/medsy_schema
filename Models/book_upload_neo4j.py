@@ -15,7 +15,7 @@ class Book_upload(Document):
     layer1=ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
     layer2=ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
     layer3=ReferenceField(Layer_3,reverse_delete_rule=CASCADE)
-    uploaded_by=ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
+    uploaded_by=ReferenceField(Admin,reverse_delete_rule=CASCADE,required=True)
     uploaded_at = DateTimeField(default=datetime.now(timezone.utc))
     layer=StringField(choices=['subject','layer1','layer2','layer3'],required=True)
     book_name =StringField(required=True)

@@ -7,10 +7,10 @@ from Models.year_model import Year
 
 
 class User(Document):
-    university_id = ListField(ReferenceField(University, required=True, reverse_delete_rule=CASCADE))
-    institution_id = ListField(ReferenceField(Institution, required=True, reverse_delete_rule=CASCADE))
-    course_id = ReferenceField(Course, required=True, reverse_delete_rule=CASCADE)
-    year_id = ReferenceField(Year, required=True, reverse_delete_rule=CASCADE)
+    university_id = ListField(ReferenceField(University, reverse_delete_rule=CASCADE,required=True))
+    institution_id = ListField(ReferenceField(Institution, reverse_delete_rule=CASCADE,required=True))
+    course_id = ReferenceField(Course, reverse_delete_rule=CASCADE,required=True)
+    year_id = ReferenceField(Year, reverse_delete_rule=CASCADE,required=True)
     user_id = StringField(required=True)
     university = ListField(StringField(required=True))
     institutions = ListField(StringField(required=True))

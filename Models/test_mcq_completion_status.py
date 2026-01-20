@@ -6,7 +6,7 @@ from Models.layer_3_model import Layer_3
 
 
 class Test_completion_status(Document):
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=CASCADE)

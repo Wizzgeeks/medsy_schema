@@ -4,8 +4,8 @@ from Models.subject_model import Subject
 from Models.year_model import Year
 
 class Channels(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
     year = ReferenceField(Year,reverse_delete_rule=CASCADE)
     channels = ListField()
     

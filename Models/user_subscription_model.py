@@ -4,8 +4,8 @@ from Models.subscription_model import Subscription
 from Models.user_model import User
 
 class User_subscription(Document):
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
-    subscription = ReferenceField(Subscription,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
+    subscription = ReferenceField(Subscription,reverse_delete_rule=CASCADE,required=True)
     coupon = ReferenceField(Coupon,reverse_delete_rule=CASCADE)
     coins_redeemed=IntField()
     expiry = DateTimeField(required=True)

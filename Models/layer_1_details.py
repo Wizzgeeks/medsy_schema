@@ -3,7 +3,7 @@ from Models.course_model import Course
 
 
 class Layer_1_details(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     layer1_name = StringField(required=True,default='Layer 1')
 
     def to_json(self):

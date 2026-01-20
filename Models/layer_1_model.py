@@ -4,9 +4,9 @@ from Models.subject_model import Subject
 from Models.year_model import Year
 
 class Layer_1(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
     name = StringField(required=True)
     meta_title = StringField()
     meta_image_url = StringField()

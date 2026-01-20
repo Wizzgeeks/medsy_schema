@@ -2,7 +2,7 @@ from mongoengine import Document,StringField,DictField,ListField,BooleanField,In
 from Models.admin_model import Admin
 
 class QuestionBank(EmbeddedDocument):
-    question = ReferenceField("ClassQuestionBank", required=True)
+    question = ReferenceField("ClassQuestionBank",reverse_delete_rule=CASCADE,required=True)
     sequence = IntField(default=0)
     
     def to_json(self):
@@ -26,7 +26,7 @@ class ClassQuestionBank(Document):
     difficulty_level = StringField()
     skill_focus = ListField(StringField())
     function = ListField(StringField())
-    thinking_level = StringField()
+    thinking_level = StringField(choices=["HoT", "LoT"])
     organ_system = ListField(StringField())
     organ_sub_system = ListField(StringField())
     disease_tags = ListField(StringField())

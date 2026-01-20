@@ -5,9 +5,9 @@ from Models.year_model import Year
 
 
 class Year_completion_status(Document):
-    course=ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year=ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    course=ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year=ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
     completed=BooleanField(default=False)
     total_time_taken_subject=IntField()
     total_subject_count=IntField()

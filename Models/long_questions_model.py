@@ -7,9 +7,9 @@ from Models.layer_3_model import Layer_3
 from Models.year_model import Year
 
 class LongQuestions(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
-    year = ReferenceField(Year,required=True,reverse_delete_rule=CASCADE)
-    subject = ReferenceField(Subject,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
+    year = ReferenceField(Year,reverse_delete_rule=CASCADE,required=True)
+    subject = ReferenceField(Subject,reverse_delete_rule=CASCADE,required=True)
     layer1 = ReferenceField(Layer_1,reverse_delete_rule=CASCADE)
     layer2 = ReferenceField(Layer_2,reverse_delete_rule=CASCADE)
     layer3 = ReferenceField(Layer_3,reverse_delete_rule=CASCADE)

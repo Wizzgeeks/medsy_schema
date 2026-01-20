@@ -3,7 +3,7 @@ from datetime import datetime,timezone
 from Models.user_model import User
 
 class Self_note(Document):
-    user = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
+    user = ReferenceField(User, reverse_delete_rule=CASCADE,required=True)
     title = StringField(required=True)
     notes_content = StringField(required=True)
     date = DateTimeField(required=True, default=datetime.utcnow )

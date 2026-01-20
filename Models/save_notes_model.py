@@ -6,7 +6,7 @@ from Models.page_content_model import PageContent
 
 class Saved_notes(Document):
     user = ReferenceField(User,reverse_delete_rule=CASCADE)
-    page= ReferenceField(PageContent,required=True,reverse_delete_rule=CASCADE)
+    page= ReferenceField(PageContent,reverse_delete_rule=CASCADE,required=True)
     type = StringField(choices=['RevisedLater','Important','Reference','Snapshot'],required=True)
     path_name=StringField()
     path_url=StringField()

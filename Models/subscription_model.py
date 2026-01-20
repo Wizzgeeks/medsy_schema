@@ -4,7 +4,7 @@ from Models.year_model import Year
 from Models.content_catogory_model import ContentCategory
 
 class Subscription(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     year = ListField(ReferenceField(Year,reverse_delete_rule=CASCADE,required=True))
     term_in_months = StringField(required=True)
     price = FloatField(required=True)

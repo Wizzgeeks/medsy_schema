@@ -3,7 +3,7 @@ from Models.user_model import User
 from datetime import datetime,timezone
 
 class Coins_spending(Document):
-    user = ReferenceField(User,required=True,reverse_delete_rule=CASCADE)
+    user = ReferenceField(User,reverse_delete_rule=CASCADE,required=True)
     used_for = StringField()
     coins = IntField()
     date = DateTimeField(default=datetime.now(timezone.utc))

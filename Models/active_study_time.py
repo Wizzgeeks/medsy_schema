@@ -3,7 +3,7 @@ from Models.user_model import User
 from datetime import datetime,timezone
 
 class Active_study_time(Document):
-    user = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
+    user = ReferenceField(User, reverse_delete_rule=CASCADE,required=True)
     date = StringField(default=lambda: datetime.now(timezone.utc).strftime('%d-%m-%Y'))
     study_time = ListField(required=True)
     total_time_spent = IntField(default=0)

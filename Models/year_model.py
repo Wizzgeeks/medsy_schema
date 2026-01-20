@@ -2,7 +2,7 @@ from mongoengine import Document,StringField,BooleanField,ValidationError,Refere
 from Models.course_model import Course
 
 class Year(Document):
-    course = ReferenceField(Course,required=True,reverse_delete_rule=CASCADE)
+    course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     year = StringField(required=True)
     meta_title = StringField()
     meta_image_url = StringField()

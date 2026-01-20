@@ -2,7 +2,7 @@ from mongoengine import Document,StringField,IntField,ReferenceField,DateTimeFie
 from Models.admin_model import Admin
 from datetime import datetime,timezone
 class Audit_log(Document):
-    user_id = ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
+    user_id = ReferenceField(Admin,reverse_delete_rule=CASCADE,required=True)
     method=StringField()
     table_name=StringField()
     id_or_key=StringField()

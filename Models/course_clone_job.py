@@ -10,7 +10,7 @@ class CourseCloneJob(Document):
     course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     # year = ReferenceField(Year,reverse_delete_rule=CASCADE)
     institution = ReferenceField(Institution,reverse_delete_rule=CASCADE,required=True)
-    created_by=ReferenceField(Admin,required=True,reverse_delete_rule=CASCADE)
+    created_by=ReferenceField(Admin,reverse_delete_rule=CASCADE,required=True)
     error_logs = ListField(DictField())
     completed_count=IntField()
     total_count=IntField()

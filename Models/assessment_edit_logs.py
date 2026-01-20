@@ -4,12 +4,12 @@ from Models.admin_model import Admin
 from Models.assessment import Assessment
 
 class AssessmentEditLogs(Document):
-    assessment_id = ReferenceField(Assessment, reversedelete_rule=CASCADE)
+    assessment_id = ReferenceField(Assessment, reversedelete_rule=CASCADE,required=True)
     method = StringField()
     table_name = StringField()
     updated_data = DictField()
     existing_data = DictField()
-    updated_by = ReferenceField(Admin, required=True, reversedelete_rule=CASCADE)
+    updated_by = ReferenceField(Admin,reversedelete_rule=CASCADE,required=True)
     remarks = StringField(required=True)
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     
