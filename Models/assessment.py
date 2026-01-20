@@ -9,7 +9,7 @@ from Models.institution_model import Institution
 
 
 class AssessmentQuestion(EmbeddedDocument):
-    question_id = ReferenceField(ClassQuestionBank,reverse_delete_rule=CASCADE,required=True)
+    question_id = ReferenceField(ClassQuestionBank,required=True)
     marks = IntField(default=0)
     sequence = IntField(default=0)
 
