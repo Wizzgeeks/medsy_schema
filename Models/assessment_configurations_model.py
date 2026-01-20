@@ -1,4 +1,4 @@
-from mongoengine import ( Document, ReferenceField, DateTimeField, IntField, BooleanField ,CASCADE,ListField,EmbeddedDocument,EmbeddedDocumentField,StringField)
+from mongoengine import ( Document, ReferenceField, DateTimeField, IntField, BooleanField ,CASCADE,NULLIFY,ListField,EmbeddedDocument,EmbeddedDocumentField,StringField)
 from datetime import datetime,timezone
 from Models.assessment import Assessment
 from Models.institution_model import Institution
@@ -22,7 +22,7 @@ class AttainmentLevel(EmbeddedDocument):
 
 class AssessmentConfigurations(Document):
     institution = ReferenceField(Institution,reverse_delete_rule=CASCADE,required=True)
-    created_by = ReferenceField(Admin,reverse_delete_rule=CASCADE,required=True)
+    created_by = ReferenceField(Admin,reverse_delete_rule=NULLIFY,required=True)
     assessment = ReferenceField(Assessment,reverse_delete_rule=CASCADE,required=True)
     is_active = BooleanField(default=True)
     hot_threshold = IntField()
