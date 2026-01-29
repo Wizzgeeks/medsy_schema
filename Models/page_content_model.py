@@ -1,4 +1,4 @@
-from mongoengine import Document, ReferenceField,BooleanField,ListField,CASCADE,DictField
+from mongoengine import Document, ReferenceField,BooleanField,ListField,CASCADE,DictField,StringField
 from Models.course_model import Course
 from Models.subject_model import Subject
 from Models.layer_1_model import Layer_1
@@ -10,6 +10,7 @@ from Models.layer3_page_model import Layer3_page
 from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.prompt_content_model import Prompt_content
+from Models.prompt_model import Prompt
 
 
 class PageContent(Document):
@@ -24,7 +25,10 @@ class PageContent(Document):
     layer3_page = ReferenceField(Layer3_page, reverse_delete_rule=CASCADE, null=True)
     subject_page= ReferenceField(Subject_page, reverse_delete_rule=CASCADE, null=True)
     content = ListField()
-    prompt = ReferenceField(Prompt_content, reverse_delete_rule=CASCADE, required=True)
+    prompt = ReferenceField(Prompt_content, reverse_delete_rule=CASCADE, null=True)
+    iem_prompt = ReferenceField(Prompt, reverse_delete_rule=CASCADE, null=True)
+    status = StringField(choices=["draft", "published", "rejected"])
+    published = BooleanField(default=True)
     deep_dive=BooleanField(default=False)
     summarize=BooleanField(default=False)
     ignore=BooleanField(default=False)
@@ -49,6 +53,9 @@ class PageContent(Document):
             "subject_page": str(self.subject_page.id) if self.subject_page else None,
             "content": self.content,
             "prompt": self.prompt.to_json() if self.prompt else None,
+            "iem_prompt": self.iem_prompt.to_json() if self.iem_prompt else None,
+            "status": self.status,
+            "published": self.published if self.published else False,
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
             "ignore":self.ignore if self.ignore else False,
@@ -71,5 +78,7 @@ class PageContent(Document):
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
             "ignore":self.ignore if self.ignore else False,
+            "status": self.status,
+            "published": self.published if self.published else False,
             
         }
