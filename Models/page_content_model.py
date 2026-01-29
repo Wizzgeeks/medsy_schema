@@ -27,8 +27,8 @@ class PageContent(Document):
     content = ListField()
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=CASCADE, null=True)
     iem_prompt = ReferenceField(Prompt, reverse_delete_rule=CASCADE, null=True)
-    status = StringField(choices=["draft", "published", "rejected"])
     published = BooleanField(default=True)
+    instruction = StringField()
     deep_dive=BooleanField(default=False)
     summarize=BooleanField(default=False)
     ignore=BooleanField(default=False)
@@ -54,7 +54,7 @@ class PageContent(Document):
             "content": self.content,
             "prompt": self.prompt.to_json() if self.prompt else None,
             "iem_prompt": self.iem_prompt.to_json() if self.iem_prompt else None,
-            "status": self.status,
+            "instruction": self.instruction,
             "published": self.published if self.published else False,
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
@@ -78,7 +78,6 @@ class PageContent(Document):
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
             "ignore":self.ignore if self.ignore else False,
-            "status": self.status,
             "published": self.published if self.published else False,
             
         }
