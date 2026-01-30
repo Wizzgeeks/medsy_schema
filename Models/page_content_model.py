@@ -28,6 +28,7 @@ class PageContent(Document):
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=CASCADE, null=True)
     iem_prompt = ReferenceField(Prompt, reverse_delete_rule=CASCADE, null=True)
     published = BooleanField(default=True)
+    isintegrated = BooleanField(default=False)
     related_contents = ListField(DictField())
     instruction = StringField()
     deep_dive=BooleanField(default=False)
@@ -61,6 +62,7 @@ class PageContent(Document):
             "deep_dive":self.deep_dive if self.deep_dive else False,
             "summarize":self.summarize if self.summarize else False,
             "ignore":self.ignore if self.ignore else False,
+            "isintegrated": self.isintegrated if self.isintegrated else False,
         }
     
     def to_user(self):
@@ -81,5 +83,8 @@ class PageContent(Document):
             "summarize":self.summarize if self.summarize else False,
             "ignore":self.ignore if self.ignore else False,
             "published": self.published if self.published else False,
+            "isintegrated": self.isintegrated if self.isintegrated else False,
+            "related_contents": self.related_contents,
+            "instruction": self.instruction,
             
         }
