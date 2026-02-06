@@ -17,7 +17,7 @@ class Layer3_page(Document):
     optional = BooleanField(default=False)
     ignore = BooleanField(default=False)
     min_page = IntField(default=0)
-    parent = BooleanField(default=False)   
+    parent = BooleanField(default=False)
 
 
    
