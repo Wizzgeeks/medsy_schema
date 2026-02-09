@@ -8,7 +8,7 @@ from Models.prompt_content_model import Prompt_content
 class Layer3_page(Document):
     course = ReferenceField(Course,reverse_delete_rule=CASCADE,required=True)
     name = StringField(required=True)
-    types = StringField(choices=['content','mcq','test_series','exam','adaptive_learning','adaptive_learning_mcq','adaptive_learning_content',"related_videos","active_recall","active_recall_mcq","active_recall_content"],required=True)
+    types = StringField(choices=['content','mcq','test_series','exam','adaptive_learning','adaptive_learning_mcq','adaptive_learning_content',"related_videos","active_recall","active_recall_mcq","active_recall_content","crossword_puzzle"],required=True)
     sequence = IntField(required=True)
     hierarcy_level = IntField(default=0)
     enable_days = IntField(default=0)
@@ -17,7 +17,7 @@ class Layer3_page(Document):
     optional = BooleanField(default=False)
     ignore = BooleanField(default=False)
     min_page = IntField(default=0)
-    parent = BooleanField(default=False)   
+    parent = BooleanField(default=False)
 
 
    

@@ -10,10 +10,9 @@ from Models.layer3_page_model import Layer3_page
 from Models.subject_page_model import Subject_page
 from Models.year_model import Year
 from Models.prompt_content_model import Prompt_content
-from Models.prompt_model import Prompt
 
 
-class PageContent(Document):
+class CrosswordPuzzle(Document):
     course = ReferenceField(Course, reverse_delete_rule=CASCADE, required=True)
     year = ReferenceField(Year, reverse_delete_rule=CASCADE, required=True)
     subject = ReferenceField(Subject, reverse_delete_rule=CASCADE, required=True)
@@ -26,18 +25,11 @@ class PageContent(Document):
     subject_page= ReferenceField(Subject_page, reverse_delete_rule=CASCADE, null=True)
     content = ListField()
     prompt = ReferenceField(Prompt_content, reverse_delete_rule=CASCADE, null=True)
-    iem_prompt = ReferenceField(Prompt, reverse_delete_rule=CASCADE, null=True)
     published = BooleanField(default=True)
     isintegrated = BooleanField(default=False)
     related_contents = ListField(DictField())
     instruction = StringField()
-    deep_dive=BooleanField(default=False)
-    summarize=BooleanField(default=False)
     ignore=BooleanField(default=False)
-    big6_matches = ListField(DictField())
-    systems = ListField(DictField())
-    mechanisms = ListField(DictField())
-    entities =  ListField(DictField())
     extra_meta = DictField()
 
     def to_json(self):
@@ -55,12 +47,9 @@ class PageContent(Document):
             "subject_page": str(self.subject_page.id) if self.subject_page else None,
             "content": self.content,
             "prompt": self.prompt.to_json() if self.prompt else None,
-            "iem_prompt": self.iem_prompt.to_json() if self.iem_prompt else None,
             "instruction": self.instruction,
             "related_contents": self.related_contents,
             "published": self.published if self.published else False,
-            "deep_dive":self.deep_dive if self.deep_dive else False,
-            "summarize":self.summarize if self.summarize else False,
             "ignore":self.ignore if self.ignore else False,
             "isintegrated": self.isintegrated if self.isintegrated else False,
         }
@@ -79,8 +68,6 @@ class PageContent(Document):
             "layer3_page": {"id":str(self.layer3_page.id),"name":self.layer3_page.name} if self.layer3_page else None,
             "subject_page": {"id":str(self.subject_page.id),"name":self.subject_page.name} if self.subject_page else None,
             "content": self.content,
-            "deep_dive":self.deep_dive if self.deep_dive else False,
-            "summarize":self.summarize if self.summarize else False,
             "ignore":self.ignore if self.ignore else False,
             "published": self.published if self.published else False,
             "isintegrated": self.isintegrated if self.isintegrated else False,
