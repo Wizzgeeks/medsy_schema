@@ -1,6 +1,7 @@
 from mongoengine import Document, StringField, DictField, ReferenceField,CASCADE,DateTimeField,BooleanField
 from datetime import datetime,timezone
 from Models.university_model import University
+from pytz import timezone as pytz_timezone, all_timezones
 
 class Institution(Document):
     university = ReferenceField(University,reverse_delete_rule=CASCADE,required=True)
@@ -33,6 +34,7 @@ class Institution(Document):
     created_at = DateTimeField(default=datetime.now(timezone.utc))
     onboarded_at = DateTimeField()
     default = BooleanField(default=False)
+    timezone = StringField(default="Asia/Kolkata", choices=all_timezones)
 
 
 
@@ -68,7 +70,8 @@ class Institution(Document):
             'email2': self.email2 if self.email2 else None,
             'onboarded': self.onboarded if self.onboarded else False,
             'onboarded_at': self.onboarded_at.strftime('%d/%m/%Y') if self.onboarded_at else None,
-            'default': self.default if self.default else False
+            'default': self.default if self.default else False,
+            'timezone': self.timezone if self.timezone else None
 
         }
 
@@ -103,6 +106,8 @@ class Institution(Document):
             'email2': self.email2 if self.email2 else None,
             'onboarded': self.onboarded if self.onboarded else False,
             'onboarded_at': self.onboarded_at.strftime('%d/%m/%Y') if self.onboarded_at else None,
-            'default': self.default if self.default else False
+            'default': self.default if self.default else False,
+            'timezone': self.timezone if self.timezone else None
+
 
         }
