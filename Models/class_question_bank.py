@@ -1,5 +1,7 @@
 from mongoengine import Document,StringField,DictField,ListField,BooleanField,IntField,ReferenceField,CASCADE,NULLIFY,EmbeddedDocumentField,EmbeddedDocument
 from Models.admin_model import Admin
+from Models.university_model import University
+from Models.institution_model import Institution
 
 class QuestionBank(EmbeddedDocument):
     question = ReferenceField("ClassQuestionBank",required=True)
@@ -43,6 +45,8 @@ class ClassQuestionBank(Document):
     active = BooleanField(default=True)
     mark = IntField(default=1)
     author = StringField()
+    university = ReferenceField(University, reverse_delete_rule=CASCADE)
+    institution = ReferenceField(Institution, reverse_delete_rule=CASCADE)
     author_id = ReferenceField(Admin, reverse_delete_rule=NULLIFY, required=True)
     
 
@@ -78,5 +82,7 @@ class ClassQuestionBank(Document):
             "key_concept": self.key_concept if self.key_concept else [],
             "organ_sub_system": self.organ_sub_system if self.organ_sub_system else [],
             "learning_objective": self.learning_objective if self.learning_objective else "",
+            "university": {"id":str(self.university.id),"key":self.university.key} if self.university else {},
+            "institution": {"id":str(self.institution.id),"key":self.institution.key} if self.institution else {},
             "author_id": {"id":str(self.author_id.id),"name":self.author_id.name,"faculty_id":self.author_id.admin_id} if self.author_id else {},
         }
