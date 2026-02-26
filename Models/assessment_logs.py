@@ -20,6 +20,15 @@ class AssessmentLogs(Document):
     updated_at = DateTimeField(null=True)
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     
+        
+    meta = {
+        "indexes": [
+            {
+                "fields": ["assessment", "user"],
+                "unique": True
+            }
+        ]
+    }
 
     def to_json(self):
         return {

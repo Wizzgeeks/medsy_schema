@@ -25,6 +25,19 @@ class AssessmentResult(Document):
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
     updated_at = DateTimeField(null=True)
     
+    
+    meta = {
+        "indexes": [
+            {
+                "fields": ["assessment", "user"],
+                "unique": True
+            },
+            "assessment",
+            "user",
+            "eval_status",
+            "completed"
+        ]
+    }
 
     def to_json(self):
         return {
@@ -73,3 +86,4 @@ class AssessmentResult(Document):
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }
+    
