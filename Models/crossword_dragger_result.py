@@ -11,7 +11,7 @@ from Models.layer1_page_model import Layer1_page
 from Models.layer2_page_model import Layer2_page
 from Models.layer3_page_model import Layer3_page
 from Models.subject_page_model import Subject_page
-from Models.crossword_puzzle_model import CrosswordPuzzle
+from Models.crossword_dragger_model import CrosswordDragger
 
 
 class CrosswordDraggerResult(Document):
@@ -30,8 +30,8 @@ class CrosswordDraggerResult(Document):
     subject_page = ReferenceField(
         Subject_page, reverse_delete_rule=CASCADE, null=True)
     user = ReferenceField(User, reverse_delete_rule=CASCADE, required=True)
-    crossword_puzzle = ReferenceField(
-        CrosswordPuzzle, reverse_delete_rule=CASCADE, required=True)
+    crossword_dragger = ReferenceField(
+        CrosswordDragger, reverse_delete_rule=CASCADE, required=True)
     attempted_data = ListField(DictField())
     completed = BooleanField(default=True)
     ignore = BooleanField(default=False)
@@ -48,7 +48,7 @@ class CrosswordDraggerResult(Document):
             'layer2': str(self.layer2.id) if self.layer2 else None,
             'layer3': str(self.layer3.id) if self.layer3 else None,
             'user': str(self.user.id) if self.user.id else None,
-            'crossword_puzzle': str(self.crossword_puzzle.id) if self.crossword_puzzle.id else None,
+            'crossword_dragger': str(self.crossword_dragger.id) if self.crossword_dragger.id else None,
             'attempts_data': self.attempted_data,
             "layer1_page": str(self.layer1_page.id) if self.layer1_page else None,
             "layer2_page": str(self.layer2_page.id) if self.layer2_page else None,
