@@ -20,6 +20,8 @@ class AssessmentResult(Document):
     result_data = ListField(DictField())
     marks = IntField(default=0)
     analytics_data = DictField()
+    logs_data = DictField()
+    additional_logs = DictField()
     completed = BooleanField(default=False)
     eval_status = StringField(default="Incomplete",choices=["Incomplete","Completed","Pending","InProgress"])
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
@@ -57,6 +59,8 @@ class AssessmentResult(Document):
             "marks": self.marks,
             "completed": self.completed,
             "analytics_data": self.analytics_data,
+            "logs_data": self.logs_data,
+            "additional_logs": self.additional_logs,
             "eval_status": self.eval_status,
             "attendance": self.attendance,
             "created_at": self.created_at.isoformat() if self.created_at else None,
