@@ -49,14 +49,19 @@ class Assessment(Document):
     test_type = StringField(choices=["mcq", "descriptive", "hybrid"], required=True)
     category = StringField(choices=["internal", "midterm", "final", "viva"], required=True)
     duration = IntField(required=True)
+    mcq_duration = IntField(required=True)
+    descriptive_duration = IntField(required=True)
     start_time = DateTimeField(null=True)
     end_time = DateTimeField(null=True)
     offline_start_time = DateTimeField(null=True)
     offline_end_time = DateTimeField(null=True)
     log_details = ListField(DictField())
     mcq_publish_type_online = BooleanField(default=True)
+    mcq_online_paper = BooleanField(default=False)
     descriptive_publish_type_online = BooleanField(default=False)
+    descriptive_online_paper = BooleanField(default=False)
     auto_result_mcq = BooleanField(default=False)
+    auto_result_date = DateTimeField(null=True)
     total_marks = IntField()
     instructions = StringField()
     created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
@@ -87,14 +92,19 @@ class Assessment(Document):
             "test_type": self.test_type,
             "category": self.category,
             "duration": self.duration,
+            "mcq_duration": self.mcq_duration,
+            "descriptive_duration": self.descriptive_duration,
             "start_time": self.start_time.isoformat() if self.start_time else None,
             "end_time": self.end_time.isoformat() if self.end_time else None,
             "offline_start_time": self.offline_start_time.isoformat() if self.offline_start_time else None,
             "offline_end_time": self.offline_end_time.isoformat() if self.offline_end_time else None,
             "log_details": self.log_details if self.log_details else [],
             "mcq_publish_type_online": self.mcq_publish_type_online,
+            "mcq_online_paper": self.mcq_online_paper,
             "descriptive_publish_type_online": self.descriptive_publish_type_online,
+            "descriptive_online_paper": self.descriptive_online_paper,
             "auto_result_mcq": self.auto_result_mcq,
+            "auto_result_date": self.auto_result_date.isoformat() if self.auto_result_date else "",
             "total_marks": self.total_marks,
             "instructions": self.instructions,
             "course": {"id": str(self.course.id), "name": self.course.name,"key":self.course.key} if self.course else {},
@@ -126,14 +136,19 @@ class Assessment(Document):
             "test_type": self.test_type,
             "category": self.category,
             "duration": self.duration,
+            "mcq_duration": self.mcq_duration,
+            "descriptive_duration": self.descriptive_duration,
             "start_time": self.start_time.isoformat() if self.start_time else None,
             "end_time": self.end_time.isoformat() if self.end_time else None,
             "offline_start_time": self.offline_start_time.isoformat() if self.offline_start_time else None,
             "offline_end_time": self.offline_end_time.isoformat() if self.offline_end_time else None,
             "log_details": self.log_details if self.log_details else [],
             "mcq_publish_type_online": self.mcq_publish_type_online,
+            "mcq_online_paper": self.mcq_online_paper,
             "descriptive_publish_type_online": self.descriptive_publish_type_online,
+            "descriptive_online_paper": self.descriptive_online_paper,
             "auto_result_mcq": self.auto_result_mcq,
+            "auto_result_date": self.auto_result_date.isoformat() if self.auto_result_date else "",
             "total_marks": self.total_marks,
             "course": {"id": str(self.course.id), "name": self.course.name,"key":self.course.key} if self.course else {},
             "year": {"id": str(self.year.id), "name": self.year.year,"key":self.year.key} if self.year else {},
@@ -147,7 +162,8 @@ class Assessment(Document):
             "evaluation": self.evaluation,
             "analytics": self.analytics,
             "analytics_data": self.analytics_data,
-            "evaluation_status": self.evaluation_status if self.evaluation_status else ""          
+            "evaluation_status": self.evaluation_status if self.evaluation_status else "",
+                      
         }
         
         
