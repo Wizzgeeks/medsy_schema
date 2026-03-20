@@ -5,7 +5,8 @@ from mongoengine import (
 )
 from datetime import datetime, timezone
 from Models.doap_activity_student_model import StudentAnswerItem
-
+from Models.doap_activity_student_model import DoapActivityStudent
+from Models.doap_activity_student_model import StudentAnswerItem
 
 class DoapActivityAttempt(Document):
     """
@@ -13,10 +14,16 @@ class DoapActivityAttempt(Document):
     assignment_id → DoapActivityStudent (the assignment record).
     """
 
-    assignment_id  = ReferenceField("DoapActivityStudent", required=True,
-                                    reverse_delete_rule=CASCADE)
+   assignment_id = ReferenceField(
+        DoapActivityStudent,
+        required=True,
+        reverse_delete_rule=CASCADE
+    )
     attempt_count  = IntField(default=1)
-    answers        = ListField(EmbeddedDocumentField(StudentAnswerItem), default=[])
+    answers = ListField(
+        EmbeddedDocumentField(StudentAnswerItem),
+        required=True
+    )
     overall_status = StringField()
     completed      = BooleanField(default=False)
 
