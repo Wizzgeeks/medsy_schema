@@ -14,7 +14,7 @@ class DoapActivityAttempt(Document):
     assignment_id → DoapActivityStudent (the assignment record).
     """
 
-   assignment_id = ReferenceField(
+    assignment_id = ReferenceField(
         DoapActivityStudent,
         required=True,
         reverse_delete_rule=CASCADE
