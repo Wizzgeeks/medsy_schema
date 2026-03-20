@@ -5,7 +5,8 @@ from mongoengine import (
 )
 from datetime import datetime, timezone
 from Models.doap_model import Doap
-from Models.doap_activity_model import DoapActivity
+# Remove this direct import - it's causing circular import
+# from Models.doap_activity_model import DoapActivity
 
 class DoapActivityContent(Document):
     """
@@ -16,8 +17,9 @@ class DoapActivityContent(Document):
 
     doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
 
+    # Use string reference instead of direct import
     doap_activity_id = ReferenceField(
-        DoapActivity, reverse_delete_rule=CASCADE, required=True
+        'DoapActivity', reverse_delete_rule=CASCADE, required=True  # Changed to string
     )
     activity_name    = StringField()
     doap_type        = StringField()   # "OSPE" | "OSCE" | "Interpretation" | "Image"
