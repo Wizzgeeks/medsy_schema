@@ -1,41 +1,73 @@
 from mongoengine import (
-    Document, EmbeddedDocument, ReferenceField,
-    ListField, StringField, FloatField,
-    BooleanField, IntField, DateTimeField,
-    EmbeddedDocumentField, CASCADE, NULLIFY
+    Document, EmbeddedDocument, StringField,
+    ReferenceField, ListField, IntField,
+    EmbeddedDocumentField, CASCADE,
+    BooleanField
 )
-from datetime import datetime, timezone
 
+from Models.doap_model import Doap
+from Models.doap_activity_model import DoapActivity
+from Models.doap_activity_question_model import DoapActivityQuestion
+from Models.user_model import User
+
+
+# ======================================
+# Student Answer Embedded Model
+# ======================================
 
 class StudentAnswerItem(EmbeddedDocument):
-    """One answer submitted by a student."""
-    question       = StringField()
-    student_answer = StringField()
-    faculty_remarks= StringField()
-    mark           = FloatField()
-    status         = StringField()
 
+    question = StringField(required=True)  # copied from template
+
+    student_answer = StringField()
+
+    faculty_remarks = StringField()
+
+    mark = IntField(min_value=0)
+
+    status = StringField(
+        choices=("P", "F1", "F2", "F3", "F4"),
+        default=None
+    )
+
+
+# ======================================
+# Student Attempt Model
+# ======================================
 
 class DoapActivityStudent(Document):
-    """Assignment record: one student assigned to one activity attempt."""
 
-    doap_id                 = ReferenceField("Doap", required=True, reverse_delete_rule=CASCADE)
-    doap_activity_id        = ReferenceField("DoapActivity", required=True, reverse_delete_rule=CASCADE)
-    doap_activity_question_id = ReferenceField("DoapActivityQuestion", reverse_delete_rule=NULLIFY)
-    student_id              = ReferenceField("User", required=True, reverse_delete_rule=CASCADE)
+    doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
 
-    attempt_count   = IntField(default=1)
-    answers         = ListField(EmbeddedDocumentField(StudentAnswerItem), default=[])
-    overall_status  = StringField()
-    completed       = BooleanField(default=False)
+    doap_activity_id = ReferenceField(
+        DoapActivity,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
 
-    created_at = DateTimeField(default=lambda: datetime.now(timezone.utc))
+    doap_activity_question_id = ReferenceField(
+        DoapActivityQuestion,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
 
-    meta = {
-        "collection": "doap_activity_student",
-        "indexes": [
-            "student_id",
-            "doap_activity_id",
-            {"fields": ["doap_id", "doap_activity_id", "student_id"]}
-        ]
-    }
+    student_id = ReferenceField(
+        User,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
+
+    attempt_count = IntField(default=1)
+
+    answers = ListField(
+        EmbeddedDocumentField(StudentAnswerItem),
+        required=True
+    )
+
+    overall_status = StringField(
+        choices=("P", "F1", "F2", "F3", "F4"),
+        default=None
+    )
+
+    completed = BooleanField(default=False)
+    meta = {"collection": "doap_activity_student"}
