@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 
 
 class DoapEvaluation(Document):
+    
     """Faculty evaluation of a student's submitted attempt."""
 
     doap_activity_id = ReferenceField("DoapActivity", required=True,
