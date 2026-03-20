@@ -10,7 +10,7 @@ from Models.admin_model import Admin
 
 class DoapEvaluation(Document):
     """Faculty evaluation of a student's submitted attempt."""
- doap_activity_id = ReferenceField(DoapActivity, required=True, reverse_delete_rule=CASCADE)
+    doap_activity_id = ReferenceField(DoapActivity, required=True, reverse_delete_rule=CASCADE)
     student_id = ReferenceField(User, required=True, reverse_delete_rule=CASCADE)
 
     # DoapActivityStudent ObjectId as string (works for all activity types)
@@ -18,7 +18,7 @@ class DoapEvaluation(Document):
     activity_type = StringField(required=True,
                                 choices=("OSPE", "OSCE", "Interpretation", "Image"))
 
-       evaluated_by = ReferenceField(Admin, reverse_delete_rule=NULLIFY)
+    evaluated_by = ReferenceField(Admin, reverse_delete_rule=NULLIFY)
 
     # Per-item evaluation dicts
     # Checklist:  {sequence, item_text, is_correct, mark, remarks}
