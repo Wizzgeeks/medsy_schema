@@ -20,7 +20,7 @@ class QuestionItem(EmbeddedDocument):
 
 class DoapActivityQuestion(Document):
 
-   doap_id = ReferenceField(
+    doap_id = ReferenceField(
         Doap,
         reverse_delete_rule=CASCADE,
         required=True
