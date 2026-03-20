@@ -5,7 +5,10 @@ from mongoengine import (
     EmbeddedDocumentField, CASCADE, NULLIFY
 )
 from datetime import datetime, timezone
-
+from Models.doap_model import Doap
+from Models.doap_activity_model import DoapActivity
+from Models.doap_activity_question_model import DoapActivityQuestion
+from Models.user_model import User
 
 class StudentAnswerItem(EmbeddedDocument):
     """One answer submitted by a student."""
@@ -19,10 +22,25 @@ class StudentAnswerItem(EmbeddedDocument):
 class DoapActivityStudent(Document):
     """Assignment record: one student assigned to one activity attempt."""
 
-    doap_id                 = ReferenceField("Doap", required=True, reverse_delete_rule=CASCADE)
-    doap_activity_id        = ReferenceField("DoapActivity", required=True, reverse_delete_rule=CASCADE)
-    doap_activity_question_id = ReferenceField("DoapActivityQuestion", reverse_delete_rule=NULLIFY)
-    student_id              = ReferenceField("User", required=True, reverse_delete_rule=CASCADE)
+  doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
+
+    doap_activity_id = ReferenceField(
+        DoapActivity,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
+
+    doap_activity_question_id = ReferenceField(
+        DoapActivityQuestion,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
+
+    student_id = ReferenceField(
+        User,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
 
     attempt_count   = IntField(default=1)
     answers         = ListField(EmbeddedDocumentField(StudentAnswerItem), default=[])
