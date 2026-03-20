@@ -4,6 +4,7 @@ from mongoengine import (
 )
 from Models.doap_model import Doap
 from Models.layer_3_model import Layer_3
+from Models.doap_activity_content_model import DoapActivityContent
 
 class DoapActivity(Document):
 
@@ -16,7 +17,7 @@ class DoapActivity(Document):
     layer3_id   = ReferenceField(Layer_3, reverse_delete_rule=NULLIFY)
 
     # AI-generated content reference (OSPE/OSCE only)
-    content_id  = ReferenceField("DoapActivityContent", reverse_delete_rule=NULLIFY)
+    content_id  = ReferenceField(DoapActivityContent, reverse_delete_rule=NULLIFY)
 
     is_certified    = BooleanField(default=False)
     is_assigned     = BooleanField(default=False)
