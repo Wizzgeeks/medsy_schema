@@ -22,7 +22,7 @@ class StudentAnswerItem(EmbeddedDocument):
 class DoapActivityStudent(Document):
     """Assignment record: one student assigned to one activity attempt."""
 
-  doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
+    doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
 
     doap_activity_id = ReferenceField(
         DoapActivity,
