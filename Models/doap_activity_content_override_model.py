@@ -31,7 +31,7 @@ class DoapActivityContentOverride(Document):
     student_activity_form = ListField(DictField(), default=[])
     scaffolded_questions  = ListField(DictField(), default=[])
 
-   edited_by = ReferenceField(Admin, reverse_delete_rule=NULLIFY)
+    edited_by = ReferenceField(Admin, reverse_delete_rule=NULLIFY)
     edited_at = DateTimeField()
 
     meta = {
