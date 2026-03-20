@@ -1,41 +1,39 @@
 from mongoengine import (
-    Document, StringField, ReferenceField,
-    BooleanField, CASCADE,
-    DateTimeField
+    Document, ReferenceField, StringField,
+    BooleanField, DateTimeField, CASCADE, NULLIFY
 )
-from Models.doap_model import Doap
-
 
 class DoapActivity(Document):
-    doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE)
 
-    name = StringField(required=True)
+    doap_id     = ReferenceField("Doap", required=True, reverse_delete_rule=CASCADE)
+    name        = StringField(required=True)
+    type        = StringField(required=True,
+                              choices=("OSPE", "OSCE", "Interpretation", "Image"))
 
-    type = StringField(
-        required=True,
-        choices=("OSPE", "OSCE", "Interpretation", "Image")
-    )
+    # Link to Layer_3 for competency context (used in AI generation & evaluation)
+    layer3_id   = ReferenceField("Layer_3", reverse_delete_rule=NULLIFY)
 
-    status = StringField(
-        choices=("Generated", "Created"),
-        default=None
-    )
+    # AI-generated content reference (OSPE/OSCE only)
+    content_id  = ReferenceField("DoapActivityContent", reverse_delete_rule=NULLIFY)
 
-    assignyear = StringField()  # example: "2024", "1st Year"
+    is_certified    = BooleanField(default=False)
+    is_assigned     = BooleanField(default=False)
+    enable_marks    = BooleanField(default=False)
 
-    assigned_section = StringField()  # example: "A", "B", "C"
+    # "Created" | "Generated" | "Assigned"
+    status          = StringField()
 
-    enable_marks = BooleanField(default=False)
+    # Which sections are shown to students
+    assign_checklist = BooleanField(default=False)
+    assign_form      = BooleanField(default=False)
+    assign_questions = BooleanField(default=False)
 
-    is_assigned = BooleanField(default=False)
+    assigned_date    = DateTimeField()
+    # Year key string (e.g. "MB1-FI1") stored at assignment time
+    assignyear       = StringField()
+    assigned_section = StringField()
 
-    assigned_date = DateTimeField()
-
-    meta = {"collection": "doap_activity"}
-
-    def clean(self):
-        # Auto-set status based on type
-        if self.type in ("Interpretation", "Image"):
-            self.status = "Created"
-        elif self.type in ("OSPE", "OSCE"):
-            self.status = "Generated"
+    meta = {
+        "collection": "doap_activity",
+        "indexes": ["doap_id", "type"]
+    }
