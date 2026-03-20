@@ -4,7 +4,8 @@ from mongoengine import (
     CASCADE
 )
 from datetime import datetime, timezone
-
+from Models.doap_model import Doap
+from Models.doap_activity_model import DoapActivity
 
 class DoapActivityContent(Document):
     """
@@ -13,9 +14,11 @@ class DoapActivityContent(Document):
     Never modified after generation — edits go to DoapActivityContentOverride.
     """
 
-    doap_id          = ReferenceField("Doap", reverse_delete_rule=CASCADE)
-    doap_activity_id = ReferenceField("DoapActivity", required=True,
-                                      reverse_delete_rule=CASCADE)
+   doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
+
+    doap_activity_id = ReferenceField(
+        DoapActivity, reverse_delete_rule=CASCADE, required=True
+    )
     activity_name    = StringField()
     doap_type        = StringField()   # "OSPE" | "OSCE" | "Interpretation" | "Image"
 
