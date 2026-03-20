@@ -5,7 +5,8 @@ from mongoengine import (
     DateTimeField, CASCADE
 )
 from datetime import datetime, timezone
-
+from Models.doap_activity_model import DoapActivity
+from Models.doap_model import Doap
 
 class QuestionItem(EmbeddedDocument):
     """One activity-form question (student fills this in during the activity)."""
@@ -19,8 +20,17 @@ class QuestionItem(EmbeddedDocument):
 
 class DoapActivityQuestion(Document):
 
-    doap_id          = ReferenceField("Doap", required=True, reverse_delete_rule=CASCADE)
-    doap_activity_id = ReferenceField("DoapActivity", required=True, reverse_delete_rule=CASCADE)
+   doap_id = ReferenceField(
+        Doap,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
+
+    doap_activity_id = ReferenceField(
+        DoapActivity,
+        reverse_delete_rule=CASCADE,
+        required=True
+    )
 
     main_description = StringField(default="")
 
