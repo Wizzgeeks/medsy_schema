@@ -14,7 +14,7 @@ class DoapActivityContent(Document):
     Never modified after generation — edits go to DoapActivityContentOverride.
     """
 
-   doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
+    doap_id = ReferenceField(Doap, reverse_delete_rule=CASCADE, required=True)
 
     doap_activity_id = ReferenceField(
         DoapActivity, reverse_delete_rule=CASCADE, required=True
