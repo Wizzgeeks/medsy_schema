@@ -2,16 +2,18 @@ from mongoengine import (
     Document, ReferenceField, StringField,
     BooleanField, DateTimeField, CASCADE, NULLIFY
 )
+from Models.doap_model import Doap
+from Models.layer_3_model import Layer_3
 
 class DoapActivity(Document):
 
-    doap_id     = ReferenceField("Doap", required=True, reverse_delete_rule=CASCADE)
+    doap_id     = ReferenceField(Doap, required=True, reverse_delete_rule=CASCADE)
     name        = StringField(required=True)
     type        = StringField(required=True,
                               choices=("OSPE", "OSCE", "Interpretation", "Image"))
 
     # Link to Layer_3 for competency context (used in AI generation & evaluation)
-    layer3_id   = ReferenceField("Layer_3", reverse_delete_rule=NULLIFY)
+    layer3_id   = ReferenceField(Layer_3, reverse_delete_rule=NULLIFY)
 
     # AI-generated content reference (OSPE/OSCE only)
     content_id  = ReferenceField("DoapActivityContent", reverse_delete_rule=NULLIFY)
